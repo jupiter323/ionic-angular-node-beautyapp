@@ -1,0 +1,224 @@
+<div class="row  m-subheader" style="background: rgb(250,249,247) !important;
+    padding: 20px !important;
+text-align: left !important;
+border-bottom: solid 1px lightgray;    display: block;">
+	
+ 
+	<i (click)='goBack()' style="font-size: 25px;
+    color: lightgray;
+    padding-left: 10px;" class="la la-angle-left"></i>
+	<div class="" style="display: inline-block;font-size: 26px;font-weight: 300;padding-left: 15px;">Nueva Reserva</div>
+
+	<button  class="btn btn-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" (click)='guardarCita()' 
+    [disabled]='!cita.fecha || !cita.nombreCliente ||  sinEmpleado()' >Guardar</button>
+<!-- 
+
+
+	<button  class="btn btn-outline-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" (click)='goBack()' >Cancelar</button> -->
+
+
+</div>
+<div class="row">
+<ngx-loading [show]="loadingScreen" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+	<div class="col-xl-6" style="    border-right: solid 1px lightgray;" >
+
+		<div style="padding: 40px 60px; ">
+
+
+			<div class="conteinInput">
+				
+
+				<label class='labelBy'>Cliente</label>
+				<input  class='inputBy w100' placeholder="nombre del cliente"  autocomplete="off"  type="text" name="nombre" [(ngModel)]='cita.nombreCliente'>
+			</div>
+
+			<div class="conteinInput"> 
+			<label class='labelBy'>Fecha</label>
+			<mat-form-field style='  margin-right: 20px;  width: 100% !important;' >
+			<input matInput [(ngModel)]='cita.fecha' [matDatepicker]="pickerI" 
+			(dateChange)="moveDate($event)" [matDatepickerFilter]="myFilter" placeholder="Fecha" [min]="fechaMin" autocomplete="off"  (click)="pickerI.open()">
+			<mat-datepicker-toggle matSuffix [for]="pickerI"></mat-datepicker-toggle>
+			<mat-datepicker #pickerI></mat-datepicker>
+			</mat-form-field>
+
+			</div>
+
+
+			<div class="conteinInput" *ngIf='cita.fecha && horasDisponibles.length>1'> 
+			<label class='labelBy'>Hora de Inicio</label>
+		      <mat-select [disabled]='!cita.fecha' placeholder="" class='inputBy selectD' 
+		       [(ngModel)]='cita.inicio' (selectionChange)="changeTime($event)">
+		                  <mat-option 
+		                  *ngFor="let h of horasDisponibles; let i = index" 
+		                   [value]="h.inicio">{{getHorasFormat(h.inicio)}}</mat-option>
+		      </mat-select>
+
+			</div>
+
+<!-- 			<div class="conteinInput">
+				<label class='labelBy'>Telefono</label>
+				<input  [(ngModel)]='centroInfo.telefono' class='inputBy w100' placeholder="cual es el telefono del negocio"  autocomplete="off"  type="number" name="telefono">
+			</div> -->
+
+		</div>
+	
+	</div>
+	<div class="col-xl-6" >
+
+		<div style="padding: 20px 25px; ">
+
+
+			<div class="conteinInput"> 
+
+				<div><label class='labelBy'>Servicios</label></div>
+
+			<div class="conteinInput" style="margin-top: 20px">
+				<label class='labelBy' style="    font-size: 14px !important;
+    font-weight: 300 !important;">Categoria - Subcategoria</label>
+				<div style="display: flex">
+				
+				<mat-select [(ngModel)]="idCategoriaS"  (selectionChange)="getSubs($event)" class='inputBy w50' style='margin-right: 20px'>
+
+							 <mat-option [value]="0" >
+              Seleccione Categoría
+              </mat-option>
+
+				 <mat-option  *ngFor="let c of categorias" [value]="c.idCategoria" >
+              {{c.nombre}}
+              </mat-option>
+				</mat-select>
+
+				<mat-select [(ngModel)]="idSubcategoriaS"    class='inputBy w50'>
+		<mat-option  *ngFor="let sc of subcategorias" 
+				 [value]="sc.idSubcategoria" >
+              {{sc.nombre}}
+              </mat-option>
+				</mat-select>
+			    </div>
+
+			</div>
+
+
+				<mat-select placeholder="" 
+				 [(ngModel)]='servicioSeleccionado' 
+				 class='inputBy' style="    width: 200px;display: inline-block;">
+
+				<mat-option *ngFor="let s of serviciosCentro  | callback: filterUser; let i = index" [value]="s.idServicio">{{s.nombre}} / ${{s.precio}}</mat-option>
+
+				</mat-select>
+
+				<button  class="btn btn-success" style="margin-left: 20px;display: inline-block;"
+				(click)='addServicio(servicioSeleccionado)' [disabled]='!servicioSeleccionado' >Agregar Servicio
+				</button>
+
+			</div>
+
+					
+				
+
+
+
+
+					<div  *ngFor="let s of serviciosCita; let i = index" class="m-timeline-2__item"  style="width: 100%">
+
+	<!-- 					<div class="m-timeline-2__item-cricle">
+							<i class="fa fa-genderless mfont-danger"></i>
+						</div> -->
+						<div class="m-timeline-2__item-text  m--padding-top-5" style="    width: 100%;">
+
+							<div style="background: #faf9f7; border: 1px solid #e1e1e1; border-radius: 4px;padding: 20px 20px 20px 30px; position: relative;">
+								<mat-icon style='position: absolute; left: 0;top: 0; padding: 2px;background-color: transparent;' (click)='quitarItem(i)'>close</mat-icon>
+								<div style="    font-size: 16px;margin-bottom: 10px;">
+									<span style="color:#383734;font-weight: 400">{{s.nombre}}</span>
+									<span style="color:#383734;float: right;font-weight: 600">${{s.precio}}</span>
+								</div>
+
+								<div  style="    font-size: 16px;    width: 100%;
+    height: 22px;">
+									<span *ngIf='s.inicio'>{{getHorasFormat2(s.inicio)}} - {{getHorasFormat2(s.fin)}}</span>
+							
+
+
+									<span style="float: right;">
+										{{getHoras(s.duracion)}}h {{s.duracion % 60}}min
+									</span>
+
+
+							<span  style="     text-align: left;
+    display: inline;
+    color: lightcoral;
+    font-weight: 400;
+    font-size: 12px;" *ngIf='this.fechaSeleccionadaN && (!s.inicio || !s.empleados) && !loadingScreen'>
+										Sin staff disponibles. Seleccione otra fecha
+									</span>
+
+								</div>
+
+								<div *ngIf='s.empleados' style="    margin-top: 12px;">
+		<!-- 						<img style='    display: inline-block; margin: auto; height: 35px;' matListAvatar src="assets/app/media/img/userB.png">
+								<span style="  color:#383734; margin-left: 5px;font-size: 16px;font-weight: 400; display: inline-block;">{{s.nombreEmpleado}}</span> -->
+									<label style="    display: block;
+    font-weight: 400;">Staff Asignado</label>
+									<mat-select placeholder="" class='inputBy' style="    width: 200px;display: inline-block;" 
+									[(ngModel)]='s.empleadoSeleccionado'>
+
+									<mat-option *ngFor="let e of s.empleados; let i = index" [value]="e">
+								<img style='    display: inline-block; margin: auto; height: 35px;' matListAvatar src="https://centro.yourbeauty.com.pa:8443/{{e.idFoto}}" 
+    onError="this.src='assets/app/media/img/userB.png'">{{e.nombre}}
+
+									</mat-option>
+
+									</mat-select>
+
+								</div> 
+								<div *ngIf='!cita.fecha' style=" ">
+									Seleccione una fecha en el calendario
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+		
+
+<!-- <div style="    float: right;
+    margin-top: 20px; margin-bottom: 20px;">
+	<span style="font-size: 16px;">Total</span>
+	<span style="    font-size: 30px;
+    color: #383734;
+    margin-left: 10px;">${{citaSeleccionada?.precioEsperado}}</span>
+</div> -->
+
+
+				<!-- 	<div class="m-timeline-2__item m--margin-top-30">
+						<span class="m-timeline-2__item-time">17:00</span>
+						<div class="m-timeline-2__item-cricle">
+							<i class="fa fa-genderless m--font-info"></i>
+						</div>
+						<div class="m-timeline-2__item-text m--padding-top-5">
+							Placed a new order in
+							<a href="#" class="m-link m-link--brand m--font-bolder">SIGNATURE MOBILE</a> marketplace.
+						</div>
+					</div> -->
+	
+
+		
+
+
+
+
+
+
+</div>
+
+	</div>
+
+</div>
+
+
+
+

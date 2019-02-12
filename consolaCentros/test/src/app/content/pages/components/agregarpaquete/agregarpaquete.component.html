@@ -1,0 +1,166 @@
+<div class="row  m-subheader" style="background: rgb(250,249,247) !important;
+    padding: 20px !important;
+text-align: left !important;
+border-bottom: solid 1px lightgray;    display: block;">
+	
+
+	<i (click)='goBack()' style="font-size: 25px;
+    color: lightgray;
+    padding-left: 10px;" class="la la-angle-left"></i>
+	<div class="" style="display: inline-block;font-size: 26px;font-weight: 300;padding-left: 15px;">Agregar Paquete</div>
+
+
+
+	<button  class="btn btn-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" [disabled]='!valorOferta || !duracion.nombre || itemsPaquete.length<2' (click)='openDialog()' >Guardar</button>
+
+	<button  class="btn btn-outline-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" (click)='goBack()' >Cancelar</button>
+
+
+</div>
+
+
+<div class="row">
+ <ngx-loading [show]="loadingScreen" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+	<div class="col-xl-6" style="    border-right: solid 1px lightgray;" >
+
+		<div style="padding: 40px 60px; ">
+			<div style="    border: solid 2px darkgray;
+    border-radius: 5px;" class="conteinInput">
+
+				<div style="font-size: 16px;
+    font-weight: 500;
+    background-color: #e91e63;
+    color: white;
+    padding: 14px;">Contrato de Paquete</div>
+
+				<p style="  font-size: 15px;  padding: 14px;" class=' w100'>
+					Los paquetes tienen una vigencia de 7 dias y un costo de $10. Puedes tener hasta 10 paquetes activos al mismo tiempo. 
+				</p>
+			</div>
+			
+			<label class='labelBy'>Agrupa servicios y brinda un precio preferencial</label>
+			<label class='labelBy'>Los paquetes tienen un sitio especial en el app</label>
+			<img src="assets/app/media/img/demo1.png">
+			<hr>
+
+
+<!-- 			<div class="conteinInput" style="margin-top: 20px">
+				<label class='labelBy'>Fecha de expiracion</label>
+				<div style="display: flex">
+
+				<span class='inputBy w50' > 01/01/2018</span>
+			    </div>
+
+			</div> -->
+		</div>
+	
+	</div>
+	<div class="col-xl-6" >
+		<div style="padding: 40px 60px; ">
+
+								
+										<div  style="margin-top: 20px;font-size: 14px;">
+									<span style="font-weight: 400;display: block">
+									Nombre del paquete 
+
+																		               <mat-icon style='    vertical-align: sub;
+    color: darkgray;
+    margin-left: 19px;'   
+          placement="top" ngbTooltip="Forma un paquete con varios servicios y asigna un nombre, precio y duracion especial" ngbTooltipClass="m-tooltip">help_outline</mat-icon>
+
+      								</span> 
+									<input   class='inputBy w50' placeholder="nombre del paquete"  autocomplete="off"  style='      margin-bottom: 20px;  margin-top: 15px;' type="text" name="nombre" [(ngModel)]="duracion.nombre">
+
+					
+
+	<span style="font-weight: 400;display: block">
+									Precio del paquete 
+
+      			</span> 
+									<input   class='inputBy w50' placeholder="precio de paquete"  autocomplete="off"  style='    margin-top: 15px;' type="number" name="precio" [(ngModel)]="valorOferta">
+
+
+								<div class="conteinInput" style="margin-top: 20px">
+				<label style="font-weight: 400">Duracion del paquete</label>
+
+				<div style="    margin-left: 10px;">
+
+				<span>{{getHoras(duracion.totalTiempo)}}h</span>		 
+				<span style="margin-left: 6px">{{duracion.totalTiempo % 60}}min</span>
+
+				</div>
+
+<!-- 				<div style="display: flex">
+				
+				<mat-select  [(ngModel)]="duracion.hora"  required class='inputBy w50'>
+				 <mat-option [value]="0">0 horas</mat-option>
+              <mat-option [value]="60">1 hora</mat-option>
+              <mat-option [value]="120">2 horas</mat-option>
+              <mat-option [value]="180">3 horas</mat-option>
+              <mat-option [value]="240">4 horas</mat-option>
+              <mat-option [value]="300">5 horas</mat-option>
+				</mat-select>
+
+				<mat-select [(ngModel)]="duracion.minuto"  required class='inputBy w50'>
+				 <mat-option [value]="0">0 minutos</mat-option>
+              <mat-option [value]="5">5 minutos</mat-option>
+              <mat-option [value]="10">10 minutos</mat-option>
+              <mat-option [value]="15">15 minutos</mat-option>
+              <mat-option [value]="20">20 minutos</mat-option>
+              <mat-option [value]="25">25 minutos</mat-option>
+              <mat-option [value]="30">30 minutos</mat-option>
+              <mat-option [value]="35">35 minutos</mat-option>
+              <mat-option [value]="40">40 minutos</mat-option>
+              <mat-option [value]="45">45 minutos</mat-option>
+              <mat-option [value]="50">50 minutos</mat-option>
+              <mat-option [value]="55">55 minutos</mat-option>
+				</mat-select>
+			    </div>
+ -->
+			</div>
+
+
+
+								</div>
+
+
+		<div style="color:darkgray;font-size: 16px;font-weight: 500 !important;margin-bottom: 20px;">
+			Elige los servicios que forman parte del paquete</div>
+					<div style="border: solid 1px lightgray;padding: 20px;">
+
+					
+
+							<div *ngFor="let k of keys;  let m = index">
+							<div class='tituloCateg'>{{k}}</div>
+
+							<div style="margin-bottom:3px;background: rgb(250,249,247);padding: 10px 10px;" *ngFor="let item of serviciosValues[m];  let i = index">
+							<mat-checkbox color='primary' name="{{i}}-name"  (change)="OnChange($event,item.idServicio, item)">
+								<span class="txtF">
+									{{item.nombre}} / 
+									<span  [ngClass]="{'underl': item.oferta}">${{item.precio}}</span>
+									<span style="margin-left: 10px;font-weight: 500;" *ngIf='item.oferta' >${{item.oferta}}</span>
+
+
+								</span></mat-checkbox>
+
+					
+							</div>
+
+
+		
+
+						</div>	
+
+
+
+					</div>
+
+		</div>
+	</div>
+
+</div>
+

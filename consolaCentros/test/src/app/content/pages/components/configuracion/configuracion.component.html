@@ -1,0 +1,108 @@
+<div class="row  m-subheader" style="background: rgb(250,249,247) !important;
+    padding: 20px !important;
+text-align: left !important;
+border-bottom: solid 1px lightgray;    display: block;">
+	
+	<div class="" style="display: inline-block;font-size: 26px;font-weight: 300;padding-left: 30px;">Configuración
+
+         <span style="display: block;
+    font-size: 14px;
+    line-height: 15px;">Ajusta los valores para la configuración de tus reservas 
+</span>
+
+</div>
+
+	<button  class="btn btn-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" [disabled]='
+    !configuracion.parametro1 || !configuracion.parametro2 || !configuracion.parametro3' (click)='editarConf()'>Guardar</button>
+
+
+
+</div>
+
+
+<div class="row" style="    padding: 40px;">
+
+ <ngx-loading [show]="loadingScreen" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+
+	
+	<div class="col-sm-12">
+
+
+    <div style='max-width: 600px;
+    margin: auto;'>
+
+
+    <div style="text-align: center;  padding: 40px;padding-top: 50px !important">
+      <span style="color: #383734;    font-size: 24px;
+    font-weight: 300;
+    line-height: 34px;
+    margin-bottom: 10px;">Configuración de Reservas
+
+</span><br>
+<span style="color: #605f5d;font-size: 16px">
+Ajusta los valores para la configuración de tus reservas
+</span>
+
+    </div>
+
+
+
+ 
+    <div style="    padding: 0px 0px 20px 0px;">
+<!--     <mat-slide-toggle [(ngModel)]="isHuman2" (change)="onChange2($event)" name="human2">I am not a robot</mat-slide-toggle> -->
+
+    <mat-slide-toggle color='primary' name="human2"  [(ngModel)]='configuracion.confirmacionAutomatica'>
+      <span style="font-size: 16px !important;">
+        Las reservas serán confirmadas automaticamente
+      </span>
+      </mat-slide-toggle>
+
+
+    </div>
+
+    <hr>
+
+    <div style="color: #383734;font-size: 19px;font-weight: 400; line-height: 34px;margin-bottom: 30px;">Configuración de reserva</div>
+
+      <p style="display: inline-block;font-size: 16px;">Los clientes podrán realizar reservas</p>
+      <mat-select placeholder="" 
+      class='inputBy selectD' style='border: solid 1px #e1e1e1;padding: 5px;' 
+      [(ngModel)]='configuracion.parametro1'>
+                <mat-option [value]="1">Hasta 1 hora antes de la hora de inicio</mat-option>
+                 <mat-option [value]="2">Hasta 2 horas antes de la hora de inicio</mat-option>
+           <mat-option [value]="3">Hasta 3 horas antes de la hora de inicio</mat-option>
+            <mat-option [value]="6">Hasta 6 horas antes de la hora de inicio</mat-option>
+             <mat-option [value]="12">Hasta 12 horas antes de la hora de inicio</mat-option>
+
+      </mat-select>
+
+
+
+      <p style="display: inline-block;font-size: 16px;">Los clientes podrán realizar reservas</p>
+      <mat-select placeholder="" class='inputBy selectD' 
+       [(ngModel)]='configuracion.parametro2'>
+                  <mat-option [value]="15">Hasta 15 dias en el futuro</mat-option>
+                 <mat-option [value]="30">Hasta 30 dias en el futuro</mat-option>
+                 <mat-option [value]="60">Hasta 60 dias en el futuro</mat-option>
+
+      </mat-select>
+
+
+
+            <p style="display: inline-block;font-size: 16px;">Permitir Reprogramaciones</p>
+      <mat-select placeholder="" class='inputBy selectD' 
+       [(ngModel)]='configuracion.parametro3'>
+                <mat-option [value]="12">Hasta 12 horas antes de la reserva</mat-option>
+                  <mat-option [value]="24">Hasta 24 horas antes de la reserva</mat-option>
+          
+
+      </mat-select>
+
+
+
+
+</div>
+	</div>
+</div>

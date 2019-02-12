@@ -1,0 +1,337 @@
+<div class="row  m-subheader" style="background: rgb(250,249,247) !important;
+    padding: 20px !important;
+text-align: left !important;
+border-bottom: solid 1px lightgray;    display: block;">
+	
+<!-- 
+	<i (click)='goBack()' style="font-size: 25px;
+    color: lightgray;
+    padding-left: 10px;" class="la la-angle-left"></i>
+ -->	<div class="" style="display: inline-block;font-size: 26px;font-weight: 300;padding-left: 15px;">Valoraciones
+   <span style="display: block;
+    font-size: 14px;
+    line-height: 15px;">Conoce la opinión de tus clientes!</span>
+</div>
+
+
+<!--
+	<button  class="btn btn-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" (click)='editarCentroInfo()' 
+    [disabled]='!centroInfo.nombre' >Guardar</button>
+
+ 	<button  class="btn btn-outline-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" (click)='goBack()' >Cancelar</button> -->
+
+
+</div>
+<div class="row">
+<ngx-loading [show]="loadingScreen" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+	<div class="col-xl-6" style="    border-right: solid 1px lightgray;    padding-right: 0px !important;" >
+
+
+    
+<div style="    padding: 20px;"> 
+    <p>Buscar en periodo</p>
+<mat-form-field style='  margin-right: 20px;  width: 120px !important;' >
+  <input matInput [(ngModel)]='fechas.inicio' [matDatepicker]="pickerI" 
+  (dateChange)="changeDate2()" placeholder="Inicio" >
+  <mat-datepicker-toggle matSuffix [for]="pickerI"></mat-datepicker-toggle>
+  <mat-datepicker #pickerI></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field style='    width: 120px !important;' >
+  <input matInput [disabled]='!fechas.inicio' [(ngModel)]='fechas.fin' [min]="fechas.inicio" [matDatepicker]="pickerF" (dateChange)="changeDate1()" placeholder="Fin">
+  <mat-datepicker-toggle matSuffix [for]="pickerF"></mat-datepicker-toggle>
+  <mat-datepicker #pickerF></mat-datepicker>
+</mat-form-field>
+
+</div>
+
+
+<mat-nav-list style='padding-top: 0px '>
+
+	  <mat-list-item   *ngFor="let r of reviews; let i = index" 
+      style='border-top: solid 1px lightgray;' >
+
+    <img matListAvatar src="https://centro.yourbeauty.com.pa:8443/{{r.idFoto}}" 
+    onError="this.src='assets/app/media/img/userB.png'">
+
+  
+   <div matLine> 
+    <span>{{r.nombreCliente}}</span> 
+    <button matLine style="width: 104px;
+    display: inline-block;
+    margin-left: 10px;
+    height: 27px;
+    line-height: 0px;" class="btn btn-sm btn-outline-success"
+    [routerLink]="['/detallecita']" [queryParams]="{id: r.idCita}" >ver reserva</button>
+
+
+    <p style="float:right;    color: darkgray;
+    margin-right: 25px;">{{r.soloFecha}}</p></div>
+    			<div matLine>
+
+				<mat-icon  
+                [ngStyle]="{'color': r.puntuacion>0 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+				<mat-icon  
+                [ngStyle]="{'color': r.puntuacion>1 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': r.puntuacion>2 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': r.puntuacion>3 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': r.puntuacion>4 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+<!-- 				<mat-icon style='color: #FFC107;'>star</mat-icon> -->
+
+
+			</div>
+    <p matLine style="    margin-bottom: 10px;">
+
+      <span >{{r.comentario}}</span>
+ 
+    </p>
+
+        <div matLine>
+    	<input [(ngModel)]='r.respuestaCentro'   style="    width: 80%;" type="text" name="">
+        </div>
+        <button matLine style="       margin-top: 9px;
+    width: 104px;" class="btn btn-sm btn-success" [disabled]='!r.respuestaCentro' 
+    (click)='responderCom(r)' >Responder</button>
+
+  </mat-list-item>
+
+
+
+
+
+</mat-nav-list>
+
+
+
+	
+	</div>
+	<div class="col-xl-6" >
+
+		<div *ngIf='dataReview && dataReview.puntuacion' style="padding: 20px;
+    text-align: center;
+    display: inline-block;">
+			<div style="border-bottom: solid 1px #34bfa3;
+    color: #34bfa3;
+    background-color: white;
+    padding: 7px;
+    font-size: 14px;">Puntuacion del negocio</div>
+			<div style="padding: 20px;
+    text-align: center;
+    display: inline-block;font-size: 32px">{{dataReview.puntuacion.toFixed(1)}}</div>
+			<div>
+
+
+
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.puntuacion>0 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.puntuacion>1 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.puntuacion>2 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.puntuacion>3 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.puntuacion>4 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+
+			</div>
+			<div style="color: #6b6b6b;">Puntuacion basada en {{dataReview.cantidad}} valoraciones de los clientes</div>
+
+
+
+<hr>
+
+            <div style="    margin-top: 20px;text-align: left !important;font-size: 15px;">
+                <p>Servicio</p>
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.servicio>0 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.servicio>1 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.servicio>2 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.servicio>3 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.servicio>4 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+
+            </div>
+
+            <div style="    margin-top: 20px;text-align: left !important;font-size: 15px;">
+                <p>Staff</p>
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.staff>0 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.staff>1 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.staff>2 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.staff>3 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.staff>4 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+
+            </div>
+
+
+
+            <div style="    margin-top: 20px;text-align: left !important;font-size: 15px;">
+                <p>Staff</p>
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.staff>0 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.staff>1 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.staff>2 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.staff>3 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.staff>4 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+
+            </div>
+
+
+
+            <div style="    margin-top: 20px;text-align: left !important;font-size: 15px;"> 
+                <p>Precio</p>
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.precio>0 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.precio>1 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.precio>2 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.precio>3 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.precio>4 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+
+            </div>
+
+
+
+            <div style="    margin-top: 20px;text-align: left !important;font-size: 15px;">
+                <p>Limpieza</p>
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.limpieza>0 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.limpieza>1 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.limpieza>2 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.limpieza>3 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.limpieza>4 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+
+            </div>
+
+            <div style="    margin-top: 20px;text-align: left !important;font-size: 15px;">
+                <p>Ambiente</p>
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.ambiente>0 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.ambiente>1 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.ambiente>2 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.ambiente>3 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+                <mat-icon  
+                [ngStyle]="{'color': dataReview.ambiente>4 ? '#FFC107' : '#dcdcdc' }">
+                star</mat-icon>
+
+
+            </div>
+
+
+
+		</div>
+
+	</div>
+
+</div>
+
+
+
+

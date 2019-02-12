@@ -1,0 +1,167 @@
+<div class="row  m-subheader" style="background: rgb(250,249,247) !important;
+    padding: 20px !important;
+text-align: left !important;
+border-bottom: solid 1px lightgray;    display: block;">
+	
+ 
+	<i (click)='goBack()' style="font-size: 25px;
+    color: lightgray;
+    padding-left: 10px;" class="la la-angle-left"></i>
+	<div class="" style="display: inline-block;font-size: 26px;font-weight: 300;padding-left: 15px;">Reprogramar Reserva</div>
+
+	<button  class="btn btn-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" (click)='reprogramarCita()' 
+    [disabled]='!mensajeSoporte' >Reprogramar</button>
+<!-- 
+
+
+	<button  class="btn btn-outline-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" (click)='goBack()' >Cancelar</button> -->
+
+
+</div>
+<div class="row">
+<ngx-loading [show]="loadingScreen" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+      <div style="width: 50%;text-align: center; margin-left: 25%; margin-top: 50px">
+
+
+        
+        <label  style="    float: left;
+    font-size: 15px;">Por favor incluya el motivo y otra disponibilidad de tiempo para que el cliente pueda reprogramar su cita. </label>
+        <textarea [(ngModel)]='mensajeSoporte' style="    width: 100%;
+    height: 200px;
+    resize: none;
+    border-color: lightgray;
+    border-radius: 4px;padding: 20px;
+    color: #444;
+    font-size: 15px;">
+        	
+
+        </textarea> 
+
+                       
+      </div>
+<!-- 	<div class="col-xl-6" style="    border-right: solid 1px lightgray;" >
+
+		<div style="padding: 40px 60px; ">
+
+
+			<div class="conteinInput">
+				
+
+				<label class='labelBy'>Cliente</label>
+				<div style="font-style: 16px">{{datasCita.nombreCliente}}</div>
+			</div>
+
+			<div class="conteinInput"> 
+			<label class='labelBy'>Fecha</label>
+			<mat-form-field style='  margin-right: 20px;  width: 100% !important;' >
+			<input matInput [(ngModel)]='datasCita.horaInicio' [matDatepicker]="pickerI" 
+			(dateChange)="moveDate($event)" [matDatepickerFilter]="myFilter" placeholder="Fecha" [min]="fechaMin" autocomplete="off">
+			<mat-datepicker-toggle matSuffix [for]="pickerI"></mat-datepicker-toggle>
+			<mat-datepicker #pickerI></mat-datepicker>
+			</mat-form-field>
+
+			</div>
+
+
+			<div class="conteinInput"> 
+			<label class='labelBy'>Hora de Inicio</label>
+		      <mat-select  placeholder="" class='inputBy selectD' 
+		       (selectionChange)="changeTime($event)">
+		                  <mat-option 
+		                  *ngFor="let h of horasDisponibles; let i = index" 
+		                   [value]="h.inicio">{{getHorasFormat(h.inicio)}}</mat-option>
+		      </mat-select>
+
+			</div>
+
+
+
+		</div>
+	
+	</div>
+	<div class="col-xl-6" >
+
+		<div style="padding: 20px 25px; ">
+
+
+			<div class="conteinInput"> 
+
+				<div><label class='labelBy'>Servicios</label></div>
+
+
+
+			</div>
+
+					
+				
+
+
+
+
+					<div  *ngFor="let s of serviciosCita; let i = index" class="m-timeline-2__item"  style="width: 100%">
+
+
+						<div class="m-timeline-2__item-text  m--padding-top-5" style="    width: 100%;">
+
+							<div style="background: #faf9f7; border: 1px solid #e1e1e1; border-radius: 4px;padding: 20px 20px 20px 30px; position: relative;">
+
+								<div style="    font-size: 16px;margin-bottom: 10px;">
+									<span style="color:#383734;font-weight: 400">{{s.nombre}}</span>
+									<span style="color:#383734;float: right;font-weight: 600">${{s.precio}}</span>
+								</div>
+
+								<div  style="    font-size: 16px;    width: 100%;
+    height: 22px;">
+									<span *ngIf='s.inicio'>{{getHorasFormat2(s.inicio)}} - {{getHorasFormat2(s.fin)}}</span>
+							
+
+
+									<span style="float: right;">
+										{{getHoras(s.duracion)}}h {{s.duracion % 60}}min
+									</span>
+
+
+							<span  style="    width: 100%;
+								    text-align: left;
+								    display: block;
+								    color: lightcoral;    font-weight: 400;" *ngIf='this.fechaSeleccionadaN && (!s.inicio || !s.empleados) && !loadingScreen'>
+										No disponible, intenta otro horario o fecha
+									</span>
+
+								</div>
+
+								<div *ngIf='s.empleados' style="    margin-top: 23px;">
+
+
+									<mat-select placeholder="" class='inputBy' style="    width: 200px;display: inline-block;" 
+									[(ngModel)]='s.empleadoSeleccionado'>
+
+									<mat-option *ngFor="let e of s.empleados; let i = index" [value]="e">
+								<img style='    display: inline-block; margin: auto; height: 35px;' matListAvatar src="https://centro.yourbeauty.com.pa:8443/{{e.idFoto}}" 
+    onError="this.src='assets/app/media/img/userB.png'">{{e.nombre}}
+
+									</mat-option>
+
+									</mat-select>
+
+								</div> 
+
+							</div>
+
+						</div>
+					</div>
+
+
+</div>
+
+	</div> -->
+
+</div>
+
+
+
+

@@ -1,0 +1,169 @@
+<div class="row  m-subheader" style="background: rgb(250,249,247) !important;
+    padding: 20px !important;
+text-align: left !important;
+border-bottom: solid 1px lightgray;    display: block;">
+	
+	<div class="" style="display: inline-block;font-size: 26px;font-weight: 300;padding-left: 30px;">Estadísticas
+
+       <span style="display: block;
+    font-size: 14px;
+    line-height: 15px;">Te brinda información útil para tu negocio!</span>
+</div>
+
+
+
+</div>
+
+
+<div class="row" style="     padding: 40px;
+    padding-top: 20px !important;">
+
+ <ngx-loading [show]="loadingScreen" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+
+	
+<div class="col-sm-12">
+<div class="user-card-block card" style=" border: none !important;    padding: 0px 60px 25px 60px; border-radius: 0px !important;">
+<div class="card-block" style="padding-top: 0px !important;">
+<div class="top-card text-center">
+<img  src="https://centro.yourbeauty.com.pa:8443/{{info.idFoto}}" 
+    onError="this.src='assets/app/media/img/fotoComercio.png'" 
+     class="img-responsive" alt="" style="    height: 75px;
+    width: 75px;
+    border-radius: 70px;">
+</div>
+<div class="card-contain text-center p-t-40"  style="    padding-top: 40px;">
+<h5 class="text-capitalize p-b-10" style="    padding-bottom: 10px;">{{info.nombre}}</h5>
+<p class="text-muted">{{info.direccion}}</p>
+</div>
+<div class="card-data m-t-40" style="    margin-top: 40px;">
+<div class="row">
+<div class="col-3 b-r-default text-center">
+<p class="text-muted">Total</p>
+<span>{{info.total}}</span>
+</div>
+
+<div class="col-3 b-r-default text-center">
+<p class="text-muted">Completadas</p>
+<span>{{info.completadas}}</span>
+</div>
+
+<div class="col-3 b-r-default text-center ">
+<p class="text-muted">Confirmadas</p>
+<span>{{info.confirmadas}}</span>
+</div>
+
+<div class=" col-3  text-center">
+<p class="text-muted">Canceladas</p>
+<span>{{info.canceladas}}</span>
+</div>
+
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="col-md-12 col-xl-4">
+
+<div class="row">
+<div class="col-xl-12 col-md-6" style="    margin-bottom: 20px;">
+<div class="card">
+<div class="card-block-big card-status">
+<h5>Ingresos Totales</h5>
+<div class="card-block text-center">
+<h2 class="text-primary">${{ingresos.total || 0}}</h2>
+</div>
+
+</div>
+</div>
+</div>
+<div class="col-xl-12 col-md-6"  style="    margin-bottom: 20px;">
+<div class="card">
+<div class="card-block-big card-status">
+<h5>Reserva promedio</h5>
+<div class="card-block text-center">
+<h2 class="text-warning">${{ingresos.promedio || 0}}</h2>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div class="col-md-12 col-xl-8">
+<div class="card">
+<div class="card-block">
+<h5>Servicios mas consumidos</h5>
+</div>
+
+
+<div class="card-block client-card table-1-card p-t-0">
+<div class="table-responsive">
+<table class="table">
+<thead>
+<tr class="text-capitalize">
+<th>Servicio</th>
+<th>Categoria</th>
+<th>Cantidad</th>
+
+
+</tr>
+</thead>
+<tbody>
+
+<tr *ngFor="let h of bests; let i = index"  >
+<td class="photo-table img">
+<!-- <a href="#!">
+
+	<img style="border-radius: 0px;
+width: 27px;" class="img-circle" src="{{globalImage}}{{e.idFoto}}" onError="this.src='assets/categoria.png';"  alt="chat-user">
+
+</a> -->
+<p>{{h.nombre}}</p>
+</td>
+<td>{{h.nombreCategoria}}</td>
+<td>{{h.cantidad}}</td>
+
+<!-- <td class="text-success">${{e.total?.toFixed(2)}}</td> -->
+</tr>
+
+
+
+
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+
+

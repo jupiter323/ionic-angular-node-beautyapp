@@ -1,0 +1,76 @@
+<div class="row  m-subheader" style="background: rgb(250,249,247) !important;
+    padding: 20px !important;
+text-align: left !important;
+border-bottom: solid 1px lightgray;    display: block;">
+	
+	<div class="" style="display: inline-block;font-size: 26px;font-weight: 300;padding-left: 30px;">Soporte</div>
+<!-- 
+	<button  class="btn btn-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" [disabled]='
+    !configuracion.parametro1 || !configuracion.parametro2 || !configuracion.parametro3' (click)='editarConf()'>Guardar</button> -->
+
+
+
+</div>
+
+
+<div class="row" style="    padding: 40px;">
+
+ <ngx-loading [show]="loadingScreen" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+
+	
+	<div class="col-sm-12">
+
+
+    <div style='max-width: 600px;
+    margin: auto;    text-align: end;'>
+
+
+    <div style="text-align: center;  padding: 40px;padding-top: 50px !important">
+      <span style="color: #383734;    font-size: 24px;
+    font-weight: 300;
+    line-height: 34px;
+    margin-bottom: 10px;">Formulario de Soporte
+
+</span><br>
+<span style="color: #605f5d;font-size: 16px">
+Déjanos tus dudas en el siguiente formulario y te contactaremos al email relacionado a tu cuenta a la brevedad posible
+</span>
+
+    </div>
+
+
+
+        <label style="    float: left;
+    font-size: 15px;">Asunto</label>
+        <input type="text" [(ngModel)]='asuntoSoporte' name="asunto" placeholder="asunto" 
+        style="width: 100%;padding: 5px; margin-bottom: 15px">
+        
+        <label  style="    float: left;
+    font-size: 15px;">Descripción</label>
+        <textarea [(ngModel)]='mensajeSoporte' style="    width: 100%;
+    height: 200px;
+    resize: none;
+    border-color: lightgray;
+    border-radius: 4px;padding: 20px;
+    color: #444;
+    font-size: 15px;">
+        	
+
+        </textarea> 
+
+
+	<button  class="btn btn-success " style="margin-top: 15px !important;" [disabled]='!mensajeSoporte || mensajeSoporte.trim().length==0' (click)='enviarMensaje()' >Enviar mensaje</button> 
+
+    
+
+
+
+
+
+
+</div>
+	</div>
+</div>
+

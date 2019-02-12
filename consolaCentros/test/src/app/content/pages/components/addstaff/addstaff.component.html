@@ -1,0 +1,129 @@
+<div class="row  m-subheader" style="background: rgb(250,249,247) !important;
+    padding: 20px !important;
+text-align: left !important;
+border-bottom: solid 1px lightgray;    display: block;">
+	
+
+	<i (click)='goBack()' style="font-size: 25px;
+    color: lightgray;
+    padding-left: 10px;" class="la la-angle-left"></i>
+	<div class="" style="display: inline-block;font-size: 26px;font-weight: 300;padding-left: 15px;">Agregar Staff</div>
+
+
+
+	<button  class="btn btn-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" [disabled]='!f.form.valid || !empleado.tipo'
+     (click)='guardarStaff()'>Guardar</button>
+
+	<button  class="btn btn-outline-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" (click)='goBack()' >Cancelar</button>
+
+
+</div>
+<div class="row">
+<ngx-loading [show]="loadingScreen" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+
+	<div class="col-xl-6" style="    border-right: solid 1px lightgray;" >
+
+		<div style="padding: 40px 60px; ">
+			<div style="text-align: center">
+			<img   style='    height: 70px;
+    width: 70px;
+    border-radius: 100px;
+    margin: 5px 11px;' src="assets/app/media/img/userB.png">
+</div>
+
+
+  <form [formGroup]="addFormGroup" #f="ngForm">
+
+			<div class="conteinInput">
+				<label class='labelBy'>Nombre*</label>
+				<input [(ngModel)]='empleado.nombre' class='inputBy w100' placeholder="nombre del staff"  autocomplete="off"  formControlName="nombreStaff" type="text" name="nombre" required>
+			</div>
+			<div class="conteinInput">
+				<label class='labelBy'>Telefono</label>
+				<input [(ngModel)]='empleado.telefono' class='inputBy w100' placeholder="telefono del staff" formControlName="telefonoStaff"  autocomplete="off"  type="number" name="telefono">
+			</div>
+
+			<div class="conteinInput">
+				<label class='labelBy'>Email*</label>
+ <mat-form-field style=' width: 100% !important;     font-size: 16px !important;
+    '>
+				 <span matSuffix style="color: lightgray;
+    vertical-align: middle;
+    margin-right: 7px;"
+     [hidden]=" addFormGroup.controls['correoStaff'].hasError('email') || addFormGroup.controls['correoStaff'].hasError('required')"  *ngIf='!emailTaken' ><mat-icon style='color: lightcoral;
+    vertical-align: middle;'>cancel</mat-icon>
+     ya existe esta cuenta</span>
+    <span matSuffix style="color: lightgray;
+    vertical-align: middle;
+    margin-right: 7px;" *ngIf='emailTaken' 
+    [hidden]="addFormGroup.controls['correoStaff'].hasError('email') || addFormGroup.controls['correoStaff'].hasError('required')"  >
+      <mat-icon style='color: #34bfa3;
+    vertical-align: top;'>check_circle</mat-icon></span>
+
+				<input [(ngModel)]='empleado.email' matInput class=' w100' placeholder=""  autocomplete="off" formControlName="correoStaff" style="padding: 11px !important;"  type="email" email required>
+
+				 
+      </mat-form-field>
+
+
+			</div>
+			<div class="conteinInput">
+				<label class='labelBy'>Descripcion*</label>
+				<input [(ngModel)]='empleado.descripcion' class='inputBy w100' placeholder="descripcion del staff"  formControlName="desc" autocomplete="off"  type="text" name="desc">
+			</div>
+
+</form>
+
+    <div *ngIf='empleado.tipo== 2' style="    padding: 0px 0px 2px 0px;
+    font-size: 13px;color: rgb(232,84,126);font-weight: 400;">
+      Se enviará por e-mail el link para descargar el App del Staff y los credenciales de acceso
+<!--     <mat-slide-toggle [(ngModel)]="isHuman2" (change)="onChange2($event)" name="human2">I am not a robot</mat-slide-toggle> -->
+
+<!--     <mat-slide-toggle name="human2">Invitar a YourBeauty y crear cuenta</mat-slide-toggle>
+ -->
+
+    </div>
+
+
+		</div>
+	
+	</div>
+	<div class="col-xl-6" >
+		<div style="padding: 40px 60px; ">
+			<div style="color:darkgray;font-size: 16px;font-weight: 500 !important;margin-bottom: 20px;">Permisos</div>
+					<div style="border: solid 1px lightgray;padding: 20px;">
+						
+<label class='labelBy'>Permisos de usuario</label>
+			<mat-select [(ngModel)]='empleado.tipo' class='inputBy w100'>
+			<mat-option value="1">Miembro Administrador</mat-option>
+				<mat-option value="2">Miembro de Staff</mat-option>
+				<mat-option value="3">Recepcion</mat-option>
+				</mat-select>
+
+				<div style="
+    margin-top: 40px;">
+					<p><span style="font-weight: 500">Administrador:</span>
+					Este usuario tendrá acceso a todas las funciones del panel.</p>
+					<p><span style="font-weight: 500">Staff:</span>
+					Dedicado a los empleados del establecimiento para que tengan acceso a la aplicación y puedan confirmar las reservas.</p>
+					<p><span style="font-weight: 500">Recepción:</span>
+					Tendrá acceso a gestionar el calendario y la lista de reservas.</p>
+
+				</div>
+
+					</div>
+
+
+										
+		</div>
+	</div>
+
+</div>
+
+
+
+

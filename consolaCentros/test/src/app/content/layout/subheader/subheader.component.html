@@ -1,0 +1,42 @@
+<!-- BEGIN: Subheader -->
+<div class="m-subheader" [hidden]="subheaderService.disabled$ | async" 
+style="background: rgb(250,249,247) !important;
+    padding: 15px 30px 15px 30px !important;display: grid;
+text-align: left !important;
+border-bottom: solid 1px lightgray;">
+	<div class="align-items-center">
+		<div class="mr-auto">
+			<h1 class="m-subheader__title" 
+			style="font-size: 30px;
+    font-weight: 300;" [ngClass]="{ 'm-subheader__title--separator': (subheaderService.breadcrumbs$ | async)?.length > 0 }">
+				{{subheaderService.title$ | async}}
+			</h1>
+
+
+		<a  *ngIf="(subheaderService.title$ | async) == 'Servicios'"  style="    float: right;margin-top: 10px;" 
+		[routerLink]="['/editservicio']" 
+		[queryParams]="{id: 34}" mat-raised-button color="green" matTooltip="Crear nuevo servicio">Agregar Servicio</a>
+
+
+
+			<ul *ngIf="(subheaderService.breadcrumbs$ | async)?.length > 0" class="m-subheader__breadcrumbs m-nav m-nav--inline">
+				<li class="m-nav__item m-nav__item--home">
+					<a href="javascript:;" routerLink="/" class="m-nav__link m-nav__link--icon">
+						<i class="m-nav__link-icon la la-home"></i>
+					</a>
+				</li>
+				<ng-container *ngFor="let item of subheaderService.breadcrumbs$ | async">
+					<li class="m-nav__separator">-</li>
+					<li class="m-nav__item">
+						<a href="javascript:;" [routerLink]="item.page" [queryParams]="item.queryParams" class="m-nav__link">
+							<span class="m-nav__link-text" [translate]="item.translate">
+								{{item.title}}
+							</span>
+						</a>
+					</li>
+				</ng-container>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- END: Subheader -->

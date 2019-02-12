@@ -1,0 +1,584 @@
+<div class="row  m-subheader" style="background: rgb(250,249,247) !important;
+    padding: 20px !important;
+text-align: left !important;
+border-bottom: solid 1px lightgray;    display: block;">
+	
+	<div class="" style="display: inline-block;font-size: 26px;font-weight: 300;padding-left: 30px;">Staff
+	<span style="display: block;
+    font-size: 14px;
+    line-height: 2px;">Edita cada miembro indicando servicios y horario que ofrece</span>
+	</div>
+
+	<button  class="btn btn-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" 
+		[routerLink]="['/addstaff']"   matTooltip="Crear nuevo servicio">Agregar miembro del Staff</button>
+
+</div>
+
+<div class="row">
+
+	 <ngx-loading [show]="loadingScreen" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+
+	 
+	<div class="col-xl-4" style="padding-right: 0px;    border-right: solid 1px lightgray;" >
+
+
+
+<mat-nav-list style='padding-top: 0px '>
+
+  <mat-list-item *ngFor="let e of empleados; let i = index" [ngClass]="{'selectedItem': selected == e.idEmpleado}" (click)="itemSelectedChange(e)">
+    <img matListAvatar src="https://centro.yourbeauty.com.pa:8443/{{e.idFoto}}" 
+    onError="this.src='assets/app/media/img/userB.png'">
+    <h3 matLine> {{e.nombre}} </h3>
+    <p matLine>
+      <span class="tagStaff">{{e.tipo == 1 ? 'MIEMBRO ADMINISTRADOR' : 
+					  e.tipo == 2 ? 'MIEMBRO STAFF' : 'RECEPCION'}}</span>
+ 
+    </p>
+  </mat-list-item>
+
+  <!-- 
+
+    <mat-list-item [ngClass]="{'selectedItem': selected == 2}" (click)="itemSelectedChange(2)">
+    <img matListAvatar src="https://booksy.com/media/us/2015/11/23/21f309ce4859db0374e7fdb085bc776d_50x50.png" >
+    <h3 matLine> Maria Segura  </h3>
+    <p matLine>
+        <span class="tagStaff">MIEMBRO ADMINISTRADOR</span>
+    </p>
+  </mat-list-item>
+
+      <mat-list-item [ngClass]="{'selectedItem': selected == 3}" (click)="itemSelectedChange(3)">
+    <img matListAvatar src="https://booksy.com/media/us/2015/11/23/21f309ce4859db0374e7fdb085bc776d_50x50.png" >
+    <h3 matLine> Luisa Corrales </h3>
+    <p matLine>
+      <span class="tagStaff">MIEMBRO ADMINISTRADOR</span>
+    </p>
+  </mat-list-item> -->
+
+
+
+</mat-nav-list>
+
+
+
+
+			
+			</div>
+
+
+		
+
+	<div class="col-xl-8" style="padding-left: 0px !important">
+
+		<div style="">
+			<div style="    border-bottom: solid 1px lightgray;font-size: 16px;font-weight: 400;line-height: 1.5;color: #383734;background: #fff;">
+				<div style="display: table-cell;padding: 0 10px;vertical-align: middle;">
+					<div style="font-size: 70px; width: 72px;min-height: 72px;">
+						 <img  src="https://centro.yourbeauty.com.pa:8443/{{miembroSeleccionado.idFoto}}" 
+    onError="this.src='assets/app/media/img/userB.png'" style="border-radius: 50%;z-index: 1;position: relative;height: 70px;width: 70px;">
+					</div>
+				</div>
+				<div style="display: table-cell;padding: 0 10px;vertical-align: middle;    width: 100%;">
+					<div style="width: 100%;">{{miembroSeleccionado.nombre}}<span class="tagStaff">{{miembroSeleccionado.tipo == 1 ? 'MIEMBRO ADMINISTRADOR' : 
+					  miembroSeleccionado.tipo == 2 ? 'MIEMBRO BASICO' : 'RECEPCION'}}</span></div>
+
+					<div style="display: block;vertical-align: top;">
+										<div style="float: right !important;display: inline-block; min-height: 1px;vertical-align: top; margin: 0;padding: 0;">
+							<button  	[routerLink]="['/editstaff']" skipLocationChange  
+							[queryParams]=miembroSeleccionado 
+		 class="btn btn-outline-success" style="margin-top: 3px;float: right;margin-right: 10px;"  >Editar Perfil</button>
+						</div>
+						<div style="float: right !important;display: inline-block; min-height: 1px;vertical-align: top; margin: 0;padding: 0;">
+				
+						</div>
+		
+						    
+					</div>
+				</div>
+			</div>
+
+
+		<div class="m-section" style="margin-top: 30px">
+			<div class="m-section__content">
+				<ngb-tabset>
+					<ngb-tab title="Servicios" [disabled]="miembroSeleccionado.tipo==3">
+					<ng-template ngbTabContent >
+
+
+
+								<div style="padding: 40px 60px; " [hidden]="miembroSeleccionado.tipo==3">
+		<div style="color:#EA527D;font-size: 16px;font-weight: 500 !important;margin-bottom: 20px;">
+			Elige los servicios que el empleado brinda</div>
+					<div style="border: solid 1px lightgray;padding: 20px;">
+
+					
+
+
+
+
+
+							<div *ngFor="let k of keys;  let m = index">
+							<div class='tituloCateg'>{{k}}</div>
+
+							<div style="margin-bottom:3px;background: rgb(250,249,247);padding: 10px 10px;" *ngFor="let item of serviciosValues[m];  let i = index">
+							<mat-checkbox color='primary' name="{{item.idEmpleado}}-name" (change)="OnChange($event,item)" [checked]="item.idServicioEmpleado">
+								<span class="txtF">
+									{{item.nombre}} / 
+									<span  [ngClass]="{'underl': item.oferta}">${{item.precio}}</span>
+									<span style="margin-left: 10px;font-weight: 500;" *ngIf='item.oferta' >${{item.oferta}}</span>
+								</span>
+
+							<div class="txtF" style="    margin-left: 6px;display: inline-block;" >
+							<span> / {{getHoras(item.duracion)}}h</span>		 
+							<span style="margin-left: 6px">{{item.duracion % 60}}min</span> 
+							</div>
+
+
+							</mat-checkbox>
+							</div>
+						</div>	
+
+
+
+
+
+
+
+
+
+
+					</div>
+
+		</div>
+
+
+					</ng-template>
+					</ngb-tab>
+					<ngb-tab  title="Horario" [disabled]="miembroSeleccionado.tipo==3">
+					<ng-template ngbTabContent >
+						<div style='padding: 30px 45px;'[hidden]="miembroSeleccionado.tipo==3">
+
+
+
+
+
+
+
+
+						<div  style="margin-bottom:3px;background: white;padding: 0px 0px;" >
+								<div class="contentSupe">
+						<mat-checkbox color='primary' [(ngModel)]='diasSemana.lunes.estado'>
+							<span class='labelBy' style='margin-bottom: 0px !important;'>Lunes</span>
+								</mat-checkbox>
+							</div>
+							<div class="conteinInput" style="margin-top: 20px">
+							
+							<div [hidden]='diasSemana.lunes.estado' style="display: flex">
+								NO TRABAJA
+							</div>
+							<div [hidden]='!diasSemana.lunes.estado' style="display: flex">
+
+							<mat-select  [(ngModel)]='diasSemana.lunes.horaEntrar' class='inputBy w50'>
+
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+<span class="separadorHoras"> - </span>
+							<mat-select  [(ngModel)]='diasSemana.lunes.horaSalir' class='inputBy w50'>
+							
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							</div>
+
+							</div>	
+					
+						</div>
+
+
+
+
+						<div style="margin-bottom:3px;background: white;padding: 0px 0px;" >
+								<div class="contentSupe">
+						<mat-checkbox color='primary' [(ngModel)]='diasSemana.martes.estado'>
+							<span class='labelBy' style='margin-bottom: 0px !important;'>Martes</span>
+								</mat-checkbox>
+							</div>
+							<div class="conteinInput" style="margin-top: 20px">
+							
+							<div [hidden]='diasSemana.martes.estado' style="display: flex">
+								NO TRABAJA
+							</div>
+							<div [hidden]='!diasSemana.martes.estado' style="display: flex">
+
+							<mat-select  [(ngModel)]='diasSemana.martes.horaEntrar' class='inputBy w50'>
+
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+<span class="separadorHoras"> - </span>
+							<mat-select  [(ngModel)]='diasSemana.martes.horaSalir' class='inputBy w50'>
+							
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							</div>
+
+							</div>	
+					
+						</div>
+
+
+
+						<div style="margin-bottom:3px;background: white;padding: 0px 0px;" >
+								<div class="contentSupe">
+						<mat-checkbox color='primary' [(ngModel)]='diasSemana.miercoles.estado'>
+							<span class='labelBy' style='margin-bottom: 0px !important;'>Miercoles</span>
+								</mat-checkbox>
+							</div>
+							<div class="conteinInput" style="margin-top: 20px">
+							
+							<div [hidden]='diasSemana.miercoles.estado' style="display: flex">
+								NO TRABAJA
+							</div>
+							<div [hidden]='!diasSemana.miercoles.estado' style="display: flex">
+
+							<mat-select  [(ngModel)]='diasSemana.miercoles.horaEntrar' class='inputBy w50'>
+
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+<span class="separadorHoras"> - </span>
+							<mat-select  [(ngModel)]='diasSemana.miercoles.horaSalir' class='inputBy w50'>
+							
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							</div>
+
+							</div>	
+					
+						</div>
+
+
+
+
+						<div style="margin-bottom:3px;background: white;padding: 0px 0px;" >
+								<div class="contentSupe">
+						<mat-checkbox color='primary' [(ngModel)]='diasSemana.jueves.estado'>
+							<span class='labelBy' style='margin-bottom: 0px !important;'>Jueves</span>
+								</mat-checkbox>
+							</div>
+							<div class="conteinInput" style="margin-top: 20px">
+							
+							<div [hidden]='diasSemana.jueves.estado' style="display: flex">
+								NO TRABAJA
+							</div>
+							<div [hidden]='!diasSemana.jueves.estado' style="display: flex">
+
+							<mat-select  [(ngModel)]='diasSemana.jueves.horaEntrar' class='inputBy w50'>
+
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+<span class="separadorHoras"> - </span>
+							<mat-select  [(ngModel)]='diasSemana.jueves.horaSalir' class='inputBy w50'>
+							
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							</div>
+
+							</div>	
+					
+						</div>
+
+
+
+						<div style="margin-bottom:3px;background: white;padding: 0px 0px;" >
+								<div class="contentSupe">
+						<mat-checkbox color='primary' [(ngModel)]='diasSemana.viernes.estado'>
+							<span class='labelBy' style='margin-bottom: 0px !important;'>Viernes</span>
+								</mat-checkbox>
+							</div>
+							<div class="conteinInput" style="margin-top: 20px">
+							
+							<div [hidden]='diasSemana.viernes.estado' style="display: flex">
+								NO TRABAJA
+							</div>
+							<div [hidden]='!diasSemana.viernes.estado' style="display: flex">
+
+							<mat-select  [(ngModel)]='diasSemana.viernes.horaEntrar' class='inputBy w50'>
+
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+<span class="separadorHoras"> - </span>
+							<mat-select  [(ngModel)]='diasSemana.viernes.horaSalir' class='inputBy w50'>
+							
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							</div>
+
+							</div>	
+					
+						</div>
+
+
+						<div style="margin-bottom:3px;background: white;padding: 0px 0px;" >
+								<div class="contentSupe">
+						<mat-checkbox color='primary' [(ngModel)]='diasSemana.sabado.estado'>
+							<span class='labelBy' style='margin-bottom: 0px !important;'>Sabado</span>
+								</mat-checkbox>
+							</div>
+							<div class="conteinInput" style="margin-top: 20px">
+							
+							<div [hidden]='diasSemana.sabado.estado' style="display: flex">
+								NO TRABAJA
+							</div>
+							<div [hidden]='!diasSemana.sabado.estado' style="display: flex">
+
+							<mat-select  [(ngModel)]='diasSemana.sabado.horaEntrar' class='inputBy w50'>
+
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+<span class="separadorHoras"> - </span>
+							<mat-select [(ngModel)]='diasSemana.sabado.horaSalir' class='inputBy w50'>
+							
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							</div>
+
+							</div>	
+					
+						</div>
+
+												<div style="margin-bottom:3px;background: white;padding: 0px 0px;" >
+														<div class="contentSupe">
+						<mat-checkbox color='primary' [(ngModel)]='diasSemana.domingo.estado'>
+							<span class='labelBy' style='margin-bottom: 0px !important;'>Domingo</span>
+								</mat-checkbox>
+							</div>
+							<div class="conteinInput" style="margin-top: 20px">
+							
+							<div [hidden]='diasSemana.domingo.estado' style="display: flex">
+								NO TRABAJA
+							</div>
+							<div [hidden]='!diasSemana.domingo.estado' style="display: flex">
+
+							<mat-select  [(ngModel)]='diasSemana.domingo.horaEntrar' class='inputBy w50'>
+
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+<span class="separadorHoras"> - </span>
+							<mat-select  [(ngModel)]='diasSemana.domingo.horaSalir' class='inputBy w50'>
+							
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							</div>
+
+							</div>	
+					
+						</div>
+
+
+
+						<button  class="btn btn-success" style="    margin-top: 3px;
+					    float: right;
+					    margin-right: 10px;" (click)='guardarHorario()'>Guardar</button>
+
+					</div>
+
+					</ng-template>
+					</ngb-tab>
+					<ngb-tab title="Fechas Especiales" [disabled]="miembroSeleccionado.tipo==3">
+					<ng-template ngbTabContent >
+
+
+
+						<div [hidden]="miembroSeleccionado.tipo==3" style="margin-bottom:3px;background: white;padding: 0px 0px;" >
+
+
+							<div class="conteinInput2" style="margin-top: 20px">
+							<p style="    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 30px;
+    margin-bottom: 30px;">Agrega un bloque libre para el empleado</p>
+				
+							<div  style="margin-left: 20px">
+
+								
+								  <mat-form-field style='        margin-right: 25px;' class='inputBy'>
+								    <input [(ngModel)]='tiempoLibre.inicio' matInput [matDatepicker]="dp3" (dateChange)="setDate2()" placeholder="Inicio" disabled>
+									<mat-datepicker-toggle matSuffix [for]="dp3">
+								  </mat-datepicker-toggle>
+								  <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+								    </mat-form-field>
+								
+
+
+								<mat-form-field  style='       margin-right: 25px;'  class='inputBy'>
+								    <input [(ngModel)]='tiempoLibre.fin' matInput [matDatepicker]="dp4" placeholder="Finaliza" disabled [min]="tiempoLibre.inicio" 
+								    (dateChange)="getDatesBet()" [disabled]='!tiempoLibre.inicio'>
+									<mat-datepicker-toggle matSuffix [for]="dp4">
+								  </mat-datepicker-toggle >
+								  <mat-datepicker #dp4 disabled="false"></mat-datepicker>
+								    </mat-form-field>
+
+					
+							<mat-checkbox style=" " color='primary' [(ngModel)]='tiempoLibre.centroCerrado'>
+							<span class='labelBy' style='margin-bottom: 0px !important;'>Dia Libre</span>
+								</mat-checkbox>
+<!-- 							<mat-select [(ngModel)]='diasSemana.sabado.horaSalir' class='inputBy w50'>
+							
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select> -->
+							</div>
+
+													<div style="  margin-top: 13px;    margin-left: 20px;">
+
+							<mat-select [hidden]='tiempoLibre.centroCerrado' [(ngModel)]='tiempoLibre.horaAbrir'  class='inputBy w50' 
+							style='width: 140px;'>
+						
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							<span [hidden]='tiempoLibre.centroCerrado' style="margin: 0px 16px;line-height: 40px;">-</span>
+							<mat-select  [hidden]='tiempoLibre.centroCerrado' [(ngModel)]='tiempoLibre.horaCerrar' class='inputBy w50' 
+							style='width: 140px;margin-right: 40px;'>
+							
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+
+										<button  [disabled]='((!tiempoLibre.inicio || !tiempoLibre.horaAbrir || !tiempoLibre.horaCerrar) && !tiempoLibre.centroCerrado) || (tiempoLibre.centroCerrado && !tiempoLibre.inicio)' class="btn btn-success" style="    " (click)='agregarBloque()'>Guardar</button>
+
+							</div>
+
+<!-- 
+							<div>
+								<button [disabled]='!tiempoLibre.fin || !tiempoLibre.inicio' class="btn btn-success" style="margin: auto;float: right;margin-right: 20px;" (click)='agregarBloque()'>Agregar</button>
+
+							</div> -->
+							</div>	
+					    <hr>
+
+
+					    <!-- 	AQUI LOS ITEMNS -->
+
+
+					    <div  *ngFor="let h of horarioEspecial; let i = index"  style="border-bottom: solid 1px lightgray;display: flex;font-size: 16px;padding: 20px"> 
+
+					    <div style="font-weight :500; display: inline-block;        margin-right: 16px;">{{h.fecha.split('T')[0]}}  </div>	
+					    <div *ngIf='h.abierto==1' style="display: inline-block;">	
+					    <span style="font-weight: 400; margin-right: 20px">{{h.horaFI}}</span> 
+					    <span style="margin-left: 10px;margin-right:10px"> - </span>
+					    <span style="font-weight: 400;margin-right: 20px">{{h.horaFF}}</span>
+						</div>
+						<div *ngIf='h.abierto==0' style="display: inline-block;">
+							Dia Libre
+						</div>
+
+					    	<mat-icon class='iconGG' (click)='borrarBloque(h.idHorarioEspecialEmpleado)' style='margin-left: 23px;background: darkgray; margin: auto;height: 20px;line-height: 20px;color: white;text-align: center;'>
+					    	close
+					    	</mat-icon>
+
+					    </div>
+
+
+
+						</div>
+
+
+
+
+
+
+
+					</ng-template>
+					</ngb-tab>
+
+					<ngb-tab title="Detalle Contacto" >
+					<ng-template ngbTabContent>
+
+							<div style='padding: 30px 45px;'>
+
+								<div style="margin: 20px 0px;">
+									<span style="font-weight: 600;display: block;margin-bottom: 15px;">Email</span>
+									<span>{{miembroSeleccionado.email}}</span>
+								</div>
+								<hr>
+
+								<div  style="margin: 20px 0px;">
+									<span style="font-weight: 600;display: block;margin-bottom: 15px;">Descripcion</span>
+									<span>{{miembroSeleccionado.descripcion}}</span>
+								</div>
+
+
+							</div>
+
+					</ng-template>
+					</ngb-tab>
+
+				</ngb-tabset>
+			</div>
+		</div>
+
+
+
+		</div>
+<!-- 
+		<div style="    padding: 40px 60px;width: 100%">
+
+			
+	</div> -->
+
+
+
+</div>
+
+
+</div>
+

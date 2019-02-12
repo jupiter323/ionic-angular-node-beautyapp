@@ -1,0 +1,326 @@
+
+
+::ng-deep .progress-bar{
+   background-color: #e91e63 !important
+}
+.horarioContainer{
+  margin-bottom: 17px;
+  background: white;
+  padding: 0px;
+  font-size: 16px;
+}
+
+.horarioSpan{
+  margin-bottom: 0px !important;
+      width: 100px !important;
+    display: block;
+}
+
+.conteinInput{
+  margin-top: 5px;
+    display: inline-block;
+    width: 300px;
+    margin-left: 28px;
+}
+
+.ssdd{
+  border: solid 1px #e1e1e1;
+  padding: 5px;
+}
+
+
+.separatorHours{
+  display: inline-block;
+    margin: 7px 10px 0px 10px;
+}
+
+
+
+
+
+.itemServicios{
+  border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    display: block;
+        margin-bottom: 10px;
+}
+
+.itemServicios:hover{
+      opacity: 0.8;
+}
+
+.iconR{
+  font-size: 16px;
+    position: absolute;
+    right: 5px;
+    top: 20px;
+    color: darkgray
+}
+
+.boxItem{
+   position: relative;  
+   background: rgb(250,249,247) !important;
+   padding: 10px 50px 10px 40px;
+}
+
+.txtItemServ{
+  width: 60%!important;    
+  display: inline-block;
+  min-height: 1px;
+  vertical-align: top;
+  margin: 0;
+  padding: 0;
+}
+
+
+.txtItemServP{ width: 20%!important;text-align: right!important;    display: inline-block;
+    min-height: 1px;
+
+    vertical-align: top;
+    margin: 0;     padding-left: 20px;    font-size: 16px;  margin-top: 8px !important;
+    font-weight: 400;}
+
+
+
+
+:host {
+	.mat-form-field {
+		width: 100%;
+	}
+}
+
+
+
+/* Font color */
+input.mat-input-element {
+  color: #383734;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+    background-color: #e1e1e1 !important;
+}
+::ng-deep .mat-form-field-underline, ::ng-deep .mat-form-field-ripple {
+  background-color:  #e1e1e1 !important;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    padding-bottom: 12px !important;
+}
+
+
+
+.pac-container {
+    z-index: 1051 !important;
+}
+
+mat-icon{
+	    margin-right: 9px;
+	    color:  #e1e1e1 !important;
+}
+
+.mat-card-title{
+	font-size: 16px !important;
+}
+
+.mat-card-subtitle{
+	font-size: 16px !important;
+}
+
+
+.botonTxt{
+	font-size: 14px !important;
+}
+
+.botonTxt:hover{color:red !important;}
+
+.itemHover{  padding-bottom: 23px;
+font-size: 16px;
+}
+
+.itemHover:hover{
+	    color: red;
+}
+
+
+
+.selectD{
+  
+      border: solid 1px #e1e1e1;
+    padding: 5px;
+    display: block !important;
+    margin-left: 25px !important;
+    width: 75% !important;
+
+        margin-bottom: 20px;
+
+}
+
+
+
+.imgCheckBox{
+  
+      height: 34px;
+    width: 34px;
+    border-radius: 20px;
+    margin: 5px 11px;
+
+}
+
+
+
+  .cdk-global-overlay-wrapper, .cdk-overlay-container {
+     z-index: 99999 !important;
+  }
+
+.mauto{
+      margin: auto !important;
+}
+
+.txtF{
+        color: #383734;
+    font-size: 16px;
+}
+
+.tituloCateg{
+        font-size: 16px;
+    margin-bottom: 10px;
+        margin-top: 15px;
+    font-weight: 400;
+}
+
+.md-dialog-container {
+
+    width: 600px !important;
+
+}
+
+.w50b{
+    
+ 
+    width: 50% !important;
+    max-width:200px;
+
+
+}
+
+
+.w50{
+    
+            display: flex;
+    width: 50%;
+
+}
+
+
+
+
+
+.w100{
+    
+            display: block;
+    width: 100%;
+
+}
+
+
+
+.pricing-table{
+ 
+  
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.pricing-table .block-heading {
+  padding-top: 50px;
+  margin-bottom: 40px;
+  text-align: center; 
+}
+
+.pricing-table .block-heading h2 {
+  color: #3b99e0;
+}
+
+.pricing-table .block-heading p {
+  text-align: center;
+  max-width: 420px;
+  margin: auto;
+  opacity: 0.7; 
+}
+
+.pricing-table .heading {
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); 
+}
+
+.pricing-table .item {
+  background-color: #ffffff;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+  border-top: 2px solid #34bfa3;
+  padding: 30px;
+  overflow: hidden;
+  position: relative; 
+      border: solid 1px lightgray;
+}
+
+.pricing-table .col-md-5:not(:last-child) .item {
+  margin-bottom: 30px; 
+}
+
+.pricing-table .item button {
+  font-weight: 600; 
+}
+
+.pricing-table .ribbon {
+  width: 160px;
+  height: 32px;
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0px 2px 3px rgba(136, 136, 136, 0.25);
+  background: #4dbe3b;
+  transform: rotate(45deg);
+  position: absolute;
+  right: -42px;
+  top: 20px;
+  padding-top: 7px; 
+}
+
+.pricing-table .item p {
+  text-align: center;
+  margin-top: 20px;
+  opacity: 0.7; 
+}
+
+.pricing-table .features .feature {
+  font-weight: 600; }
+
+.pricing-table .features h4 {
+  text-align: center;
+  font-size: 18px;
+  padding: 5px; 
+}
+
+.pricing-table .price h4 {
+  margin: 15px 0;
+  font-size: 45px;
+  text-align: center;
+  color: #34bfa3; 
+}
+
+.pricing-table .buy-now button {
+  text-align: center;
+  margin: auto;
+  font-weight: 600;
+  padding: 9px 0; 
+}
+
+
+
+
+::ng-deep .mat-horizontal-stepper-header-container{
+      display: none !important;
+}
+
+

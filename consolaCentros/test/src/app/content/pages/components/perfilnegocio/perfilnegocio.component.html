@@ -1,0 +1,188 @@
+<div class="row  m-subheader" style="background: rgb(250,249,247) !important;
+    padding: 20px !important;
+text-align: left !important;
+border-bottom: solid 1px lightgray;    display: block;">
+	
+<!-- 
+	<i (click)='goBack()' style="font-size: 25px;
+    color: lightgray;
+    padding-left: 10px;" class="la la-angle-left"></i>
+ -->	<div class="" style="display: inline-block;font-size: 25px;font-weight: 300;padding-left: 15px;">Perfil de Negocio
+
+  <span style="display: block;
+    font-size: 14px;
+    line-height: 15px;">Información del perfil de tu negocio!</span>
+
+  
+</div>
+
+
+
+	<button  class="btn btn-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" (click)='editarCentroInfo()' 
+    [disabled]='!centroInfo.nombre' >Guardar</button>
+
+<!-- 	<button  class="btn btn-outline-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" (click)='goBack()' >Cancelar</button> -->
+
+
+</div>
+<div class="row">
+<ngx-loading [show]="loadingScreen" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+	<div class="col-xl-6" style="    border-right: solid 1px lightgray;" >
+
+		<div style="padding: 40px 60px; ">
+			<div style="text-align: center">
+			<img   style='    height: 70px;
+    width: 70px;
+    margin-bottom: 40px;
+
+    margin: 5px 11px;' src="https://centro.yourbeauty.com.pa:8443/{{centroInfo.idFoto}}" 
+    onError="this.src='assets/app/media/img/fotoComercio.png'">
+
+<div style="margin-bottom: 15px;">
+    <label style='border: solid 1px lightgray;
+    padding: 5px;
+    margin-top: 13px;' for="filesL" class="btn cambImg">cambiar logo</label>
+  <input [hidden]='true'  id="filesL" style='margin-top: 10px;' type="file" (change)="onFileChanged2($event)">
+
+</div>
+</div>
+			<div class="conteinInput">
+				
+
+				<label class='labelBy'>Nombre del Negocio</label>
+				<input [(ngModel)]='centroInfo.nombre' class='inputBy w100' placeholder="cual es el nombre del negocio"  autocomplete="off"  type="text" name="nombre">
+			</div>
+			<div class="conteinInput">
+				<label class='labelBy'>Telefono</label>
+				<input  [(ngModel)]='centroInfo.telefono' class='inputBy w100' placeholder="cual es el telefono del negocio"  autocomplete="off"  type="number" name="telefono">
+			</div>
+
+      <div class="conteinInput">
+        <label class='labelBy'>Web</label>
+        <input  [(ngModel)]='centroInfo.fbLink' class='inputBy w100' placeholder="cual es el telefono del negocio"  autocomplete="off"  type="tel" name="telefono">
+      </div>
+
+      <div class="conteinInput">
+        <label class='labelBy'>Descripcion del negocio</label>
+        <input  [(ngModel)]='centroInfo.sobreNosotros' class='inputBy w100' placeholder="descripcion del negocio"  autocomplete="off"  type="text" name="descripcion">
+      </div>
+
+
+		</div>
+	
+	</div>
+	<div class="col-xl-6" >
+
+		<div style="padding: 40px 60px; ">
+
+<div class="conteinInput">
+			<div>	<label class='labelBy'>Imagen de Perfil</label></div>
+				<img   style='       height: 230px;
+    width: 375px;' src="https://centro.yourbeauty.com.pa:8443/{{centroInfo.imagenBanner}}" 
+    onError="this.src='assets/app/media/img/banner.png'">
+<div style="    text-align: center;">
+   <label  style='border: solid 1px lightgray;
+    padding: 5px;
+    margin-top: 13px;' for="filesB" class="btn cambImg">cambiar foto de Banner</label>
+<input id='filesB' [hidden]='true' style='margin-top: 20px;' type="file" (change)="onFileChanged($event)">
+</div>
+
+
+
+			</div>
+
+
+<!-- 
+			<div class="conteinInput">
+				<label class='labelBy'>Telefono</label>
+				<input class='inputBy w100' placeholder="cual es el telefono del negocio"  autocomplete="off"  type="tel" name="telefono">
+			</div> -->
+
+
+
+
+
+
+
+
+
+
+
+  <div  class="form-group row">
+
+  	<div style="    padding-left: 15px;">	<label class='labelBy'>Ubicacion del Negocio</label></div>
+
+    <div  class="col-sm-10">
+
+    <div class="form-group">
+        <input [(ngModel)]='centroInfo.direccion' placeholder="busca por lugar" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl" >
+      </div>
+
+<agm-map style='height: 400px; width: 100%' 
+  [latitude]="centroInfo.latitud"
+  [longitude]="centroInfo.longitud"
+  [zoom]="zoom"
+  [disableDefaultUI]="false"
+  [zoomControl]="true"
+  [mapDraggable]="true"
+  
+  (mapClick)="mapClicked($event)">
+ 
+  <agm-marker 
+      *ngFor="let m of markers; let i = index"
+      (markerClick)="clickedMarker(m.label, i)"
+      [latitude]="m.lat"
+      [longitude]="m.lng"
+      [label]="m.label"
+      [markerDraggable]="m.draggable"
+      (dragEnd)="markerDragEnd(m, $event)">
+      
+    <agm-info-window>
+      <strong>InfoWindow content</strong>
+    </agm-info-window>
+    
+  </agm-marker> 
+  <!--
+  <agm-circle [latitude]="lat + 0.3" [longitude]="lng" 
+      [radius]="5000"
+      [fillColor]="'red'"
+      [circleDraggable]="true"
+      [editable]="true">
+  </agm-circle>
+-->
+</agm-map>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+
+	</div>
+
+</div>
+
+
+
+

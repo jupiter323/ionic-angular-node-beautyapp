@@ -1,0 +1,572 @@
+  <ng-template #content let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" style="    font-weight: 500;
+    color: #555;">NOTA IMPORTANTE</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+    <p style="    margin-bottom: 25px;" >1) Agrega todos los servicios de tu negocio. <a [routerLink]="['/servicios']"  style="color: #e91e63 !important" (click)="d('Cross click')">Ir a Servicios</a>.</p>
+       <p style="    margin-bottom: 25px;">2) Agrega el staff de tu negocio. <a  [routerLink]="['/staff']" style="color: #e91e63 !important" (click)="d('Cross click')">Ir a Staff</a>.</p>
+          <p>*Recibirán un e-mail para descargar la app “Yourbeautystaff” y así configuren su horario y creen las reservas que tienen a la fecha.</p>
+ 
+         <p style="    text-align: center;
+    font-weight: 500;
+    color: #555;
+    margin-top: 25px;
+    margin-bottom: 0px;">¡SIEMPRE NECESITAMOS LA DISPONIBILIDAD REAL DE TU STAFF!</p>
+ 
+ 
+ 
+                       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Cerrar</button>
+<!--         <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </ng-template>
+
+
+
+
+
+<div class="row " style="background: rgb(250,249,247) !important;
+   
+text-align: left !important;
+border-bottom: solid 1px lightgray;    display: block;">
+
+
+<!-- 	NOTIS START-->
+ 
+
+
+
+<!--  NOTIS START-->
+
+ 
+
+
+
+
+  <div  class="" style="display: inline-block;font-size: 22px;font-weight: 300;width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 15px;position:relative">
+
+
+
+    <div *ngIf='tipoCalendario==1' style="display: inline-block;">
+          <mat-icon (click)='moverFechasAA(2)' class='iconRo'>chevron_left</mat-icon>
+
+    <span>{{ diasAdelante[0] | date:'LLL dd' }} - {{ diasAdelante[4] | date:'LLL dd' }}, 
+    {{ diasAdelante[0] | date:'yyyy' }}</span>
+
+    <mat-icon (click)='moverFechasAA(1)' class='iconRo'>chevron_right</mat-icon>
+    
+
+    </div>
+    <div  *ngIf='tipoCalendario==2' style="display: inline-block;"> 
+    <mat-icon (click)='moverFechasAA2(2)' class='iconRo'>chevron_left</mat-icon>
+
+    <span>{{dateSelected | date:'LLL dd' }}</span>
+
+    <mat-icon (click)='moverFechasAA2(1)' class='iconRo'>chevron_right</mat-icon>
+    </div>
+        
+
+   <div style="    height: 30px;
+    position: absolute;
+    right: 0;
+    top: 0;">  
+
+     
+<!-- <a  style='float: right;margin-right: 15px' href="javascript:;" class="">
+  
+  <span class="m-nav__link-icon" >
+    <span class="m-nav__link-icon-wrapper">
+      <i class="flaticon-music-2" style="font-size: 26px !important;"></i>
+    </span>
+  </span>
+</a>  -->
+
+<div style='float: right;margin-right: 15px' class="dropdown" dropdown>
+<!--   <h1 class="" dropdownToggle>wn</h1> -->
+   <i dropdownToggle class="flaticon-music-2" style="font-size: 26px !important;"></i>
+   <span *ngIf='budge>0' style="font-size: 15px;
+    height: 21px;
+    width: 21px;
+    position: absolute;
+    top: 0;
+    right: 16px;
+    background: lightcoral;
+    border-radius: 30px;
+    color: white;
+    font-weight: 800;    text-align: center;">{{budge}}</span>
+  <ul class="dropdown-menu" dropdownMenu style="right: 0 !important;
+    max-height: 650px;
+    overflow-x: scroll;">
+
+<!--     <li><a class="neat" href="https://github.com/zurfyx/angular-custom-modal" rel="noopener" target="_blank">Check it out @ GitHub</a></li>
+
+    <li><a class="neat" href="#">Juan Dias ha confirmado una cita</a></li> -->
+      <mat-list-item  *ngFor="let cita of notis ; let i = index" style='    height: 77px !important;
+    border-bottom: solid 1px lightgray;'  [routerLink]="['/detallecita']" [queryParams]="{id: cita.idCita}"  >
+
+       <div style="    padding: 10px 0px;
+    border-bottom: solid 1px lightgray;">
+      
+        <div  class="popOverDate" 
+        [ngClass]="{'citaE3':cita.estadoServicio == 3, 'citaE2': cita.estadoServicio == 2, 'citaE1':cita.estadoServicio == 1, 'citaE0':cita.estadoServicio == 0,
+        'citaE4':cita.estadoServicio == 4}" style='   min-width: 52px !important; background: white !important;padding: 0px !important'>
+                <!-- <span>SEP</span>
+                <span>25</span> -->
+                <div style="    font-size: 12px;">{{ cita.fechaServicio | date:'LLL' }}</div>
+                 <div style="    font-size: 14px;">{{ cita.fechaServicio | date:'dd' }}</div>
+                <div style="    font-size: 11px;">{{cita.inicioServicio}}</div>
+              </div>
+        <div style="     padding-left: 6px;   display: inline-block;"> 
+
+          <div style="font-size: 14px;">
+            <span>{{cita.nombreEmpleado}}</span>
+            <mat-icon style='color: #888;vertical-align: top;margin: 0px 0px;width: 15px !important;'>chevron_right</mat-icon>
+            <span>{{cita.nombreCliente}}</span>
+          </div>  
+
+          <div style="margin-top: -7px">
+            {{cita.nombreServicio}}
+          </div> 
+
+          <div style="    font-size: 11px;">
+        <span class="tagStaff3 " [ngClass]="{'citaE3sb3':cita.estadoServicio == 3,'citaE4sb3':cita.estadoServicio == 4, 'citaE2sb3': cita.estadoServicio == 2, 'citaE1sb3':cita.estadoServicio == 1, 'citaE0sb3':cita.estadoServicio == 0}">
+          {{cita.estadoServicio == 0 ? 'POR CONFIRMAR' : 
+            cita.estadoServicio == 1 ? 'CONFIRMADA' : 
+            cita.estadoServicio == 2 ? 'CONFIRMAR CLIENTE' : 
+            cita.estadoServicio == 3 ? 'COMPLETADA' :
+          cita.estadoServicio == 4 ? 'CANCELADA' : 'INVALIDA'}}
+
+         </span>{{cita.timeAgo}}
+ 
+          </div> 
+
+ 
+        </div>
+      </div>
+
+  </mat-list-item>
+
+  </ul>
+</div>
+
+    <button  class="btn btn-success" style="       margin-top: 0px; margin-right: 15px;float: right;" [routerLink]="['/nuevareserva']" >Crear Reserva</button>
+
+   </div>
+  </div>
+
+
+
+	<div style="display: flex;margin-top: 20px;">
+		
+  <p style="    margin: auto;">
+    <mat-form-field  appearance="legacy">
+      <mat-select [(value)]="estadoFiltro" 
+      (selectionChange)="changeFilter($event)"
+       placeholder="Filtrar por estado" [multiple]="true">
+     
+        <mat-option  [value]='1' >
+         Confirmadas
+        </mat-option>
+
+                <mat-option [value]='4' >
+         Canceladas
+        </mat-option>
+
+                <mat-option [value]='0' >
+         Por confirmar
+        </mat-option>
+
+
+                <mat-option [value]='3' >
+         Completadas
+        </mat-option>
+
+
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+
+
+  <p style="    margin: auto;">
+    <mat-form-field  appearance="legacy" style='width: 120px;'>
+
+      <input style='  padding: 10px 10px 0px 10px !important;' matInput placeholder="#ID"  autocomplete="off" [(ngModel)]="textFilter2" type='number'  (keyup.enter)="buscarR()">
+      <mat-icon matSuffix style='width: 30px;'  (click)="buscarR()">search</mat-icon>
+      <mat-label><!-- <mat-icon style='  vertical-align: middle;  font-size: 25px !important;'>list_alt</mat-icon> -->ID Reserva</mat-label>
+
+    </mat-form-field>
+
+  </p>
+
+
+		
+  <p style="    margin: auto;">
+    <mat-form-field  appearance="legacy">
+      <mat-select [(value)]="estadoFiltroEmpleados" 
+      (selectionChange)="changeFilter2($event)" placeholder="Filtrar Staff" [multiple]="true">
+     
+        <mat-option  *ngFor="let ee of empleados; let i = index" [value]="ee.idEmpleado"  style='    border-bottom: solid 1px lightgray;
+    height: 60px;'>
+         <div style="     padding: 0px 45px;">
+								<img style=' border-radius: 40px;   display: inline-block; margin: auto;    width: 35px; height: 35px;' matListAvatar  src="https://centro.yourbeauty.com.pa:8443/{{ee.idFoto}}" 
+    onError="this.src='assets/app/media/img/userB.png'">
+								<span style="  color:#383734; margin-left: 10px;font-size: 16px;font-weight: 400; display: inline-block;">{{ee.nombre}}</span>
+								</div> 
+        </mat-option > 
+
+        
+
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+
+
+  <p style="    margin: auto;">
+    
+    <button class="btn-sm"  [ngClass]="{'selecA': tipoCalendario==1}"
+     (click)='vistaSemana()'>semana</button>
+
+    <button class="btn-sm" [ngClass]="{'selecA': tipoCalendario==2}"  (click)='vistaDia()'>dia</button>
+
+
+  </p>
+<!--     <p style="    margin: auto;">
+    <mat-form-field   appearance="legacy"> 
+        <mat-select placeholder="Buscar Cliente" >
+        <ngx-mat-select-search [placeholderLabel]="'Buscar cliente'" 
+                       [noEntriesFoundLabel]="'no se han encontrado clientes'" >
+                       	
+                       </ngx-mat-select-search>
+       <mat-option style='    border-bottom: solid 1px lightgray;
+    height: 60px;' [value]="'Ligia Fallas'">
+          			<div style="     padding: 0px 45px;">
+								<img style='    display: inline-block; margin: auto; height: 35px;    width: 35px;' matListAvatar src="assets/app/media/img/userB.png">
+								<span style="  color:#383734; margin-left: 10px;font-size: 16px;font-weight: 400; display: inline-block;">Ligia Fallas</span>
+								</div> 
+        </mat-option>
+
+  <mat-option style='    border-bottom: solid 1px lightgray;
+    height: 60px;' [value]="'Jane Rilay'">
+          			<div style="     padding: 0px 45px;">
+								<img style='    display: inline-block; margin: auto; height: 35px;    width: 35px;' matListAvatar src="assets/app/media/img/userB.png">
+								<span style="  color:#383734; margin-left: 10px;font-size: 16px;font-weight: 400; display: inline-block;">Jane Rilay</span>
+								</div> 
+        </mat-option>
+
+         <mat-option style='    border-bottom: solid 1px lightgray;
+    height: 60px;' [value]="'Pedro Perez'">
+          			<div style="     padding: 0px 45px;">
+								<img style='    display: inline-block; margin: auto; height: 35px;' matListAvatar src="assets/app/media/img/userB.png">
+								<span style="  color:#383734; margin-left: 10px;font-size: 16px;font-weight: 400; display: inline-block;">Pedro Perez</span>
+								</div> 
+        </mat-option>
+
+
+
+     
+
+      </mat-select>
+
+    </mat-form-field>
+  </p>
+ -->
+
+
+
+
+
+
+	</div>
+
+</div>
+
+
+<div class="row">
+
+	 <ngx-loading [show]="loadingScreen" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+
+	
+	<div class="col-md-12 col-xl-3" style="  padding-left: 0px !important;   padding-right: 0px !important;    border-right: solid 1px lightgray;">
+	
+
+<mat-calendar [selected]="selectedDate" (selectedChange)="selectedDate = $event;changeCalen( $event)" (monthSelected)='updateDayStyles2()'></mat-calendar>
+
+<!--  
+<mat-form-field>
+  <mat-label>Custom calendar header</mat-label>
+  <input matInput [matDatepicker]="picker">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker [calendarHeaderComponent]="exampleHeader"></mat-datepicker>
+</mat-form-field>
+ -->
+<div style="    padding: 15px 10px;
+    border-bottom: solid 1px lightgray;
+    border-top: solid 1px lightgray;">
+  
+  <div style="    font-size: 16px;
+    color: #222;
+    font-weight: 400;"> 
+    <span *ngIf='tipoCalendario==1'>{{ diasAdelante[0] | date:'LLL dd' }} - {{ diasAdelante[4] | date:'LLL dd' }}, 
+    {{ diasAdelante[0] | date:'yyyy' }}</span>
+
+
+        <span *ngIf='tipoCalendario==2'>
+        {{dateSelected | date:'LLL dd' }}</span>
+
+
+  </div>
+    <div style="       margin-top: 7px;
+    color: #222;
+    font-weight: 500;
+    font-size: 14px;">Todas las reservas | Reservas: {{dataTotal.length}}</div>
+</div>
+
+	<mat-nav-list style='    padding-top: 0px;
+    overflow: auto;
+    height: 400px; '>
+
+  <mat-list-item  *ngFor="let cita of dataTotal ; let i = index" style='    height: 77px !important;
+    border-bottom: solid 1px lightgray;'  [routerLink]="['/detallecita']" [queryParams]="{id: cita.idCita}"  >
+
+  	   <div style="    width: 100%;">
+  	  
+        <div  class="popOverDate" 
+        [ngClass]="{'citaE3':cita.estadoServicio == 3, 'citaE2': cita.estadoServicio == 2, 'citaE1':cita.estadoServicio == 1, 'citaE0':cita.estadoServicio == 0,
+        'citaE4':cita.estadoServicio == 4}" style='background: white !important;padding: 0px !important'>
+								<!-- <span>SEP</span>
+								<span>25</span> -->
+								<div style="    font-size:  14px;">{{ cita.fechaServicio | date:'LLL dd' }}</div>
+								<div style="    font-size:  14px;">{{cita.inicioServicio}}</div>
+							</div>
+        <div style="     padding-left: 6px;   display: inline-block;width: calc(100% - 80px);"> 
+
+          <div style="font-size: 14px">
+          	<span>{{cita.nombreEmpleado}}</span>
+          	<mat-icon style='color: #888;vertical-align: top;margin: 0px 0px;width: 15px !important;'>chevron_right</mat-icon>
+          	<span>{{cita.nombreCliente}}</span>
+          </div>   
+ 
+        </div>
+      </div>
+
+  </mat-list-item>
+
+
+</mat-nav-list>
+
+
+
+	</div>
+
+  <div *ngIf='tipoCalendario==2' class="col-md-12 col-xl-9" style="    overflow-y: scroll !important; padding-left: 0px !important;   padding-right: 0px !important;  ">
+
+    <table class="table" >
+
+
+      <thead>
+        <tr style="height: 72px;">
+        <th class="mw40"></th>
+
+          <th  *ngFor="let empleado of dataCalendarioDia ; let i = index"  style=" border-right: solid 1px lightgray;" [hidden]="!aplicarFiltros3(empleado[0].idEmpleado)">
+   
+            <div class="tittleCal">
+              <img style='display: block; margin: auto;       width: 45px;  height: 45px;
+    border-radius: 35px;' matListAvatar src="https://centro.yourbeauty.com.pa:8443/{{empleado[0].empleadoFoto}}" 
+    onError="this.src='assets/app/media/img/userB.png'">
+    {{empleado[0].nombreEmpleado}}
+
+              <span style="display: block;font-size: 11px;color: darkgray;">
+             <!--  {{getKeys(empleado.idEmpleado)}} reservas
+              [ngStyle]="{'display':aplicarFiltros3(empleado[0].idEmpleado) ? 'green' : 'red' }" -->
+              {{empleado.length}} reservas
+             </span>
+            </div>
+       
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr  *ngFor="let horas of horasCalen">
+        <td class="mw40">{{horas.txt}}</td>
+        <td class="mw210" *ngFor="let empleado of dataCalendarioDia" 
+         [hidden]="!aplicarFiltros3(empleado[0].idEmpleado)">
+         
+
+          <ng-container *ngFor='let c of empleado | callback: filterUser'>
+          <div  *ngIf='(aplicarFiltros(c.estadoServicio)) && ( horas.val == c.soloHoraFixed || 
+                    ((horas.val=="08" &&  getIntS(c.soloHoraFixed)) || (horas.val=="22"  &&  getIntS2(c.soloHoraFixed))))' class="citaStyle" 
+          [ngClass]="{'citaE3':c.estadoServicio == 3, 'citaE4':c.estadoServicio == 4,'citaE2': c.estadoServicio == 2, 'citaE1':c.estadoServicio == 1, 'citaE0':c.estadoServicio == 0}" 
+          (click)='openDialogCita(c)'>
+              <span>{{c.inicioServicio}} - {{c.finServicio}}</span>
+              <span class='ml4'>{{c.clienteReferencia || c.nombreCliente}}</span>
+               <span style="display: block;font-size: 10px;" *ngIf='c.clienteReferencia'>Reserva Manual</span>
+          </div> 
+        </ng-container>
+
+    
+        </td>
+        </tr>
+
+
+
+
+      </tbody>
+
+
+    </table>
+  </div>
+
+
+	<div *ngIf='tipoCalendario==1' class="col-md-12 col-xl-9" style="overflow-y: scroll !important;padding-left: 0px !important;   padding-right: 0px !important;">
+
+
+
+		<table class="table" >
+			<thead>
+				<tr style="    height: 72px;">
+ 				<th class="mw60"></th>
+
+          <th  *ngFor="let dia of diasAdelante; let i = index"  style=" border-right: solid 1px lightgray;">
+            <div class="tittleCal">{{ dia | date:'EEE' }}
+
+              <span  [ngClass]="{'rojoCirculo':todayDate == dia}">
+                {{ dia | date:'dd' }}
+              </span> 
+
+
+              <span style="display: block;font-size: 11px;color: darkgray;">
+              {{getKeys(dia)}} reservas
+             </span>
+            </div>
+          </th>
+
+	<!--			<th style=" border-right: solid 1px lightgray;">
+					<div class="tittleCal">Lun 10
+						<span style="display: block;font-size: 11px;color: darkgray;">2 citas</span>
+					</div>
+				</th>
+				<th style=" border-right: solid 1px lightgray;">
+					<div class="tittleCal">Mar 11 
+						<span style="display: block;font-size: 11px;color: darkgray;">2 citas</span>
+					</div>
+				</th>
+				<th style=" border-right: solid 1px lightgray;">
+					<div class="tittleCal">Mie 12 
+						<span style="display: block;font-size: 11px;color: darkgray;">2 citas</span>
+					</div>
+				</th>
+				<th style=" border-right: solid 1px lightgray;">
+					<div class="tittleCal">Jue 13
+						<span style="display: block;font-size: 11px;color: darkgray;">2 citas</span>
+					</div>
+				</th>
+				<th style=" border-right: solid 1px lightgray;">
+					<div class="tittleCal">Vie 14 
+						<span style="display: block;font-size: 11px;color: darkgray;">2 citas</span>
+					</div>
+				</th>
+*ngIf='(aplicarFiltros(c.estadoServicio))
+         -->
+				</tr>
+			</thead>
+
+			<tbody>
+
+			<tr *ngFor="let e of dataCalendario; let i = index" style="border-bottom: solid 1px lightgray;">
+					<ng-container *ngIf='aplicarFiltros2(e)'  >
+          <td class="mw60" style=" padding: 10px 3px;">	
+						<div style="white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;text-align: center;max-width: 60px;">
+						<img style='display: block; margin: auto;       width: 45px;  height: 45px;
+    border-radius: 35px;' matListAvatar src="https://centro.yourbeauty.com.pa:8443/{{showSome2(e)}}" 
+    onError="this.src='assets/app/media/img/userB.png'">
+						{{showSome(e)}}
+						</div>
+					</td>
+
+
+					<td  class="mw210">
+             <ng-container *ngFor='let c of e[diasAdelante[0]]  | callback: filterUser ; let ii = index'>
+            <div  *ngIf='aplicarFiltros(c.estadoServicio)'
+            
+            class="citaStyle" [ngClass]="{'citaE3':c.estadoServicio == 3, 
+            'citaE4':c.estadoServicio == 4, 'citaE2': c.estadoServicio == 2, 'citaE1':c.estadoServicio == 1, 'citaE0':c.estadoServicio == 0}" (click)='openDialogCita(c)'>
+              <span>{{c.inicioServicio}} - {{c.finServicio}}</span>
+              <span class='ml4'>{{c.clienteReferencia ||  c.nombreCliente}}</span>
+               <span style="display: block;font-size: 10px;" *ngIf='c.clienteReferencia'>Reserva Manual</span>
+            </div>  
+          </ng-container>
+          </td>
+					<td   class="mw210">
+            <ng-container *ngFor='let c of e[diasAdelante[1]]  | callback: filterUser ; let ii = index'>
+            <div  *ngIf='aplicarFiltros(c.estadoServicio)' 
+            class="citaStyle" [ngClass]="{'citaE3':c.estadoServicio == 3, 'citaE4':c.estadoServicio == 4,'citaE2': c.estadoServicio == 2, 'citaE1':c.estadoServicio == 1, 'citaE0':c.estadoServicio == 0}" (click)='openDialogCita(c)' 
+            >
+              <span>{{c.inicioServicio}} - {{c.finServicio}}</span>
+              <span class='ml4'>{{c.clienteReferencia || c.nombreCliente}}</span>
+               <span style="display: block;font-size: 10px;" *ngIf='c.clienteReferencia'>Reserva Manual</span>
+            </div>
+            </ng-container> 
+          </td>
+					<td  class="mw210">
+            <ng-container  *ngFor='let c of e[diasAdelante[2]] | callback: filterUser ;  let ii = index'>
+            <div  *ngIf='aplicarFiltros(c.estadoServicio)' class="citaStyle" [ngClass]="{'citaE3':c.estadoServicio == 3, 'citaE4':c.estadoServicio == 4,'citaE2': c.estadoServicio == 2, 'citaE1':c.estadoServicio == 1, 'citaE0':c.estadoServicio == 0}" (click)='openDialogCita(c)' >
+              <span>{{c.inicioServicio}} - {{c.finServicio}}</span>
+              <span class='ml4'>{{c.clienteReferencia ||  c.nombreCliente}}</span>
+               <span style="display: block;font-size: 10px;" *ngIf='c.clienteReferencia'>Reserva Manual</span>
+            </div> 
+          </ng-container>
+          </td>
+					<td   class="mw210">
+             <ng-container *ngFor='let c of e[diasAdelante[3]]  | callback: filterUser ; let ii = index'>
+              <div *ngIf='aplicarFiltros(c.estadoServicio)'
+               class="citaStyle" [ngClass]="{'citaE3':c.estadoServicio == 3,'citaE4':c.estadoServicio == 4, 'citaE2': c.estadoServicio == 2, 'citaE1':c.estadoServicio == 1, 'citaE0':c.estadoServicio == 0}" (click)='openDialogCita(c)'   >
+              <span>{{c.inicioServicio}} - {{c.finServicio}}</span>
+              <span class='ml4'>{{c.clienteReferencia ||  c.nombreCliente}}</span>
+               <span style="display: block;font-size: 10px;" *ngIf='c.clienteReferencia'>Reserva Manual</span>
+            </div> 
+          </ng-container>
+          </td>
+					<td  class="mw210">
+            <ng-container *ngFor='let c of e[diasAdelante[4]]  | callback: filterUser ; let ii = index'>
+            <div  *ngIf='aplicarFiltros(c.estadoServicio)' 
+            class="citaStyle" [ngClass]="{'citaE3':c.estadoServicio == 3, 'citaE4':c.estadoServicio == 4,'citaE2': c.estadoServicio == 2, 'citaE1':c.estadoServicio == 1, 'citaE0':c.estadoServicio == 0}" (click)='openDialogCita(c)'   >
+              <span>{{c.inicioServicio}} - {{c.finServicio}}</span>
+              <span class='ml4'>{{c.clienteReferencia ||  c.nombreCliente}}</span>
+               <span style="display: block;font-size: 10px;" *ngIf='c.clienteReferencia'>Reserva Manual</span>
+            </div> 
+          </ng-container>
+          </td>
+        </ng-container>
+				</tr>
+
+
+
+
+
+
+			</tbody>
+		</table>
+
+	</div>
+
+
+
+
+</div>
+
+
+

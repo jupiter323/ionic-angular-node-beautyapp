@@ -1,0 +1,250 @@
+
+.txtF{
+        color: #383734;
+    font-size: 16px;
+}
+
+
+.ofertaPaq{
+        float: right;
+    margin-right: 30px;
+    background: #34bfa3;
+    color: white;
+    padding: 1px 16px;
+    font-size: 13px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+.tituloCateg{
+        font-size: 16px;
+    margin-bottom: 10px;
+        margin-top: 15px;
+    font-weight: 400;
+}
+
+
+.iconGG:hover{
+    background-color:#34bfa3 !important;
+}
+.w50{
+    
+            display: flex;
+    width: 50%;
+
+}
+input:focus { 
+ outline: none !important;
+    border:1px solid #34bfa3;
+
+
+
+}
+.inputBy{    
+color: #383734;
+    background: #fff;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+
+    min-height: 40px;
+    padding: 7px 10px;
+    resize: vertical;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    }
+
+
+
+
+
+.w100{
+    
+            display: block;
+    width: 100%;
+
+}
+
+.imgCheckBox{
+    
+        height: 34px;
+    width: 34px;
+    border-radius: 20px;
+    margin: 5px 11px;
+
+}
+
+
+.conteinInput{margin-bottom:30px}
+
+    .labelBy{
+    display: inline-block;
+    margin-bottom: 10px;font-size: 16px;
+    font-weight: 500 !important;
+    line-height: 1.5;
+    color: #383734;}
+
+
+
+
+
+.selectedItem{
+	  background: #e2e2e2 !important;
+}
+
+/*
+mat-list-item:hover{
+	 background: dimgrey !important;
+    color: white;
+}
+*/
+mat-list-item{
+	border-bottom: solid 1px lightgray;
+}
+
+.tagStaff{
+	color: #00beb7;
+    background: #e5f8f7;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 12px;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 2px;
+    display: inline-block;
+    padding: 2px 10px;
+    min-width: 100px;
+    vertical-align: middle;
+}
+
+
+
+.citaStyle:not(:first-child) {
+    margin-top:2px;
+}
+.ml4{margin-left: 4px}
+.citaStyle{
+    border-left: solid 3px #c400ff; 
+    background: #f6d9ff;
+    width: 100%;height: 38px;
+    padding: 4px;
+    font-weight: 500;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+}
+
+
+
+.popOverDate{
+    
+    display: inline-block;
+    text-align: center;
+    min-width: 70px;
+    padding: 2px;
+    border-bottom: 1px solid #c3c1bc!important;
+    border-right: 1px solid #c3c1bc!important;
+    border-top: 1px solid #c3c1bc!important;
+    border-radius: 5px;
+    border-left: 3px solid #c400ff !important;
+         vertical-align: top;
+
+}
+
+.popOverDate span:nth-child(1){
+        display: block;
+    color: #605f5d;
+    font-size: 12px;
+    line-height: 18px;
+    text-transform: uppercase;
+
+
+}
+
+
+.citaE0{
+        border-left: solid 3px #f1e42e !important;
+        }
+.citaE1{
+        border-left: solid 3px #3ca1ff !important; }
+
+.citaE2{
+border-left: solid 3px #ffb34c !important;}
+
+.citaE3{
+border-left: solid 3px #77dd77 !important;}
+
+
+.citaE4{
+border-left: solid 3px #ff1e1e !important;}
+
+
+.citaE4sb3{background: #ffaeae !important;
+        border-left: solid 3px #ff1e1e !important;
+        color:#444 !important;
+    
+    }
+.citaE0sb3{background: #fffbc0 !important;
+        border-left: solid 3px #f1e42e !important;
+        color:#383734 !important;
+        }
+.citaE1sb3{background: #b5dbff !important;
+        border-left: solid 3px #3ca1ff !important; 
+         color:#383734 !important;}
+
+.citaE2sb3{background: #ffd3a2 !important;
+border-left: solid 3px #ffb34c !important;
+ color:#383734 !important;}
+
+.citaE3sb3{ background: #ccffcc !important;
+border-left: solid 3px #77dd77 !important;
+ color:#383734 !important;}
+
+
+
+.tagStaff2{
+
+
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 13px;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 4px;
+    display: block;
+    padding: 7px 22px;
+    min-width: 100px;
+}
+.m-timeline-2:before{
+    display:none !important;
+}
+
+.popOverDate span:nth-child(2){
+          display: block;
+    font-size: 25px;
+    line-height: 36px;
+    color: #383734;
+
+}
+
+.priceS{
+        position: absolute;
+    right: 20px;
+    top: 20px;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.popOverDate span:nth-child(3){
+    display: block;
+    color: #605f5d;
+    font-size: 11px;
+    line-height: 18px;
+    text-transform: uppercase;
+
+
+}
+
+
+
+

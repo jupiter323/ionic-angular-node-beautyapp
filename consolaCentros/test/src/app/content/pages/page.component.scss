@@ -1,0 +1,16 @@
+
+
+
+.topFix{
+	padding-top:0px !important
+}
+
+.topFix2{
+	padding-top:60px !important
+}
+
+
+
+::ng-deep .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav>.m-menu__item.m-menu__item--active>.m-menu__heading .m-menu__link-text, .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav>.m-menu__item.m-menu__item--active>.m-menu__link .m-menu__link-text {
+    color: #e91e63;
+}

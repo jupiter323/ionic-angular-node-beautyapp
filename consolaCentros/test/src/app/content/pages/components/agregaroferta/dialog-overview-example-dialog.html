@@ -1,0 +1,11 @@
+<!-- <h1 mat-dialog-title>Hi {{data.name}}</h1> -->
+<mat-dialog-content style='margin: auto !important;'>
+   ¿Desea agregar 1 ofertas por $8 dólares?
+  <!--<mat-form-field>
+     <input matInput [(ngModel)]="data.animal">
+  </mat-form-field> -->
+</mat-dialog-content>
+<mat-dialog-actions style="margin: auto !important;" >
+  <button style="margin: auto !important;" class="btn btn-outline-success btn-sm"  (click)="onNoClick()">Cancelar</button>
+  <button style="margin: auto !important;" class="btn btn-success btn-sm" (click)="onYClick()" cdkFocusInitial>Confirmar</button>
+</mat-dialog-actions>

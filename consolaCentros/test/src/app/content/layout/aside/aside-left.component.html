@@ -1,0 +1,162 @@
+<!-- BEGIN: Left Aside -->
+
+<!-- <div mMenuAsideOffcanvas id="m_aside_left" class="m-grid__item m-aside-left" [ngClass]="asideLeftClasses"> -->
+<!-- BEGIN: Aside Menu -->
+
+
+  <ng-template #content let-c="close" let-d="dismiss">
+ <ngx-loading [show]="loadingScreen" [config]="{ backdropBorderRadius: '4px' }"></ngx-loading>
+
+
+      <div class="modal-header" style="display: block !important;">
+      	<div>
+        <h4 class="modal-title" style="    font-weight: 500;
+    color: #555;">Formulario de Soporte</h4>   
+
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+</div>
+<div>
+    <span style="color: #605f5d;font-size: 13px">
+Déjanos tus dudas en el siguiente formulario y te contactaremos al email relacionado a tu cuenta a la brevedad posible
+</span>
+</div>
+     
+      </div>
+      <div class="modal-body">
+
+
+        <label style="    float: left;
+    font-size: 15px;">Asunto</label>
+        <input type="text" [(ngModel)]='asuntoSoporte' name="asunto" placeholder="asunto" 
+        style="width: 100%;padding: 5px; margin-bottom: 15px">
+        
+        <label  style="    float: left;
+    font-size: 15px;">Descripción</label>
+        <textarea [(ngModel)]='mensajeSoporte' style="    width: 100%;
+    height: 200px;
+    resize: none;
+    border-color: lightgray;
+    border-radius: 4px;padding: 20px;
+    color: #444;
+    font-size: 15px;">
+        	
+
+        </textarea> 
+
+                       
+      </div>
+      <div class="modal-footer">
+
+      <button type="button" class="btn btn-success" (click)="enviarMensaje(c)">Enviar</button>
+
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Cerrar</button>
+<!--         <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </ng-template>
+
+
+
+<div mMenuAside (mouseenter)="mouseEnter($event)" (mouseleave)="mouseLeave($event)" id="m_ver_menu" class="m-aside-menu " m-menu-vertical="1" [ngClass]="classInitService.onClassesUpdated$ | async | mGetObject:'aside_menu' | mJoin" [attr.m-menu-dropdown]="menuAsideService.isDropdown" [attr.m-menu-dropdown-timeout]="menuAsideService.dropdownTimeout" [attr.m-menu-scrollable]="menuAsideService.isScrollable">
+
+<!-- 	<span *ngIf='getValueSideMenu()' style="display: block;color: white;text-align: center;padding: 20px;">YourBeauty</span> -->
+
+	<ul class="m-menu__nav" [ngClass]="classInitService.onClassesUpdated$ | async | mGetObject:'aside_menu_nav' | mJoin">
+		<ng-container [ngTemplateOutlet]="mMenuListing"></ng-container>
+	</ul>
+</div>
+<!-- END: Aside Menu -->
+<!-- </div> -->
+
+<ng-template #mMenuListing>
+	<ng-container *ngFor="let child of menuAsideService.menuList$ | async">
+		<m-menu-section *ngIf="child.section" [item]="child"></m-menu-section>
+		<ng-container *ngIf="child.title" [ngTemplateOutlet]="mMenuItem" [ngTemplateOutletContext]="{ item: child, parentItem: item }"></ng-container>
+	</ng-container>
+</ng-template>
+
+<ng-template #mMenuItem let-item="item" let-parentItem="parentItem">
+	<li class="m-menu__item" [ngClass]="{ 'm-menu__item--submenu': item.submenu, 'm-menu__item--active' : !item.submenu && isMenuItemIsActive(item), 'm-menu__item--open' : item.submenu && isMenuItemIsActive(item) }" aria-haspopup="true">
+
+		<!-- if menu item hasn't submenu -->
+		<a [hidden]='item.function || getRo(item)' *ngIf="!item.submenu" [routerLink]="item.page" class="m-menu__link m-menu__toggle" [matTooltip]="item.tooltip" matTooltipPosition="left">
+			<ng-container [ngTemplateOutlet]="mMenuItemText" [ngTemplateOutletContext]="{ item: item, parentItem: parentItem }"></ng-container>
+		</a>
+
+		<a *ngIf="!item.submenu && item.function=='logout'" (click)='logout()' class="m-menu__link m-menu__toggle" [matTooltip]="item.tooltip" matTooltipPosition="left">
+			<ng-container [ngTemplateOutlet]="mMenuItemText" [ngTemplateOutletContext]="{ item: item, parentItem: parentItem }"></ng-container>
+		</a>
+
+				<a *ngIf="!item.submenu && item.function=='faq'" (click)='gofaq(item.page)' class="m-menu__link m-menu__toggle" [matTooltip]="item.tooltip" matTooltipPosition="left">
+			<ng-container [ngTemplateOutlet]="mMenuItemText" [ngTemplateOutletContext]="{ item: item, parentItem: parentItem }"></ng-container>
+		</a>
+
+				<a *ngIf="!item.submenu && item.function=='sopor'" (click)='sopor(content)' class="m-menu__link m-menu__toggle" [matTooltip]="item.tooltip" matTooltipPosition="left">
+			<ng-container [ngTemplateOutlet]="mMenuItemText" [ngTemplateOutletContext]="{ item: item, parentItem: parentItem }"></ng-container>
+		</a>
+
+
+	<a *ngIf="!item.submenu && item.function=='logo'"  class="m-menu__link m-menu__toggle" [matTooltip]="item.tooltip" matTooltipPosition="left">
+			<ng-container [ngTemplateOutlet]="mMenuItemText" [ngTemplateOutletContext]="{ item: item, parentItem: parentItem }"></ng-container>
+		</a>
+
+
+
+		<!-- if menu item has sumnenu child  -->
+		<a href="javascript:;" *ngIf="item.submenu" class="m-menu__link m-menu__toggle">
+			<ng-container [ngTemplateOutlet]="mMenuItemText" [ngTemplateOutletContext]="{ item: item, parentItem: parentItem }"></ng-container>
+		</a>
+
+		<!-- if menu item has submenu child then recursively call new menu item component -->
+		<div *ngIf="item.submenu" class="m-menu__submenu">
+			<span class="m-menu__arrow"></span>
+			<ul class="m-menu__subnav">
+				<ng-container *ngFor="let child of item.submenu">
+					<ng-container [ngTemplateOutlet]="mMenuItem" [ngTemplateOutletContext]="{ item: child, parentItem: item }"></ng-container>
+				</ng-container>
+			</ul>
+		</div>
+	</li>
+</ng-template>
+
+<ng-template #mMenuItemText let-item="item" let-parentItem="parentItem">
+	<!-- if menu item has icon -->
+	<i *ngIf="item.icon" class="m-menu__link-icon" [ngClass]="item.icon"></i>
+
+	<!-- if menu item using bullet -->
+	<i *ngIf="parentItem && parentItem.bullet === 'dot'" class="m-menu__link-bullet m-menu__link-bullet--dot">
+		<span></span>
+	</i>
+	<i *ngIf="parentItem && parentItem.bullet === 'line'" class="m-menu__link-bullet m-menu__link-bullet--line">
+		<span></span>
+	</i>
+
+	<ng-container *ngIf="!item.badge; else mMenuLinkBadge">
+		<!-- menu item title text -->
+		<span class="m-menu__link-text" [translate]="item.translate" 
+		[ngStyle]="{'color': item.function == 'logo' ? 'white' : 'normal', 
+	'font-weight': item.function == '400' ? 'white' : 'normal'}">
+			{{item.title}}
+		</span>
+
+
+
+	</ng-container>
+
+	<ng-template #mMenuLinkBadge>
+		<!-- menu item with badge -->
+		<span class="m-menu__link-title">
+			<span class="m-menu__link-wrap">
+				<span class="m-menu__link-text" [translate]="item.translate">{{item.title}}</span>
+				<span class="m-menu__link-badge">
+					<span class="m-badge" [ngClass]="item.badge.type">{{item.badge.value}}</span>
+				</span>
+			</span>
+		</span>
+	</ng-template>
+
+	<!-- if menu item has submenu child then put arrow icon -->
+	<i *ngIf="item.submenu" class="m-menu__ver-arrow la la-angle-right"></i>
+</ng-template>
+<!-- END: Left Aside -->

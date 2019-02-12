@@ -1,0 +1,1655 @@
+<div class="modal fade" id="m_modal_6" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>  
+
+
+
+    <ng-template #content let-c="close" let-d="dismiss" style='width: 600px !important'>
+      <div class="modal-header">
+        <h4 class="modal-title" style="    font-size: 25px;
+    line-height: 34px;
+    font-weight: 300;">Agrega Miembro del Staff</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 19px 40px !important;">
+<div class="row ">
+<!-- <div class="col-xl-3" style="    margin-bottom: 22px;text-align: center;padding-right: 0px !important;">
+  <img style="    width: 64px;
+    border-radius: 100%;
+    height: 64px;
+    margin-top: 14px;" src="assets/app/media/img/userB.png">
+</div> -->
+<div class="col-xl-12" >
+    <form [formGroup]="addFormGroup" #f="ngForm">
+     
+
+     <mat-form-field  color="primary" style='width: 100% !important;font-size: 16px !important;'>
+        <input style='  padding: 10px 10px 0px 10px !important;' matInput placeholder="Nombre del staff" formControlName="nombreStaff" autocomplete="off" required>
+
+         <span *ngIf='fs.nombreStaff.errors' matSuffix style="font-size: 13px !important;color: lightcoral;">campo requerido</span> 
+
+
+         <mat-label><mat-icon style='  vertical-align: middle;  font-size: 25px !important;'>person</mat-icon>Cual es el nombre del Staff?</mat-label>
+      </mat-form-field>
+
+
+
+      <mat-form-field style=' width: 100% !important;     font-size: 16px !important;
+    '>
+        <input style='  padding: 10px 10px 0px 10px !important;' matInput placeholder="Puesto del empleado" formControlName="puestoStaff" autocomplete="off" required>
+
+        <span *ngIf='fs.puestoStaff.errors' matSuffix style="font-size: 13px !important;color: lightcoral;">campo requerido</span> 
+
+
+         <mat-label><mat-icon style='  vertical-align: middle;  font-size: 25px !important;'>list_alt</mat-icon>¿Cuál es el puesto del Staff?</mat-label>
+      </mat-form-field>
+
+      <mat-form-field style='  width: 100% !important;    font-size: 16px !important;
+    '>
+        <input style='  padding: 10px 10px 0px 10px !important;' matInput placeholder="Numero de telefono" formControlName="telefonoStaff" autocomplete="off"  >
+
+          <span *ngIf='fs.telefonoStaff.errors && fs.telefonoStaff.value' matSuffix style="font-size: 13px !important;color: lightcoral;">Número incorrecto</span> 
+
+            <span *ngIf='fs.telefonoStaff.errors  && !fs.telefonoStaff.value' matSuffix style="font-size: 13px !important;color: lightcoral;">campo requerido</span> 
+
+
+         <mat-label><mat-icon style='  vertical-align: middle;  font-size: 25px !important;'>phone</mat-icon>Telefono</mat-label>
+      </mat-form-field>
+
+      <mat-form-field style=' width: 100% !important;     font-size: 16px !important;
+    '>
+
+    <span matSuffix style="color: lightgray;vertical-align: super;"
+     [hidden]=" addFormGroup.controls['correoStaff'].hasError('email') || addFormGroup.controls['correoStaff'].hasError('required')"  *ngIf='!emailTaken2' ><mat-icon style='color: #fbb7b7 !important; vertical-align: top;'>cancel</mat-icon>
+     ya existe esta cuenta</span>
+    <span matSuffix style="color: lightgray;vertical-align: super;" *ngIf='emailTaken2' 
+    [hidden]="addFormGroup.controls['correoStaff'].hasError('email') || addFormGroup.controls['correoStaff'].hasError('required')"  >
+      <mat-icon style='color: #6bbf6f !important;vertical-align: top;'>check_circle</mat-icon></span>
+
+        <input style='  padding: 10px 10px 0px 10px !important;' matInput placeholder="Correo Electronico" formControlName="correoStaff" type='email' autocomplete="off" email required>
+
+           <span  *ngIf="addFormGroup.controls['correoStaff'].hasError('required')"  matSuffix style="font-size: 13px !important;color: lightcoral;">campo requerido</span> 
+
+
+         <mat-label ><mat-icon style='  vertical-align: middle;  font-size: 25px !important;'>email</mat-icon>Correo electronico</mat-label>
+      </mat-form-field>
+
+
+
+
+
+
+    </form>
+
+    <div style="    padding: 0px 0px 2px 0px;
+    font-size: 13px;color: rgb(232,84,126);font-weight: 400;">
+      Se enviará por e-mail el link para descargar el App del Staff y los credenciales de acceso
+<!--     <mat-slide-toggle [(ngModel)]="isHuman2" (change)="onChange2($event)" name="human2">I am not a robot</mat-slide-toggle> -->
+
+<!--     <mat-slide-toggle name="human2">Invitar a YourBeauty y crear cuenta</mat-slide-toggle>
+ -->
+
+    </div>
+
+
+
+  </div>
+</div>
+
+      </div>
+
+
+      <div class="modal-footer" *ngIf='!editarStaff'>
+        <button [disabled]='!f.form.valid'  type="button" class="btn" (click)='addStaff(1)' mat-raised-button color="primary">Guardar</button>
+        <button [disabled]='!f.form.valid' type="button" class="btn" mat-raised-button color="primary" (click)='addStaff(2)'>Guardar & Agregar otro</button>
+      </div>
+
+      <div class="modal-footer" *ngIf='editarStaff'>
+        <button [disabled]='!f.form.valid'  type="button" class="btn" (click)='editStaffDo()' mat-raised-button color="primary">Editar Staff</button>
+      </div>
+
+
+    </ng-template>
+
+
+
+
+
+    <ng-template #content2 let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" style="    font-size: 25px;
+    line-height: 34px;
+    font-weight: 300;">Agregando Horario</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 0px !important">
+          <div class="col-xl-12" style="    border-right: solid 1px lightgray;" >
+
+        <div style='padding: 30px 45px;'>
+            <div style="margin-bottom:3px;background: white;padding: 0px 0px;" *ngFor="let item of [{nombre:'Domingo'},{nombre:'Lunes'},{nombre:'Martes'}
+            ,{nombre:'Miercoles'},{nombre:'Jueves'},{nombre:'Viernes'},{nombre:'Sabado'}];  let i = index">
+            <mat-checkbox >
+              <span class='labelBy' style='margin-bottom: 0px !important;'>{{item.nombre}}</span>
+                </mat-checkbox>
+              <div class="conteinInput" style="margin-top: 20px">
+              
+              <div style="display: flex">
+
+              <mat-select class='inputBy w50'>
+    
+              <mat-option value="option1">12:00 AM</mat-option>
+              <mat-option value="option1">12:05 AM</mat-option>
+              <mat-option value="option1">12:10 AM</mat-option>
+              <mat-option value="option1">12:15 AM</mat-option>
+              <mat-option value="option1">12:20 AM</mat-option>
+              <mat-option value="option1">12:25 AM</mat-option>
+              <mat-option value="option1">12:30 AM</mat-option>
+              <mat-option value="option1">12:35 AM</mat-option>
+              <mat-option value="option1">12:40 AM</mat-option>
+              <mat-option value="option1">12:45 AM</mat-option>
+              <mat-option value="option1">12:50 AM</mat-option>
+              <mat-option value="option1">12:55 AM</mat-option>
+
+              <mat-option value="option1">01:00 AM</mat-option>
+              <mat-option value="option1">01:05 AM</mat-option>
+              <mat-option value="option1">01:10 AM</mat-option>
+              <mat-option value="option1">01:15 AM</mat-option>
+              <mat-option value="option1">01:20 AM</mat-option>
+              <mat-option value="option1">01:25 AM</mat-option>
+              <mat-option value="option1">01:30 AM</mat-option>
+              <mat-option value="option1">01:35 AM</mat-option>
+              <mat-option value="option1">01:40 AM</mat-option>
+              <mat-option value="option1">01:45 AM</mat-option>
+              <mat-option value="option1">01:50 AM</mat-option>
+              <mat-option value="option1">01:55 AM</mat-option>
+
+
+              <mat-option value="option1">02:00 AM</mat-option>
+              <mat-option value="option1">02:05 AM</mat-option>
+              <mat-option value="option1">02:10 AM</mat-option>
+              <mat-option value="option1">02:15 AM</mat-option>
+              <mat-option value="option1">02:20 AM</mat-option>
+              <mat-option value="option1">02:25 AM</mat-option>
+              <mat-option value="option1">02:30 AM</mat-option>
+              <mat-option value="option1">02:35 AM</mat-option>
+              <mat-option value="option1">02:40 AM</mat-option>
+              <mat-option value="option1">02:45 AM</mat-option>
+              <mat-option value="option1">02:50 AM</mat-option>
+              <mat-option value="option1">02:55 AM</mat-option>
+
+              <mat-option value="option1">03:00 AM</mat-option>
+              <mat-option value="option1">03:05 AM</mat-option>
+              <mat-option value="option1">03:10 AM</mat-option>
+              <mat-option value="option1">03:15 AM</mat-option>
+              <mat-option value="option1">03:20 AM</mat-option>
+              <mat-option value="option1">03:25 AM</mat-option>
+              <mat-option value="option1">03:30 AM</mat-option>
+              <mat-option value="option1">03:35 AM</mat-option>
+              <mat-option value="option1">03:40 AM</mat-option>
+              <mat-option value="option1">03:45 AM</mat-option>
+              <mat-option value="option1">03:50 AM</mat-option>
+              <mat-option value="option1">03:55 AM</mat-option>
+
+              <mat-option value="option1">04:00 AM</mat-option>
+              <mat-option value="option1">04:05 AM</mat-option>
+              <mat-option value="option1">04:10 AM</mat-option>
+              <mat-option value="option1">04:15 AM</mat-option>
+              <mat-option value="option1">04:20 AM</mat-option>
+              <mat-option value="option1">04:25 AM</mat-option>
+              <mat-option value="option1">04:30 AM</mat-option>
+              <mat-option value="option1">04:35 AM</mat-option>
+              <mat-option value="option1">04:40 AM</mat-option>
+              <mat-option value="option1">04:45 AM</mat-option>
+              <mat-option value="option1">04:50 AM</mat-option>
+              <mat-option value="option1">04:55 AM</mat-option>
+
+
+              <mat-option value="option1">05:00 AM</mat-option>
+              <mat-option value="option1">05:05 AM</mat-option>
+              <mat-option value="option1">05:10 AM</mat-option>
+              <mat-option value="option1">05:15 AM</mat-option>
+              <mat-option value="option1">05:20 AM</mat-option>
+              <mat-option value="option1">05:25 AM</mat-option>
+              <mat-option value="option1">05:30 AM</mat-option>
+              <mat-option value="option1">05:35 AM</mat-option>
+              <mat-option value="option1">05:40 AM</mat-option>
+              <mat-option value="option1">05:45 AM</mat-option>
+              <mat-option value="option1">05:50 AM</mat-option>
+              <mat-option value="option1">05:55 AM</mat-option>
+
+              <mat-option value="option1">06:00 AM</mat-option>
+              <mat-option value="option1">06:05 AM</mat-option>
+              <mat-option value="option1">06:10 AM</mat-option>
+              <mat-option value="option1">06:15 AM</mat-option>
+              <mat-option value="option1">06:20 AM</mat-option>
+              <mat-option value="option1">06:25 AM</mat-option>
+              <mat-option value="option1">06:30 AM</mat-option>
+              <mat-option value="option1">06:35 AM</mat-option>
+              <mat-option value="option1">06:40 AM</mat-option>
+              <mat-option value="option1">06:45 AM</mat-option>
+              <mat-option value="option1">06:50 AM</mat-option>
+              <mat-option value="option1">06:55 AM</mat-option>
+
+              <mat-option value="option1">07:00 AM</mat-option>
+              <mat-option value="option1">07:05 AM</mat-option>
+              <mat-option value="option1">07:10 AM</mat-option>
+              <mat-option value="option1">07:15 AM</mat-option>
+              <mat-option value="option1">07:20 AM</mat-option>
+              <mat-option value="option1">07:25 AM</mat-option>
+              <mat-option value="option1">07:30 AM</mat-option>
+              <mat-option value="option1">07:35 AM</mat-option>
+              <mat-option value="option1">07:40 AM</mat-option>
+              <mat-option value="option1">07:45 AM</mat-option>
+              <mat-option value="option1">07:50 AM</mat-option>
+              <mat-option value="option1">07:55 AM</mat-option>
+
+              <mat-option value="option1">08:00 AM</mat-option>
+              <mat-option value="option1">08:05 AM</mat-option>
+              <mat-option value="option1">08:10 AM</mat-option>
+              <mat-option value="option1">08:15 AM</mat-option>
+              <mat-option value="option1">08:20 AM</mat-option>
+              <mat-option value="option1">08:25 AM</mat-option>
+              <mat-option value="option1">08:30 AM</mat-option>
+              <mat-option value="option1">08:35 AM</mat-option>
+              <mat-option value="option1">08:40 AM</mat-option>
+              <mat-option value="option1">08:45 AM</mat-option>
+              <mat-option value="option1">08:50 AM</mat-option>
+              <mat-option value="option1">08:55 AM</mat-option>
+
+
+              <mat-option value="option1">09:00 AM</mat-option>
+              <mat-option value="option1">09:05 AM</mat-option>
+              <mat-option value="option1">09:10 AM</mat-option>
+              <mat-option value="option1">09:15 AM</mat-option>
+              <mat-option value="option1">09:20 AM</mat-option>
+              <mat-option value="option1">09:25 AM</mat-option>
+              <mat-option value="option1">09:30 AM</mat-option>
+              <mat-option value="option1">09:35 AM</mat-option>
+              <mat-option value="option1">09:40 AM</mat-option>
+              <mat-option value="option1">09:45 AM</mat-option>
+              <mat-option value="option1">09:50 AM</mat-option>
+              <mat-option value="option1">09:55 AM</mat-option>
+
+
+              <mat-option value="option1">10:00 AM</mat-option>
+              <mat-option value="option1">10:05 AM</mat-option>
+              <mat-option value="option1">10:10 AM</mat-option>
+              <mat-option value="option1">10:15 AM</mat-option>
+              <mat-option value="option1">10:20 AM</mat-option>
+              <mat-option value="option1">10:25 AM</mat-option>
+              <mat-option value="option1">10:30 AM</mat-option>
+              <mat-option value="option1">10:35 AM</mat-option>
+              <mat-option value="option1">10:40 AM</mat-option>
+              <mat-option value="option1">10:45 AM</mat-option>
+              <mat-option value="option1">10:50 AM</mat-option>
+              <mat-option value="option1">10:55 AM</mat-option>
+
+              <mat-option value="option1">11:00 AM</mat-option>
+              <mat-option value="option1">11:05 AM</mat-option>
+              <mat-option value="option1">11:10 AM</mat-option>
+              <mat-option value="option1">11:15 AM</mat-option>
+              <mat-option value="option1">11:20 AM</mat-option>
+              <mat-option value="option1">11:25 AM</mat-option>
+              <mat-option value="option1">11:30 AM</mat-option>
+              <mat-option value="option1">11:35 AM</mat-option>
+              <mat-option value="option1">11:40 AM</mat-option>
+              <mat-option value="option1">11:45 AM</mat-option>
+              <mat-option value="option1">11:50 AM</mat-option>
+              <mat-option value="option1">11:55 AM</mat-option>
+
+
+              <mat-option value="option1">12:00 PM</mat-option>
+              <mat-option value="option1">12:05 PM</mat-option>
+              <mat-option value="option1">12:10 PM</mat-option>
+              <mat-option value="option1">12:15 PM</mat-option>
+              <mat-option value="option1">12:20 PM</mat-option>
+              <mat-option value="option1">12:25 PM</mat-option>
+              <mat-option value="option1">12:30 PM</mat-option>
+              <mat-option value="option1">12:35 PM</mat-option>
+              <mat-option value="option1">12:40 PM</mat-option>
+              <mat-option value="option1">12:45 PM</mat-option>
+              <mat-option value="option1">12:50 PM</mat-option>
+              <mat-option value="option1">12:55 PM</mat-option>
+
+              <mat-option value="option1">01:00 PM</mat-option>
+              <mat-option value="option1">01:05 PM</mat-option>
+              <mat-option value="option1">01:10 PM</mat-option>
+              <mat-option value="option1">01:15 PM</mat-option>
+              <mat-option value="option1">01:20 PM</mat-option>
+              <mat-option value="option1">01:25 PM</mat-option>
+              <mat-option value="option1">01:30 PM</mat-option>
+              <mat-option value="option1">01:35 PM</mat-option>
+              <mat-option value="option1">01:40 PM</mat-option>
+              <mat-option value="option1">01:45 PM</mat-option>
+              <mat-option value="option1">01:50 PM</mat-option>
+              <mat-option value="option1">01:55 PM</mat-option>
+
+
+              <mat-option value="option1">02:00 PM</mat-option>
+              <mat-option value="option1">02:05 PM</mat-option>
+              <mat-option value="option1">02:10 PM</mat-option>
+              <mat-option value="option1">02:15 PM</mat-option>
+              <mat-option value="option1">02:20 PM</mat-option>
+              <mat-option value="option1">02:25 PM</mat-option>
+              <mat-option value="option1">02:30 PM</mat-option>
+              <mat-option value="option1">02:35 PM</mat-option>
+              <mat-option value="option1">02:40 PM</mat-option>
+              <mat-option value="option1">02:45 PM</mat-option>
+              <mat-option value="option1">02:50 PM</mat-option>
+              <mat-option value="option1">02:55 PM</mat-option>
+
+              <mat-option value="option1">03:00 PM</mat-option>
+              <mat-option value="option1">03:05 PM</mat-option>
+              <mat-option value="option1">03:10 PM</mat-option>
+              <mat-option value="option1">03:15 PM</mat-option>
+              <mat-option value="option1">03:20 PM</mat-option>
+              <mat-option value="option1">03:25 PM</mat-option>
+              <mat-option value="option1">03:30 PM</mat-option>
+              <mat-option value="option1">03:35 PM</mat-option>
+              <mat-option value="option1">03:40 PM</mat-option>
+              <mat-option value="option1">03:45 PM</mat-option>
+              <mat-option value="option1">03:50 PM</mat-option>
+              <mat-option value="option1">03:55 PM</mat-option>
+
+              <mat-option value="option1">04:00 PM</mat-option>
+              <mat-option value="option1">04:05 PM</mat-option>
+              <mat-option value="option1">04:10 PM</mat-option>
+              <mat-option value="option1">04:15 PM</mat-option>
+              <mat-option value="option1">04:20 PM</mat-option>
+              <mat-option value="option1">04:25 PM</mat-option>
+              <mat-option value="option1">04:30 PM</mat-option>
+              <mat-option value="option1">04:35 PM</mat-option>
+              <mat-option value="option1">04:40 PM</mat-option>
+              <mat-option value="option1">04:45 PM</mat-option>
+              <mat-option value="option1">04:50 PM</mat-option>
+              <mat-option value="option1">04:55 PM</mat-option>
+
+
+              <mat-option value="option1">05:00 PM</mat-option>
+              <mat-option value="option1">05:05 PM</mat-option>
+              <mat-option value="option1">05:10 PM</mat-option>
+              <mat-option value="option1">05:15 PM</mat-option>
+              <mat-option value="option1">05:20 PM</mat-option>
+              <mat-option value="option1">05:25 PM</mat-option>
+              <mat-option value="option1">05:30 PM</mat-option>
+              <mat-option value="option1">05:35 PM</mat-option>
+              <mat-option value="option1">05:40 PM</mat-option>
+              <mat-option value="option1">05:45 PM</mat-option>
+              <mat-option value="option1">05:50 PM</mat-option>
+              <mat-option value="option1">05:55 PM</mat-option>
+
+              <mat-option value="option1">06:00 PM</mat-option>
+              <mat-option value="option1">06:05 PM</mat-option>
+              <mat-option value="option1">06:10 PM</mat-option>
+              <mat-option value="option1">06:15 PM</mat-option>
+              <mat-option value="option1">06:20 PM</mat-option>
+              <mat-option value="option1">06:25 PM</mat-option>
+              <mat-option value="option1">06:30 PM</mat-option>
+              <mat-option value="option1">06:35 PM</mat-option>
+              <mat-option value="option1">06:40 PM</mat-option>
+              <mat-option value="option1">06:45 PM</mat-option>
+              <mat-option value="option1">06:50 PM</mat-option>
+              <mat-option value="option1">06:55 PM</mat-option>
+
+              <mat-option value="option1">07:00 PM</mat-option>
+              <mat-option value="option1">07:05 PM</mat-option>
+              <mat-option value="option1">07:10 PM</mat-option>
+              <mat-option value="option1">07:15 PM</mat-option>
+              <mat-option value="option1">07:20 PM</mat-option>
+              <mat-option value="option1">07:25 PM</mat-option>
+              <mat-option value="option1">07:30 PM</mat-option>
+              <mat-option value="option1">07:35 PM</mat-option>
+              <mat-option value="option1">07:40 PM</mat-option>
+              <mat-option value="option1">07:45 PM</mat-option>
+              <mat-option value="option1">07:50 PM</mat-option>
+              <mat-option value="option1">07:55 PM</mat-option>
+
+              <mat-option value="option1">08:00 PM</mat-option>
+              <mat-option value="option1">08:05 PM</mat-option>
+              <mat-option value="option1">08:10 PM</mat-option>
+              <mat-option value="option1">08:15 PM</mat-option>
+              <mat-option value="option1">08:20 PM</mat-option>
+              <mat-option value="option1">08:25 PM</mat-option>
+              <mat-option value="option1">08:30 PM</mat-option>
+              <mat-option value="option1">08:35 PM</mat-option>
+              <mat-option value="option1">08:40 PM</mat-option>
+              <mat-option value="option1">08:45 PM</mat-option>
+              <mat-option value="option1">08:50 PM</mat-option>
+              <mat-option value="option1">08:55 PM</mat-option>
+
+
+              <mat-option value="option1">09:00 PM</mat-option>
+              <mat-option value="option1">09:05 PM</mat-option>
+              <mat-option value="option1">09:10 PM</mat-option>
+              <mat-option value="option1">09:15 PM</mat-option>
+              <mat-option value="option1">09:20 PM</mat-option>
+              <mat-option value="option1">09:25 PM</mat-option>
+              <mat-option value="option1">09:30 PM</mat-option>
+              <mat-option value="option1">09:35 PM</mat-option>
+              <mat-option value="option1">09:40 PM</mat-option>
+              <mat-option value="option1">09:45 PM</mat-option>
+              <mat-option value="option1">09:50 PM</mat-option>
+              <mat-option value="option1">09:55 PM</mat-option>
+
+
+              <mat-option value="option1">10:00 PM</mat-option>
+              <mat-option value="option1">10:05 PM</mat-option>
+              <mat-option value="option1">10:10 PM</mat-option>
+              <mat-option value="option1">10:15 PM</mat-option>
+              <mat-option value="option1">10:20 PM</mat-option>
+              <mat-option value="option1">10:25 PM</mat-option>
+              <mat-option value="option1">10:30 PM</mat-option>
+              <mat-option value="option1">10:35 PM</mat-option>
+              <mat-option value="option1">10:40 PM</mat-option>
+              <mat-option value="option1">10:45 PM</mat-option>
+              <mat-option value="option1">10:50 PM</mat-option>
+              <mat-option value="option1">10:55 PM</mat-option>
+
+              <mat-option value="option1">11:00 PM</mat-option>
+              <mat-option value="option1">11:05 PM</mat-option>
+              <mat-option value="option1">11:10 PM</mat-option>
+              <mat-option value="option1">11:15 PM</mat-option>
+              <mat-option value="option1">11:20 PM</mat-option>
+              <mat-option value="option1">11:25 PM</mat-option>
+              <mat-option value="option1">11:30 PM</mat-option>
+              <mat-option value="option1">11:35 PM</mat-option>
+              <mat-option value="option1">11:40 PM</mat-option>
+              <mat-option value="option1">11:45 PM</mat-option>
+              <mat-option value="option1">11:50 PM</mat-option>
+              <mat-option value="option1">11:55 PM</mat-option>
+
+
+
+              </mat-select>
+
+              <mat-select class='inputBy w50'>
+              
+              <mat-option value="option1">12:00 AM</mat-option>
+              <mat-option value="option1">12:05 AM</mat-option>
+              <mat-option value="option1">12:10 AM</mat-option>
+              <mat-option value="option1">12:15 AM</mat-option>
+              <mat-option value="option1">12:20 AM</mat-option>
+              <mat-option value="option1">12:25 AM</mat-option>
+              <mat-option value="option1">12:30 AM</mat-option>
+              <mat-option value="option1">12:35 AM</mat-option>
+              <mat-option value="option1">12:40 AM</mat-option>
+              <mat-option value="option1">12:45 AM</mat-option>
+              <mat-option value="option1">12:50 AM</mat-option>
+              <mat-option value="option1">12:55 AM</mat-option>
+
+              <mat-option value="option1">01:00 AM</mat-option>
+              <mat-option value="option1">01:05 AM</mat-option>
+              <mat-option value="option1">01:10 AM</mat-option>
+              <mat-option value="option1">01:15 AM</mat-option>
+              <mat-option value="option1">01:20 AM</mat-option>
+              <mat-option value="option1">01:25 AM</mat-option>
+              <mat-option value="option1">01:30 AM</mat-option>
+              <mat-option value="option1">01:35 AM</mat-option>
+              <mat-option value="option1">01:40 AM</mat-option>
+              <mat-option value="option1">01:45 AM</mat-option>
+              <mat-option value="option1">01:50 AM</mat-option>
+              <mat-option value="option1">01:55 AM</mat-option>
+
+
+              <mat-option value="option1">02:00 AM</mat-option>
+              <mat-option value="option1">02:05 AM</mat-option>
+              <mat-option value="option1">02:10 AM</mat-option>
+              <mat-option value="option1">02:15 AM</mat-option>
+              <mat-option value="option1">02:20 AM</mat-option>
+              <mat-option value="option1">02:25 AM</mat-option>
+              <mat-option value="option1">02:30 AM</mat-option>
+              <mat-option value="option1">02:35 AM</mat-option>
+              <mat-option value="option1">02:40 AM</mat-option>
+              <mat-option value="option1">02:45 AM</mat-option>
+              <mat-option value="option1">02:50 AM</mat-option>
+              <mat-option value="option1">02:55 AM</mat-option>
+
+              <mat-option value="option1">03:00 AM</mat-option>
+              <mat-option value="option1">03:05 AM</mat-option>
+              <mat-option value="option1">03:10 AM</mat-option>
+              <mat-option value="option1">03:15 AM</mat-option>
+              <mat-option value="option1">03:20 AM</mat-option>
+              <mat-option value="option1">03:25 AM</mat-option>
+              <mat-option value="option1">03:30 AM</mat-option>
+              <mat-option value="option1">03:35 AM</mat-option>
+              <mat-option value="option1">03:40 AM</mat-option>
+              <mat-option value="option1">03:45 AM</mat-option>
+              <mat-option value="option1">03:50 AM</mat-option>
+              <mat-option value="option1">03:55 AM</mat-option>
+
+              <mat-option value="option1">04:00 AM</mat-option>
+              <mat-option value="option1">04:05 AM</mat-option>
+              <mat-option value="option1">04:10 AM</mat-option>
+              <mat-option value="option1">04:15 AM</mat-option>
+              <mat-option value="option1">04:20 AM</mat-option>
+              <mat-option value="option1">04:25 AM</mat-option>
+              <mat-option value="option1">04:30 AM</mat-option>
+              <mat-option value="option1">04:35 AM</mat-option>
+              <mat-option value="option1">04:40 AM</mat-option>
+              <mat-option value="option1">04:45 AM</mat-option>
+              <mat-option value="option1">04:50 AM</mat-option>
+              <mat-option value="option1">04:55 AM</mat-option>
+
+
+              <mat-option value="option1">05:00 AM</mat-option>
+              <mat-option value="option1">05:05 AM</mat-option>
+              <mat-option value="option1">05:10 AM</mat-option>
+              <mat-option value="option1">05:15 AM</mat-option>
+              <mat-option value="option1">05:20 AM</mat-option>
+              <mat-option value="option1">05:25 AM</mat-option>
+              <mat-option value="option1">05:30 AM</mat-option>
+              <mat-option value="option1">05:35 AM</mat-option>
+              <mat-option value="option1">05:40 AM</mat-option>
+              <mat-option value="option1">05:45 AM</mat-option>
+              <mat-option value="option1">05:50 AM</mat-option>
+              <mat-option value="option1">05:55 AM</mat-option>
+
+              <mat-option value="option1">06:00 AM</mat-option>
+              <mat-option value="option1">06:05 AM</mat-option>
+              <mat-option value="option1">06:10 AM</mat-option>
+              <mat-option value="option1">06:15 AM</mat-option>
+              <mat-option value="option1">06:20 AM</mat-option>
+              <mat-option value="option1">06:25 AM</mat-option>
+              <mat-option value="option1">06:30 AM</mat-option>
+              <mat-option value="option1">06:35 AM</mat-option>
+              <mat-option value="option1">06:40 AM</mat-option>
+              <mat-option value="option1">06:45 AM</mat-option>
+              <mat-option value="option1">06:50 AM</mat-option>
+              <mat-option value="option1">06:55 AM</mat-option>
+
+              <mat-option value="option1">07:00 AM</mat-option>
+              <mat-option value="option1">07:05 AM</mat-option>
+              <mat-option value="option1">07:10 AM</mat-option>
+              <mat-option value="option1">07:15 AM</mat-option>
+              <mat-option value="option1">07:20 AM</mat-option>
+              <mat-option value="option1">07:25 AM</mat-option>
+              <mat-option value="option1">07:30 AM</mat-option>
+              <mat-option value="option1">07:35 AM</mat-option>
+              <mat-option value="option1">07:40 AM</mat-option>
+              <mat-option value="option1">07:45 AM</mat-option>
+              <mat-option value="option1">07:50 AM</mat-option>
+              <mat-option value="option1">07:55 AM</mat-option>
+
+              <mat-option value="option1">08:00 AM</mat-option>
+              <mat-option value="option1">08:05 AM</mat-option>
+              <mat-option value="option1">08:10 AM</mat-option>
+              <mat-option value="option1">08:15 AM</mat-option>
+              <mat-option value="option1">08:20 AM</mat-option>
+              <mat-option value="option1">08:25 AM</mat-option>
+              <mat-option value="option1">08:30 AM</mat-option>
+              <mat-option value="option1">08:35 AM</mat-option>
+              <mat-option value="option1">08:40 AM</mat-option>
+              <mat-option value="option1">08:45 AM</mat-option>
+              <mat-option value="option1">08:50 AM</mat-option>
+              <mat-option value="option1">08:55 AM</mat-option>
+
+
+              <mat-option value="option1">09:00 AM</mat-option>
+              <mat-option value="option1">09:05 AM</mat-option>
+              <mat-option value="option1">09:10 AM</mat-option>
+              <mat-option value="option1">09:15 AM</mat-option>
+              <mat-option value="option1">09:20 AM</mat-option>
+              <mat-option value="option1">09:25 AM</mat-option>
+              <mat-option value="option1">09:30 AM</mat-option>
+              <mat-option value="option1">09:35 AM</mat-option>
+              <mat-option value="option1">09:40 AM</mat-option>
+              <mat-option value="option1">09:45 AM</mat-option>
+              <mat-option value="option1">09:50 AM</mat-option>
+              <mat-option value="option1">09:55 AM</mat-option>
+
+
+              <mat-option value="option1">10:00 AM</mat-option>
+              <mat-option value="option1">10:05 AM</mat-option>
+              <mat-option value="option1">10:10 AM</mat-option>
+              <mat-option value="option1">10:15 AM</mat-option>
+              <mat-option value="option1">10:20 AM</mat-option>
+              <mat-option value="option1">10:25 AM</mat-option>
+              <mat-option value="option1">10:30 AM</mat-option>
+              <mat-option value="option1">10:35 AM</mat-option>
+              <mat-option value="option1">10:40 AM</mat-option>
+              <mat-option value="option1">10:45 AM</mat-option>
+              <mat-option value="option1">10:50 AM</mat-option>
+              <mat-option value="option1">10:55 AM</mat-option>
+
+              <mat-option value="option1">11:00 AM</mat-option>
+              <mat-option value="option1">11:05 AM</mat-option>
+              <mat-option value="option1">11:10 AM</mat-option>
+              <mat-option value="option1">11:15 AM</mat-option>
+              <mat-option value="option1">11:20 AM</mat-option>
+              <mat-option value="option1">11:25 AM</mat-option>
+              <mat-option value="option1">11:30 AM</mat-option>
+              <mat-option value="option1">11:35 AM</mat-option>
+              <mat-option value="option1">11:40 AM</mat-option>
+              <mat-option value="option1">11:45 AM</mat-option>
+              <mat-option value="option1">11:50 AM</mat-option>
+              <mat-option value="option1">11:55 AM</mat-option>
+
+
+              <mat-option value="option1">12:00 PM</mat-option>
+              <mat-option value="option1">12:05 PM</mat-option>
+              <mat-option value="option1">12:10 PM</mat-option>
+              <mat-option value="option1">12:15 PM</mat-option>
+              <mat-option value="option1">12:20 PM</mat-option>
+              <mat-option value="option1">12:25 PM</mat-option>
+              <mat-option value="option1">12:30 PM</mat-option>
+              <mat-option value="option1">12:35 PM</mat-option>
+              <mat-option value="option1">12:40 PM</mat-option>
+              <mat-option value="option1">12:45 PM</mat-option>
+              <mat-option value="option1">12:50 PM</mat-option>
+              <mat-option value="option1">12:55 PM</mat-option>
+
+              <mat-option value="option1">01:00 PM</mat-option>
+              <mat-option value="option1">01:05 PM</mat-option>
+              <mat-option value="option1">01:10 PM</mat-option>
+              <mat-option value="option1">01:15 PM</mat-option>
+              <mat-option value="option1">01:20 PM</mat-option>
+              <mat-option value="option1">01:25 PM</mat-option>
+              <mat-option value="option1">01:30 PM</mat-option>
+              <mat-option value="option1">01:35 PM</mat-option>
+              <mat-option value="option1">01:40 PM</mat-option>
+              <mat-option value="option1">01:45 PM</mat-option>
+              <mat-option value="option1">01:50 PM</mat-option>
+              <mat-option value="option1">01:55 PM</mat-option>
+
+
+              <mat-option value="option1">02:00 PM</mat-option>
+              <mat-option value="option1">02:05 PM</mat-option>
+              <mat-option value="option1">02:10 PM</mat-option>
+              <mat-option value="option1">02:15 PM</mat-option>
+              <mat-option value="option1">02:20 PM</mat-option>
+              <mat-option value="option1">02:25 PM</mat-option>
+              <mat-option value="option1">02:30 PM</mat-option>
+              <mat-option value="option1">02:35 PM</mat-option>
+              <mat-option value="option1">02:40 PM</mat-option>
+              <mat-option value="option1">02:45 PM</mat-option>
+              <mat-option value="option1">02:50 PM</mat-option>
+              <mat-option value="option1">02:55 PM</mat-option>
+
+              <mat-option value="option1">03:00 PM</mat-option>
+              <mat-option value="option1">03:05 PM</mat-option>
+              <mat-option value="option1">03:10 PM</mat-option>
+              <mat-option value="option1">03:15 PM</mat-option>
+              <mat-option value="option1">03:20 PM</mat-option>
+              <mat-option value="option1">03:25 PM</mat-option>
+              <mat-option value="option1">03:30 PM</mat-option>
+              <mat-option value="option1">03:35 PM</mat-option>
+              <mat-option value="option1">03:40 PM</mat-option>
+              <mat-option value="option1">03:45 PM</mat-option>
+              <mat-option value="option1">03:50 PM</mat-option>
+              <mat-option value="option1">03:55 PM</mat-option>
+
+              <mat-option value="option1">04:00 PM</mat-option>
+              <mat-option value="option1">04:05 PM</mat-option>
+              <mat-option value="option1">04:10 PM</mat-option>
+              <mat-option value="option1">04:15 PM</mat-option>
+              <mat-option value="option1">04:20 PM</mat-option>
+              <mat-option value="option1">04:25 PM</mat-option>
+              <mat-option value="option1">04:30 PM</mat-option>
+              <mat-option value="option1">04:35 PM</mat-option>
+              <mat-option value="option1">04:40 PM</mat-option>
+              <mat-option value="option1">04:45 PM</mat-option>
+              <mat-option value="option1">04:50 PM</mat-option>
+              <mat-option value="option1">04:55 PM</mat-option>
+
+
+              <mat-option value="option1">05:00 PM</mat-option>
+              <mat-option value="option1">05:05 PM</mat-option>
+              <mat-option value="option1">05:10 PM</mat-option>
+              <mat-option value="option1">05:15 PM</mat-option>
+              <mat-option value="option1">05:20 PM</mat-option>
+              <mat-option value="option1">05:25 PM</mat-option>
+              <mat-option value="option1">05:30 PM</mat-option>
+              <mat-option value="option1">05:35 PM</mat-option>
+              <mat-option value="option1">05:40 PM</mat-option>
+              <mat-option value="option1">05:45 PM</mat-option>
+              <mat-option value="option1">05:50 PM</mat-option>
+              <mat-option value="option1">05:55 PM</mat-option>
+
+              <mat-option value="option1">06:00 PM</mat-option>
+              <mat-option value="option1">06:05 PM</mat-option>
+              <mat-option value="option1">06:10 PM</mat-option>
+              <mat-option value="option1">06:15 PM</mat-option>
+              <mat-option value="option1">06:20 PM</mat-option>
+              <mat-option value="option1">06:25 PM</mat-option>
+              <mat-option value="option1">06:30 PM</mat-option>
+              <mat-option value="option1">06:35 PM</mat-option>
+              <mat-option value="option1">06:40 PM</mat-option>
+              <mat-option value="option1">06:45 PM</mat-option>
+              <mat-option value="option1">06:50 PM</mat-option>
+              <mat-option value="option1">06:55 PM</mat-option>
+
+              <mat-option value="option1">07:00 PM</mat-option>
+              <mat-option value="option1">07:05 PM</mat-option>
+              <mat-option value="option1">07:10 PM</mat-option>
+              <mat-option value="option1">07:15 PM</mat-option>
+              <mat-option value="option1">07:20 PM</mat-option>
+              <mat-option value="option1">07:25 PM</mat-option>
+              <mat-option value="option1">07:30 PM</mat-option>
+              <mat-option value="option1">07:35 PM</mat-option>
+              <mat-option value="option1">07:40 PM</mat-option>
+              <mat-option value="option1">07:45 PM</mat-option>
+              <mat-option value="option1">07:50 PM</mat-option>
+              <mat-option value="option1">07:55 PM</mat-option>
+
+              <mat-option value="option1">08:00 PM</mat-option>
+              <mat-option value="option1">08:05 PM</mat-option>
+              <mat-option value="option1">08:10 PM</mat-option>
+              <mat-option value="option1">08:15 PM</mat-option>
+              <mat-option value="option1">08:20 PM</mat-option>
+              <mat-option value="option1">08:25 PM</mat-option>
+              <mat-option value="option1">08:30 PM</mat-option>
+              <mat-option value="option1">08:35 PM</mat-option>
+              <mat-option value="option1">08:40 PM</mat-option>
+              <mat-option value="option1">08:45 PM</mat-option>
+              <mat-option value="option1">08:50 PM</mat-option>
+              <mat-option value="option1">08:55 PM</mat-option>
+
+
+              <mat-option value="option1">09:00 PM</mat-option>
+              <mat-option value="option1">09:05 PM</mat-option>
+              <mat-option value="option1">09:10 PM</mat-option>
+              <mat-option value="option1">09:15 PM</mat-option>
+              <mat-option value="option1">09:20 PM</mat-option>
+              <mat-option value="option1">09:25 PM</mat-option>
+              <mat-option value="option1">09:30 PM</mat-option>
+              <mat-option value="option1">09:35 PM</mat-option>
+              <mat-option value="option1">09:40 PM</mat-option>
+              <mat-option value="option1">09:45 PM</mat-option>
+              <mat-option value="option1">09:50 PM</mat-option>
+              <mat-option value="option1">09:55 PM</mat-option>
+
+
+              <mat-option value="option1">10:00 PM</mat-option>
+              <mat-option value="option1">10:05 PM</mat-option>
+              <mat-option value="option1">10:10 PM</mat-option>
+              <mat-option value="option1">10:15 PM</mat-option>
+              <mat-option value="option1">10:20 PM</mat-option>
+              <mat-option value="option1">10:25 PM</mat-option>
+              <mat-option value="option1">10:30 PM</mat-option>
+              <mat-option value="option1">10:35 PM</mat-option>
+              <mat-option value="option1">10:40 PM</mat-option>
+              <mat-option value="option1">10:45 PM</mat-option>
+              <mat-option value="option1">10:50 PM</mat-option>
+              <mat-option value="option1">10:55 PM</mat-option>
+
+              <mat-option value="option1">11:00 PM</mat-option>
+              <mat-option value="option1">11:05 PM</mat-option>
+              <mat-option value="option1">11:10 PM</mat-option>
+              <mat-option value="option1">11:15 PM</mat-option>
+              <mat-option value="option1">11:20 PM</mat-option>
+              <mat-option value="option1">11:25 PM</mat-option>
+              <mat-option value="option1">11:30 PM</mat-option>
+              <mat-option value="option1">11:35 PM</mat-option>
+              <mat-option value="option1">11:40 PM</mat-option>
+              <mat-option value="option1">11:45 PM</mat-option>
+              <mat-option value="option1">11:50 PM</mat-option>
+              <mat-option value="option1">11:55 PM</mat-option>
+              </mat-select>
+              </div>
+</div>
+              </div>  
+          
+            </div>
+          </div>
+  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary">Guardar</button>
+
+      </div>
+    </ng-template>
+
+
+<!--
+<div class="m-login__signin">
+	<div class="m-login__title">
+		<h3 class="m-login__title">Sign Up</h3>
+		<div class="m-login__desc">Enter your details to create your account:</div>
+	</div>
+
+	<m-auth-notice></m-auth-notice>
+
+
+	<form class="m-login__form m-form" name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
+		<div class="form-group">
+			<mat-form-field>
+				<mat-label>Fullname</mat-label>
+				<input matInput type="text" name="fullname" placeholder="Fullname" autocomplete="off" [(ngModel)]="model.fullname" #fullname="ngModel" required>
+			</mat-form-field>
+		</div>
+		<div class="form-group">
+			<mat-form-field>
+				<mat-label>Email</mat-label>
+				<input matInput type="email" name="email" placeholder="Email address" autocomplete="off" [(ngModel)]="model.email" #email="ngModel" email="true" required>
+			</mat-form-field>
+		</div>
+		<div class="form-group">
+			<mat-form-field>
+				<mat-label>Password</mat-label>
+				<input matInput minlength="4" type="password" name="password" placeholder="Password" autocomplete="off" [(ngModel)]="model.password" #password="ngModel" required>
+			</mat-form-field>
+		</div>
+		<div class="form-group">
+			<mat-form-field>
+				<mat-label>Confirm Password</mat-label>
+				<input matInput minlength="4" type="password" name="rpassword" placeholder="Confirm password" autocomplete="off" [(ngModel)]="model.rpassword" #rpassword="ngModel" required>
+			</mat-form-field>
+		</div>
+		<div class="form-group">
+			<mat-checkbox name="agree" required="true" [(ngModel)]="model.agree" #agree="ngModel">I agree the
+				<a href="javascript:;">terms & conditions</a>
+			</mat-checkbox>
+		</div>
+	</form>
+
+	<div class="m-login__action m-login__action--fit">
+		<button mat-button (click)="loginPage($event)" [disabled]="loading" translate="AUTH.GENERAL.BACK_BUTTON">Back</button>
+		<m-spinner-button [options]="spinner" (click)="submit()">{{'AUTH.GENERAL.SIGNUP_BUTTON' | translate}}</m-spinner-button>
+	</div>
+
+</div>
+-->
+
+<div >
+	
+
+	<div class="row  m-subheader" style="background: rgb(250,249,247) !important;
+    padding: 20px !important;margin: 0px !important;
+    border-bottom: solid 1px lightgray;
+    text-align: center !important;
+    width: 100%;
+    display: block;">
+	
+<!--
+ 	<i [routerLink]="['/login']" style="font-size: 25px;
+    color: lightgray;    position: absolute;
+    left: 0px;
+    top: 40px;
+    padding-left: 10px;" class="la la-angle-left"></i> 
+ 	<div class="" style="display: inline-block;font-size: 30px;font-weight: 300;padding-left: 15px;">Editar Staff</div> -->
+
+<div style="display: inline-block;">
+   <img style='height: 65px;vertical-align: super;' src="assets/app/media/img/yb-icon.png">
+</div>
+			<div style="    width: 20%;
+    text-align: center;
+    display: inline-block;
+    float: none!important;">
+ 
+
+					<span style="    color: #8c8b88;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-bottom: 9px;
+    display: inline-block;">APERTURA DE CUENTA EN YOURBEAUTY</span>
+<!-- 
+
+					<div style="    background: #e1e1e1;
+    height: 4px;
+    width: 100%;"></div> -->
+
+      <ngb-progressbar  style='background-color: #e91e63 !important' [value]="avanceSteper">
+
+    </ngb-progressbar>
+
+    <div style="    color: #8c8b88;
+    font-size: 14px;
+    margin-top: 2px;">{{avanceSteper}}%</div>
+
+			</div>
+
+</div>
+
+<div class="row">
+	
+     <ngx-loading [show]="loadingScreen" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+</button> -->
+<mat-horizontal-stepper  color="warn" [linear]="false" #stepper style='width: 80%;
+    margin-left: 10%; margin-top: 40px'>
+
+
+
+
+  <mat-step [stepControl]="firstFormGroup" >
+
+
+  	<div style='max-width: 600px;
+    margin: auto;'>
+
+
+    <div style="text-align: center;  padding: 40px;padding-top: 50px !important">
+    	<span style="color: #383734;    font-size: 24px;
+    font-weight: 300;
+    line-height: 34px;
+    margin-bottom: 10px;">Empieza tu prueba gratuita ahora
+
+</span><br>
+<span style="color: #605f5d;font-size: 16px">
+Sin tarjeta de crédito o compromisos. Solo toma 2 minutos
+</span>
+
+    </div>
+
+
+
+    <form [formGroup]="firstFormGroup"    #fs2="ngForm">
+     
+
+
+     <mat-form-field  color="primary" style='font-size: 16px !important;'>
+        <input style='  padding: 10px 10px 0px 10px !important;' matInput placeholder="Nombre del negocio" formControlName="nombreNegocio" autocomplete="off" required>
+
+         <span *ngIf='ffg.nombreNegocio.errors' matSuffix style="font-size: 13px !important;color: lightcoral;">campo requerido</span> 
+
+
+         <mat-label><mat-icon style='  vertical-align: middle;  font-size: 25px !important;'>store</mat-icon>Cual es el nombre de tu negocio?</mat-label>
+      </mat-form-field>
+
+
+
+      <mat-form-field style='      font-size: 16px !important;
+    '>
+        <input style='  padding: 10px 10px 0px 10px !important;' matInput placeholder="Nombre y Apellidos" formControlName="nombreUsuario"  autocomplete="off" required>
+        <span *ngIf='ffg.nombreUsuario.errors' matSuffix style="font-size: 13px !important;color: lightcoral;">campo requerido</span> 
+
+         <mat-label><mat-icon style='  vertical-align: middle;  font-size: 25px !important;'>person</mat-icon>¿Cuál es tu nombre?</mat-label>
+      </mat-form-field>
+
+
+
+      <mat-form-field style='      width: 48%;
+    display: inline-block;    font-size: 16px !important;
+    '>
+        <input style='  padding: 10px 10px 0px 10px !important;' matInput placeholder="Nombre de factura" formControlName="nombreFactura"  autocomplete="off" >
+<!--         <span *ngIf='ffg.nombreFactura.errors' matSuffix style="font-size: 13px !important;color: lightcoral;">campo requerido</span>  -->
+
+         <mat-label><mat-icon style='  vertical-align: middle;  font-size: 25px !important;'>perm_identity</mat-icon>¿Cuál es el nombre de factura?</mat-label>
+      </mat-form-field>
+
+
+      <mat-form-field style='      width: 48%;
+    display: inline-block;margin-left: 3%;    font-size: 16px !important;
+    '>
+        <input style='  padding: 10px 10px 0px 10px !important;' matInput placeholder="Registro Único de Contribuyente " formControlName="ruc"  autocomplete="off">
+      <!--   <span *ngIf='ffg.nombreUsuario.errors' matSuffix style="font-size: 13px !important;color: lightcoral;">campo requerido</span>  -->
+
+         <mat-label><mat-icon style='  vertical-align: middle;  font-size: 25px !important;'>receipt</mat-icon>R.U.C</mat-label>
+      </mat-form-field>
+
+
+
+
+      <mat-form-field style='      font-size: 16px !important;
+    '>
+
+<!--     <span matSuffix style="color: lightgray;vertical-align: super;"
+     [hidden]='!loaderValidator' ><mat-spinner color='accent' diameter='25' style='color: lightgray !important; vertical-align: top;'></mat-spinner></span> -->
+
+     <span matSuffix style="color: lightgray;vertical-align: super;"
+     [hidden]=" firstFormGroup.controls['correoElectronico'].hasError('email') || firstFormGroup.controls['correoElectronico'].hasError('required')"  *ngIf='!emailTaken' ><mat-icon style='color: #fbb7b7 !important; vertical-align: top;'>cancel</mat-icon>
+     ya existe esta cuenta</span>
+    <span matSuffix style="color: lightgray;vertical-align: super;" *ngIf='emailTaken' 
+    [hidden]="firstFormGroup.controls['correoElectronico'].hasError('email') || firstFormGroup.controls['correoElectronico'].hasError('required')"  >
+      <mat-icon style='color: #6bbf6f !important;vertical-align: top;'>check_circle</mat-icon></span>
+
+        <input  (focusout)="quitarSpinner()" style='  padding: 10px 10px 0px 10px !important;' matInput placeholder="Correo Electronico" autocomplete="off" formControlName="correoElectronico" type='email' email="true" required> 
+
+        <span *ngIf='ffg.correoElectronico.errors' matSuffix style="font-size: 13px !important;color: lightcoral;">campo requerido</span> 
+
+
+         <mat-label><mat-icon style='  vertical-align: middle;  font-size: 25px !important;'>email</mat-icon>¿Cúal es tu correo electrónico?</mat-label>
+      </mat-form-field>
+
+ <!--    <mat-form-field style='      font-size: 16px !important;'>
+         
+
+
+     
+      
+        <span matSuffix style="color: darkgray;">.yourbeauty.com.pa</span> 
+               <mat-icon style='    vertical-align: middle;
+    font-size: 25px !important;
+    position: absolute;
+    width: 150px;
+    right: 0;
+    top: -40px;
+    margin-right: 0px;
+    text-align: right;' matSuffix  
+          placement="top" ngbTooltip="Un enlace corto para que pueda recordar como ingresar a su panel de negocios" ngbTooltipClass="m-tooltip">help_outline</mat-icon>
+
+
+
+        <input style='  padding: 10px 10px 0px 10px !important;' matInput placeholder="Enlace a su panel de negocios" formControlName="accesoweb" autocomplete="off" type='text'  required>
+
+         <mat-label ><mat-icon style='  vertical-align: middle;  font-size: 25px !important;'>public</mat-icon>Enlace a su panel de negocios</mat-label>
+      </mat-form-field> -->
+
+      <div style="    font-size: 16px;
+    padding: 27px 0px;">
+
+               <mat-icon style='    vertical-align: middle;
+    font-size: 25px !important;
+    float: right;
+    width: 150px;
+    right: 0;
+    top: -40px;
+    margin-right: 0px;
+    text-align: right;' matSuffix  
+          placement="top" ngbTooltip="Un enlace corto para que pueda recordar como ingresar a su panel de negocios" ngbTooltipClass="m-tooltip">help_outline</mat-icon>
+          
+        
+         <mat-label ><mat-icon style='  vertical-align: middle;  font-size: 25px !important;'>public</mat-icon>Enlace a su panel de negocios</mat-label>
+          <span style="    display: block;
+    border-bottom: solid 1px lightgray;
+    padding: 10px 10px 0px 10px !important;
+    color: #383734 !important;
+    font-weight: 400;">{{getVal22(firstFormGroup.controls['nombreNegocio'].value)}}.yourbeauty.com.pa</span>
+      </div>
+
+
+      <mat-form-field style='      font-size: 16px !important;
+    '>
+
+        <input autocomplete="off" style='  padding: 10px 10px 0px 10px !important;' matInput placeholder="Contraseña" formControlName="password" required>
+
+       <span *ngIf='ffg.password.errors' matSuffix style="font-size: 13px !important;color: lightcoral;">campo requerido</span> 
+
+
+         <mat-label><mat-icon style='  vertical-align: middle;  font-size: 25px !important;'>vpn_key</mat-icon>Indica la contraseña de tu cuenta</mat-label>
+      </mat-form-field>
+      <div style="text-align: center;
+    color: #555;
+    padding: 13px;">
+   <mat-slide-toggle color='primary' formControlName="terminos" [(ngModel)]='terminosycondiciones' required >Acepto los <a target="_blank" href='https://www.yourbeauty.com.pa/terminos-de-uso/'>terminos y condiciones</a> del servicio</mat-slide-toggle>
+ </div>
+
+      <div style="  margin-top: 40px;  text-align: center;">
+
+        <button 
+        [disabled]='!fs2.form.valid || !terminosycondiciones' style='    width: 80%;    height: 40px;' class='btn btn-success'  mat-raised-button color="primary"(click)="goForward(stepper)" >Crear cuenta YourBeauty</button>
+
+
+      </div>
+    </form>
+</div>
+  </mat-step>
+
+
+
+
+
+  <mat-step >
+  	
+
+  	<div style='max-width: 600px;
+    margin: auto;'>
+
+
+    <div style="text-align: center;  padding: 40px;padding-top: 50px !important">
+    	<span style="color: #383734;    font-size: 24px;
+    font-weight: 300;
+    line-height: 34px;
+    margin-bottom: 10px;">Bien Hecho!
+
+</span><br>
+
+<span style="color: black;
+    font-size: 16px;
+    display: block;
+    margin-bottom: 15px;">Los detalles de su cuenta han sido enviados a su email {{cred.email}}</span>
+
+<span style="color: #605f5d; font-size: 16px">
+Agrega unos detalles más para que empieces a agendar reservas.
+</span>
+
+    </div>
+
+<div class="containerStaff"> 
+	
+	<span>Agrega Staff a tu cuenta</span>
+	<hr style="    margin-bottom: 20px;">
+
+  <div style="    margin-bottom: 20px;" *ngFor="let s of empleadosAgregados; let i = index">
+    
+    <mat-card style='    padding: 0px !important;box-shadow: none !important;border-bottom: solid 1px #e1e1e1;' class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar style="    background-size: cover;background-image: url('assets/app/media/img/userB.png');"></div>
+    <mat-card-title style='    margin-bottom: 8px !important;'>{{s.nombre}}</mat-card-title>
+    <mat-card-subtitle>{{s.tipo == 1 ? 'Administrador' : 'Miembro del Staff'}}</mat-card-subtitle>
+  </mat-card-header>
+     <a  style='position: absolute;right: 0;top: 9px;' (click)='editStaff(s,i,content)' class="botonTxt" [hidden]='s.tipo == 1'>Editar</a>
+</mat-card>
+
+
+  </div>
+
+
+<!--     <div style="    margin-bottom: 20px;">
+    
+    <mat-card style='    padding: 0px !important;box-shadow: none !important;border-bottom: solid 1px #e1e1e1;' class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar style="background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');"></div>
+    <mat-card-title style='    margin-bottom: 8px !important;'>Shiba Inu</mat-card-title>
+    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+  </mat-card-header>
+     <a  style='position: absolute;right: 0;top: 9px;' class="botonTxt">Editar</a>
+</mat-card>
+
+
+  </div> -->
+
+ <a (click)="open3(content)" class="botonTxt" style="font-size: 16px !important"> + Agregar miembro del Staff</a>
+
+
+      <div style="  margin-top: 40px;  text-align: center;">
+
+        <button style='    width: 80%;    height: 40px;' class='btn '  mat-raised-button color="primary"  (click)="goForward2(stepper)">Continuar</button>
+
+
+      </div>
+
+</div>
+
+
+</div>
+  </mat-step>
+
+
+  <mat-step [stepControl]="infoFormGroup" >
+    <div style='max-width: 600px;
+    margin: auto;'>
+
+
+    <div style="text-align: center;  padding: 40px;padding-top: 50px !important">
+      <span style="color: #383734;    font-size: 24px;
+    font-weight: 300;
+    line-height: 34px;
+    margin-bottom: 10px;">Ayuda a tus clientes a encontrarte
+
+</span><br>
+<span style="color: #605f5d;font-size: 16px">
+Ingresa los detalles de contacto de tu negocio
+</span>
+
+    </div>
+
+
+
+    <form [formGroup]="infoFormGroup"  #f2="ngForm" >
+      <ng-template matStepLabel>Informacion del Negocio</ng-template>
+
+
+     <mat-form-field  color="primary" style='font-size: 16px !important;'>
+        <input autocomplete="off" style='  padding: 10px 10px 0px 10px !important;' matInput placeholder="Telefono del Negocio" formControlName="telefonoNegocio" type='number' required>
+
+
+          <span *ngIf='ifg.telefonoNegocio.errors && ifg.telefonoNegocio.value' matSuffix style="font-size: 13px !important;color: lightcoral;">Número incorrecto</span> 
+
+            <span *ngIf='ifg.telefonoNegocio.errors  && !ifg.telefonoNegocio.value' matSuffix style="font-size: 13px !important;color: lightcoral;">campo requerido</span> 
+
+
+         <mat-label><mat-icon style='  vertical-align: middle;  font-size: 25px !important;'>phone</mat-icon>¿Cuál es el teléfono de tu negocio?</mat-label>
+      </mat-form-field>
+
+      <mat-form-field style='      font-size: 16px !important;
+    '>
+        <input style='  padding: 10px 10px 0px 10px !important;' matInput placeholder="descripcion" formControlName="descripcion" autocomplete="off" required>
+
+       <span *ngIf='ifg.descripcion.errors' matSuffix style="font-size: 13px !important;color: lightcoral;">campo requerido</span> 
+
+         <mat-label><mat-icon style='  vertical-align: middle;  font-size: 25px !important;'>description</mat-icon>Describe tu negocio</mat-label>
+      </mat-form-field>
+
+      <mat-form-field style='      font-size: 16px !important;
+    '>
+        <input style='  padding: 10px 10px 0px 10px !important;' matInput placeholder="www.mysite.com" formControlName="webUsuario" autocomplete="off">
+         <mat-label><mat-icon style='  vertical-align: middle;  font-size: 25px !important;'>public</mat-icon>¿Cuál es tu sitio web? (opcional)</mat-label>
+      </mat-form-field>
+
+      <div (click)="openDialog4()" class='itemHover'  style="  
+    border-bottom: solid 1px #e1e1e1;
+    ">
+
+       <!--  <mat-icon style='    float: right;
+    font-size: 30px !important;'>navigate_next</mat-icon> -->
+
+        <mat-icon style='  vertical-align: middle;  font-size: 25px !important;'>location_on</mat-icon>
+        <span *ngIf='!direccionText'>Ingresa la ubicación de tu negocio</span>
+        <span *ngIf='direccionText'>{{direccionText}}</span>
+
+        <span *ngIf='ifg.latitud.errors'  style="    font-size: 13px !important;
+    color: lightcoral;
+    float: right;
+    font-weight: 400;">ubicación requerida</span> 
+
+      </div>
+
+      <div class='itemHover'  (click)="openDialog3()" style="padding-top: 23px;">
+<!--          <mat-icon style='    float: right;
+    font-size: 30px !important;'>navigate_next</mat-icon> -->
+        <mat-icon style='  vertical-align: middle;  font-size: 25px !important;'>access_time</mat-icon>
+        <span>Selecciona tu Horario</span>
+
+           <span *ngIf='getLen()'  style="    font-size: 13px !important;
+    color: lightcoral;
+    float: right;
+    font-weight: 400;">horario requerido</span> 
+
+
+      </div>
+
+
+      <div style="  margin-top: 40px;  text-align: center;">
+
+        <button style='    width: 80%;    height: 40px;' class='btn btn-success'  mat-raised-button color="primary"  [disabled]='!f2.form.valid || getLen()' (click)="goForward3(stepper)">Continuar</button>
+
+
+      </div>
+    </form>
+</div>
+  </mat-step>
+
+
+
+  <mat-step  >
+  
+    <div style='max-width: 600px;
+    margin: auto;'>
+
+
+    <div style="text-align: center;  padding: 40px;padding-top: 50px !important">
+      <span style="color: #383734;    font-size: 24px;
+    font-weight: 300;
+    line-height: 34px;
+    margin-bottom: 10px;">Agrega una foto de tu establecimiento
+
+</span><br>
+<span style="color: #605f5d;font-size: 16px">
+Cuanto más atractiva, más atraes! Elige bien!
+</span>
+
+    </div>
+
+
+
+    <div style="font-size: 15px; color:#777">
+      <mat-icon style='vertical-align: text-bottom;font-size: 25px !important;'>photo</mat-icon>
+      <p style="margin-bottom: 4px;
+    display: inline-block;">Esta imagen aparece cuando ingresan al perfil de tu negocio</p>
+      <p>Es opcional, pero muy recomendado</p>
+      <p style="font-weight: 600">Dimensiones recomendadas: 375×230</p>
+      
+
+      <div style="text-align: center;">
+      <img style="border-style: dashed;height: 230px; width: 375px"  [src]="urlImg" onError="this.src='assets/app/media/img/banner.png'">
+      <input style='margin-top: 20px;'  type="file" (change)="onFileChanged($event)" autocomplete="off">
+      </div>
+    </div>
+
+
+      <div style="  margin-top: 40px;  text-align: center;">
+
+        <button style='    width: 80%;    height: 40px;' class='btn btn-success'  mat-raised-button color="primary"  (click)="goForward4(stepper)">Continuar</button>
+
+
+      </div>
+
+
+
+</div>
+  </mat-step>
+
+
+  <mat-step  >
+  
+    <div style='max-width: 600px;
+    margin: auto;'>
+
+
+    <div style="text-align: center;  padding: 40px;padding-top: 50px !important">
+      <span style="color: #383734;    font-size: 24px;
+    font-weight: 300;
+    line-height: 34px;
+    margin-bottom: 10px;">Escoge tu foto de perfil
+
+</span><br>
+<span style="color: #605f5d;font-size: 16px">
+Cuanto más atractiva, más atraes! Elige bien!
+
+</span>
+
+    </div>
+
+
+
+    <div style="font-size: 15px; color:#777">
+      <mat-icon style='vertical-align: text-bottom;font-size: 25px !important;'>photo</mat-icon>
+      <p style="margin-bottom: 4px;
+    display: inline-block;">El logo de de tu negocio aparece en listado de centros, es tu carta de presentación</p>
+      <p>Es opcional, pero muy recomendado</p>
+      <p style="font-weight: 600">Dimensiones recomendadas: 80×80</p>
+      
+
+      <div style="text-align: center;    margin-top: 60px;">
+      <img style="border-style: dashed;height: 80px; width: 80px"  [src]="urlImg2" onError="this.src='assets/app/media/img/fotoComercio.png'"><br>
+      <input style='margin-top: 20px;'  type="file" (change)="onFileChanged2($event)" autocomplete="off">
+      </div>
+    </div>
+
+
+      <div style="  margin-top: 40px;  text-align: center;">
+
+        <button style='    width: 80%;    height: 40px;' class='btn btn-success'  mat-raised-button color="primary"  (click)="goForward42(stepper)">Continuar</button>
+
+
+      </div>
+
+
+
+</div>
+  </mat-step>
+
+
+
+  <mat-step >
+
+
+    <div style='max-width: 600px;
+    margin: auto;'>
+
+
+    <div style="text-align: center;  padding: 40px;padding-top: 50px !important">
+      <span style="color: #383734;    font-size: 24px;
+    font-weight: 300;
+    line-height: 34px;
+    margin-bottom: 10px;">Agrega tus servicios y precios.
+
+</span><br>
+<span style="color: #605f5d;font-size: 16px">
+Necesitas al menos un servicio activo y un staff asignado para que los clientes puedan realizar una reserva en tu establecimiento.
+</span>
+
+    </div>
+
+
+<!-- 
+    <div style="font-size: 16px">
+
+          <div style="text-align: center;color: darkgray;margin-bottom: 12px;"> Servicio ejemplo</div>
+          <div class="itemServicios" style="opacity: 0.5;">
+          <div class="boxItem">
+            <i class="la  la-angle-right iconR"></i>
+            <div class="txtItemServ">
+              <h3 style="     margin-bottom: 0px;font-size: 16px !important;   color: #5f5d5b;">Corte y Estilo</h3>
+              <p style="    margin-bottom: 0px;color: #989794;font-size: 12px;">
+                Peluqueria / Cortes de Mujer
+              </p>
+            </div>
+            <div class="txtItemServP">30min</div>
+            <div class="txtItemServP">$45.00</div>
+          </div>
+        </div>
+
+    </div> -->
+    <div style="text-align: center;
+    padding: 18px;">
+       <a (click)='openDialogService()'  class="botonTxt" style="font-size: 16px !important"> + Agregar Servicio</a>
+    </div>
+
+
+          <div  class="itemServicios"  *ngFor="let s of serviciosAgregados; let i = index" >
+
+          <div class="boxItem">
+            <i (click)='eliminarS(i)' style='height: 30px;
+    width: 19px;' class="la  la-close iconR"></i>
+            <div class="txtItemServ">
+              <h3 style="     margin-bottom: 0px;font-size: 16px !important;   color: #5f5d5b;">
+              {{s.nombreServicio}}
+              </h3>
+              <p style="    margin-bottom: 0px;color: #989794;font-size: 12px;">
+                {{s.categoriaName}} / {{s.subcategoriaName}} 
+              </p>
+            </div>
+            <div class="txtItemServP">
+              <span [hidden]='!s.horaServicio' >{{s.horaServicio/60}}h</span>
+              <span style="margin-left: 10px;" [hidden]='!s.minutoServicio'>{{s.minutoServicio}}min</span></div>
+            <div class="txtItemServP">${{s.precioServicio}}</div>
+          </div>
+        </div>
+
+
+      <div style="  margin-top: 40px;  text-align: center;">
+
+        <button style='    width: 80%;    height: 40px;' class='btn '  mat-raised-button color="primary" (click)="goForward5(stepper)" [disabled]='!serviciosAgregados || serviciosAgregados.length<1'>Continuar</button>
+
+
+      </div>
+
+
+
+</div>
+  </mat-step>
+
+
+
+
+
+
+  <mat-step  >
+        
+
+    <div style='max-width: 600px;
+    margin: auto;'>
+
+
+    <div style="text-align: center;  padding: 40px;padding-top: 50px !important">
+      <span style="color: #383734;    font-size: 24px;
+    font-weight: 300;
+    line-height: 34px;
+    margin-bottom: 10px;">Configuracion de Reservas
+
+</span><br>
+<span style="color: #605f5d;font-size: 16px">
+Ajusta los valores para la configuracion de tus reservas
+</span>
+
+    </div>
+
+
+
+ 
+    <div style="    padding: 0px 0px 20px 0px;">
+<!--     <mat-slide-toggle [(ngModel)]="isHuman2" (change)="onChange2($event)" name="human2">I am not a robot</mat-slide-toggle> -->
+
+    <mat-slide-toggle color='primary' name="human2"  [(ngModel)]='configuracion.confirmacionAutomatica'>
+      <span style="font-size: 16px !important;">
+        Las reservas serán confirmadas automaticamente
+      </span>
+      </mat-slide-toggle>
+
+
+    </div>
+
+    <hr>
+
+    <div style="color: #383734;font-size: 19px;font-weight: 400; line-height: 34px;margin-bottom: 30px;">Configuraciones de reserva</div>
+
+      <p style="display: inline-block;font-size: 16px;">Los clientes podrán realizar reservas</p>
+      <mat-select placeholder="" 
+      class='inputBy selectD' style='border: solid 1px #e1e1e1;padding: 5px;' 
+      [(ngModel)]='configuracion.parametro1'>
+                <mat-option value="1">Hasta 1 hora antes de la hora de inicio</mat-option>
+                 <mat-option value="2">Hasta 2 horas antes de la hora de inicio</mat-option>
+           <mat-option value="3">Hasta 3 horas antes de la hora de inicio</mat-option>
+            <mat-option value="6">Hasta 6 horas antes de la hora de inicio</mat-option>
+             <mat-option value="12">Hasta 12 horas antes de la hora de inicio</mat-option>
+
+      </mat-select>
+
+
+
+      <p style="display: inline-block;font-size: 16px;">Los clientes podrán realizar reservas</p>
+      <mat-select placeholder="" class='inputBy selectD' 
+       [(ngModel)]='configuracion.parametro2'>
+
+                <mat-option value="15">Hasta 15 dias en el futuro</mat-option>
+                 <mat-option value="30">Hasta 30 dias en el futuro</mat-option>
+                 <mat-option value="60">Hasta 60 dias en el futuro</mat-option>
+
+      </mat-select>
+
+
+
+            <p style="display: inline-block;font-size: 16px;">Permitir Reprogramaciones</p>
+      <mat-select placeholder="" class='inputBy selectD' 
+       [(ngModel)]='configuracion.parametro3'>
+                <mat-option value="12">Hasta 12 horas antes de la reserva</mat-option>
+                  <mat-option value="24">Hasta 24 horas antes de la reserva</mat-option>
+          
+
+      </mat-select>
+
+
+
+
+      <div style="  margin-top: 40px;  text-align: center;">
+
+        <button [disabled]='!configuracion.parametro3 || 
+        !configuracion.parametro2 || !configuracion.parametro1' style='    width: 80%;    height: 40px;' class='btn'  mat-raised-button color="primary"  (click)="goForward6(stepper)">Continuar</button>
+
+
+      </div>
+
+</div>
+  </mat-step>
+
+
+
+
+
+  <mat-step  >
+        
+
+    <div style='max-width: 640px;
+    margin: auto;'>
+
+
+    <div style="text-align: center;  padding: 40px;padding-top: 50px !important">
+      <span style="color: #383734;    font-size: 24px;
+    font-weight: 300;
+    line-height: 34px;
+    margin-bottom: 10px;">Planes Yourbeauty
+
+</span><br>
+<span style="color: #605f5d;font-size: 16px">
+Una vez termine el período de prueba escoge el plan que se adapte mejor a tu negocio.
+
+</span>
+
+    </div>
+
+
+    <section class="pricing-table">
+        <div class="container" style="    padding-bottom: 30px;
+    padding-top: 15px;">
+<!--             <div class="block-heading">
+              <h2>Pricing Table</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
+            </div> -->
+            <div class="row justify-content-md-center">
+                <div class="col-md-5 col-lg-4">
+                    <div class="item">
+                        <div class="heading">
+                            <h3 style="    color: #666;">Mensual</h3>
+                        </div>
+<!--                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <div class="features">
+                            <h4><span class="feature">Full Support</span> : <span class="value">No</span></h4>
+                            <h4><span class="feature">Duration</span> : <span class="value">30 Days</span></h4>
+                            <h4><span class="feature">Storage</span> : <span class="value">10GB</span></h4>
+                        </div> -->
+                        <div class="price">
+                            <h4 style="font-size: 25px !important;">$29.90</h4>
+                        </div>
+                        <button class="btn btn-block btn-outline-success" (click)='goForward7(stepper,1)'>SELECCIONAR</button>
+                    </div>
+                </div>
+                <div class="col-md-5 col-lg-4">
+                    <div class="item">
+      <!--                   <div class="ribbon">Best Value</div> -->
+                        <div class="heading">
+                            <h3 style="    color: #666;">Semestral</h3>
+                        </div>
+<!--                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <div class="features">
+                            <h4><span class="feature">Full Support</span> : <span class="value">Yes</span></h4>
+                            <h4><span class="feature">Duration</span> : <span class="value">60 Days</span></h4>
+                            <h4><span class="feature">Storage</span> : <span class="value">50GB</span></h4>
+                        </div> -->
+                        <div class="price">
+                            <h4 style="font-size: 25px !important;">$149.50</h4>
+                        </div>
+                        <button class="btn btn-block btn-success" (click)='goForward7(stepper,2)'>SELECCIONAR</button>
+                    </div>
+                </div>
+                <div class="col-md-5 col-lg-4">
+                    <div class="item">
+                        <div class="heading">
+                            <h3 style="    color: #666;">Anual</h3>
+                        </div>
+<!--                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <div class="features">
+                            <h4><span class="feature">Full Support</span> : <span class="value">Yes</span></h4>
+                            <h4><span class="feature">Duration</span> : <span class="value">120 Days</span></h4>
+                            <h4><span class="feature">Storage</span> : <span class="value">150GB</span></h4>
+                        </div> -->
+                        <div class="price">
+                            <h4 style="font-size: 25px !important;">$269.10</h4>
+                        </div>
+                        <button class="btn btn-block btn-outline-success" 
+                        (click)='goForward7(stepper,3)'>SELECCIONAR</button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center;
+    font-size: 15px;">Lo contáctaremos 5 dias antes que se acabe su periodo de prueba con las instrucciones para renovar su servicio</div>
+        </div>
+    </section>
+
+
+</div>
+  </mat-step>
+
+
+
+
+</mat-horizontal-stepper>
+
+
+</div>
+
+</div>
+

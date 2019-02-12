@@ -1,0 +1,152 @@
+<div class="row  m-subheader" style="background: rgb(250,249,247) !important;
+    padding: 20px !important;
+text-align: left !important;
+border-bottom: solid 1px lightgray;    display: block;">
+	
+
+	<i (click)='goBack()' style="font-size: 25px;
+    color: lightgray;
+    padding-left: 10px;" class="la la-angle-left"></i>
+	<div class="" style="display: inline-block;font-size: 26px;font-weight: 300;padding-left: 15px;">Editar Servicio</div>
+
+
+
+	<button  class="btn btn-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" (click)='editarServicio()'   [disabled]='!firstFormGroup.valid || !servicio.idCategoria || !servicio.idSubcategoria '  >Guardar</button>
+
+	<button  class="btn btn-outline-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" (click)='goBack()' >Cancelar</button>
+
+	<button  class="btn btn-outline-danger" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" (click)='eliminarServicio()' >Eliminar</button>
+
+
+</div>
+<div class="row">
+ <ngx-loading [show]="loadingScreen" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+
+	<div class="col-xl-6" style="    border-right: solid 1px lightgray;" >
+
+		<div style="padding: 40px 60px; ">
+
+			<form [formGroup]="firstFormGroup"  #f2="ngForm" >
+
+			<div class="conteinInput">
+				<label class='labelBy'>Nombre del Servicio</label>
+				<input formControlName="nombreServicio" required [(ngModel)]="servicio.nombre" class='inputBy w100' placeholder="Cual es el nombre del servicio"  autocomplete="off"  type="text" name="nombre">
+			</div>
+
+
+			<div class="conteinInput" style="margin-top: 20px">
+				<label class='labelBy'>Categoria y Subcategoria</label>
+				<div style="display: flex">
+				
+				<mat-select formControlName="idCategoria" required (selectionChange)="getSubs($event)"  [(ngModel)]="servicio.idCategoria" class='inputBy w50'>
+
+				 <mat-option  *ngFor="let c of categorias" [value]="c.idCategoria" >
+              {{c.nombre}}
+              </mat-option>
+
+				</mat-select>
+
+				<mat-select formControlName="idSubcategoria"  required [(ngModel)]="servicio.idSubcategoria" class='inputBy w50'>
+
+				<mat-option  *ngFor="let sc of subcategorias" 
+				 [value]="sc.idSubcategoria" >
+              {{sc.nombre}}
+              </mat-option>
+
+
+				</mat-select>
+			    </div>
+
+			</div>
+
+
+			<hr>
+
+			<div class="conteinInput" style="margin-top: 20px">
+				<label class='labelBy'>Duracion</label>
+				<div style="display: flex">
+				
+				<mat-select formControlName="duracionH"  required [(ngModel)]="servicio.duracionH" class='inputBy w50'>
+              <mat-option [value]="0">0 horas</mat-option>
+              <mat-option [value]="60">1 hora</mat-option>
+              <mat-option [value]="120">2 horas</mat-option>
+              <mat-option [value]="180">3 horas</mat-option>
+              <mat-option [value]="240">4 horas</mat-option>
+              <mat-option [value]="300">5 horas</mat-option>
+				</mat-select>
+
+				<mat-select formControlName="duracionM"  required [(ngModel)]="servicio.duracionM" class='inputBy w50'>
+              <mat-option [value]="0">0 minutos</mat-option>
+              <mat-option [value]="5">5 minutos</mat-option>
+              <mat-option [value]="10">10 minutos</mat-option>
+              <mat-option [value]="15">15 minutos</mat-option>
+              <mat-option [value]="20">20 minutos</mat-option>
+              <mat-option [value]="25">25 minutos</mat-option>
+              <mat-option [value]="30">30 minutos</mat-option>
+              <mat-option [value]="35">35 minutos</mat-option>
+              <mat-option [value]="40">40 minutos</mat-option>
+              <mat-option [value]="45">45 minutos</mat-option>
+              <mat-option [value]="50">50 minutos</mat-option>
+              <mat-option [value]="55">55 minutos</mat-option>
+				</mat-select>
+			    </div>
+
+			</div>
+
+			<div class="conteinInput" style="margin-top: 20px">
+				<label class='labelBy'>Precio</label>
+				<div style="display: flex">
+				
+	<!-- 			<mat-select class='inputBy w50'>
+				<mat-option value="option1" selected>Fijo</mat-option>
+				</mat-select>
+ -->
+				$<input formControlName="precio" required [(ngModel)]="servicio.precio" class='inputBy w50' placeholder="precio del servicio"  autocomplete="off"  type="number" name="precio">
+			    </div>
+
+			</div>
+
+		</form>
+		</div>
+	
+	</div>
+	<div class="col-xl-6" >
+		<div style="padding: 40px 60px; ">
+			<div style="color:darkgray;font-size: 16px;font-weight: 500 !important;margin-bottom: 20px;">
+			Empleados que dan este servicio</div>
+					<div style="border: solid 1px lightgray;padding: 20px;">
+		<!-- 				<p><mat-checkbox>
+						<span class="txtF">Seleccionar todos</span>
+						</mat-checkbox></p> 
+						<hr>-->
+						<p *ngFor="let e of empleados; let i = index" >
+
+						<mat-checkbox  color='primary' [(ngModel)]="e.checke" [checked]="e.idServicioEmpleado"  name="{{i}}-name">
+						<img  class='imgCheckBox' src="https://centro.yourbeauty.com.pa:8443/{{e.idFoto}}" 
+						 onError="this.src='assets/app/media/img/userB.png'" >
+						<span class="txtF">{{e.nombre}}</span>
+						</mat-checkbox></p>
+						<!-- <p><mat-checkbox>
+						<img class='imgCheckBox' src="https://booksy.com/media/us/2015/11/23/21f309ce4859db0374e7fdb085bc776d_50x50.png">
+						<span class="txtF">Juan de Arco</span>
+						</mat-checkbox></p>
+						<p><mat-checkbox>
+						<img class='imgCheckBox' src="https://booksy.com/media/us/2015/11/23/21f309ce4859db0374e7fdb085bc776d_50x50.png">
+						<span class="txtF">Juan de Arco</span>
+						</mat-checkbox></p> -->
+					</div>
+
+		</div>
+	</div>
+
+</div>
+
+
+
+

@@ -1,0 +1,379 @@
+<div class="row  m-subheader" style="background: rgb(250,249,247) !important;
+    padding: 20px !important;
+text-align: left !important;
+border-bottom: solid 1px #ebedf2;    display: block;">
+		<i (click)='goBack()' style="font-size: 25px;
+    color: lightgray;
+    padding-left: 10px;" class="la la-angle-left"></i>
+	<div class="" style="display: inline-block;font-size: 26px;font-weight: 300;padding-left: 30px;">Reserva
+	<!-- 		<div class="tagStaff" style="font-size: 17px !important;
+    padding: 9px !important;">CONFIRMADA</div> -->
+
+	</div>
+    <div style="margin-left: 66px;">ID Reserva: #{{selected}}
+
+    </div>
+<!-- 	<button  class="btn btn-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" 
+		[routerLink]="['/addstaff']"  mat-raised-button color="primary" matTooltip="Crear nuevo servicio">Agregar miembro del Staff</button>
+ -->
+
+
+</div>
+
+<div class="row">
+
+	 <ngx-loading [show]="loadingScreen" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+
+	 
+	<div class="col-xl-4" style="padding-right: 0px;    border-right: solid 1px #ebedf2;" >
+
+
+
+<div style='padding-top: 0px '>
+
+  <div style='height: 76px;padding: 10px;    border-bottom: solid 1px #ebedf2;'>
+    <img  style="display: inline-block;vertical-align: bottom;margin-right: 10px;    height: 50px;
+    width: 50px;border-radius: 50px" 
+    src="https://centro.yourbeauty.com.pa:8443/{{clienteInfo?.idFoto}}" 
+    onError="this.src='assets/app/media/img/userB.png'"
+    >
+    <div style="display: inline-block;">
+    <span *ngIf='clienteInfo?.idCliente!==0' style="    font-weight: 400;font-size: 16px;line-height: 20px;display: inline-block;">{{clienteInfo?.nombreCliente}}</span>
+
+    <span *ngIf='clienteInfo?.idCliente==0'>Reservas Manuales</span>
+
+    <span style="display: block;">
+     {{clienteInfo?.email}}
+    </span>
+
+        <span style="display: block;">
+     {{clienteInfo?.telefono}}
+    </span>
+
+
+	</div>
+  </div>
+
+
+  <div style="display: flex;text-align: center;padding: 15px;border-bottom: solid 1px #ebedf2;">
+
+  	<div style="display: inline-block;margin: auto;">
+  		<span style="display: block">{{clienteInfo?.programadas}}</span>
+  		<span style="display: block">Programadas</span>
+  	</div>
+  	<div style="display: inline-block;margin: auto;">
+  		<span style="display: block">{{clienteInfo?.completadas}}</span>
+  		<span style="display: block">Completadas</span>
+  	</div>
+  	<div style="display: inline-block;margin: auto;">
+  		<span style="display: block">{{clienteInfo?.canceladas}}</span>
+  		<span style="display: block">Canceladas</span>
+  	</div>
+
+  </div>
+
+
+<div style="color: #00beb7; margin-top: 12px;  font-size: 14px; padding-left: 22px;font-weight: 400;">Reservas</div>
+<hr>
+<mat-nav-list style='padding-top: 0px '>
+
+  <mat-list-item  *ngFor="let c of citasCliente; let i = index"  style='height: 100px !important;' 
+   [ngClass]="{'selectedItem': selected == c.idCita}" (click)="itemSelectedChange2(c)">
+
+  	   <div>
+  	   	<div class="priceS">${{c.precioEsperado}}</div>
+        <div class="popOverDate"  [ngClass]="{'citaE3':c.estado == 3,'citaE4':c.estado == 4, 'citaE2': c.estado == 5, 'citaE1':c.estado == 2, 'citaE0':c.estado == 1}" >
+        	<span>{{ c.fechaCita | date:'MMM' }}</span>
+        	<span>{{ c.fechaCita | date:'dd' }}</span>
+        	<span>{{c.inicioCita}}</span>
+        </div>
+
+
+         
+
+
+        <div style="     padding-left: 18px;   display: inline-block;"> 
+          <div class="tagStaff " [ngClass]="{'citaE3sb3':c.estado == 3,'citaE4sb3':c.estado == 4,
+          'citaE4sb3':c.estado == 7, 'citaE2sb3': c.estado == 5, 'citaE1sb3':c.estado == 2, 'citaE0sb3':c.estado == 1}">
+          {{c.estado == 1 ? 'POR CONFIRMAR' : 
+            c.estado == 2 ? 'CONFIRMADA' : 
+            c.estado == 5 ? 'POR CONFIRMAR CLIENTE' : 
+            c.estado == 3 ? 'COMPLETADA' :
+        	c.estado == 4 ? 'DECLINADA' :
+        	c.estado == 7 ? 'CANCELADA' : 'INVALIDA'}}
+
+      	 </div>
+
+
+          <div style="font-size: 12px;    white-space: nowrap;
+    text-overflow: ellipsis;">
+          	<span>{{c.nombreCliente}}</span><span *ngIf='c.clienteReferencia'>-{{c.clienteReferencia}}</span>
+  <!--         	
+
+          	<mat-icon style='color: #888;vertical-align: middle;margin: 0px 3px;'>chevron_right</mat-icon>
+          	<span>Juan perez</span> -->
+          </div>   
+          <div style="font-size: 12px;">
+          	{{c.cantServicios}} Servicio<span [hidden]='c.cantServicios==1'>s</span>
+          </div> 
+        </div>
+      </div>
+
+  </mat-list-item>
+
+
+
+
+</mat-nav-list>
+
+  <!-- 
+
+    <mat-list-item [ngClass]="{'selectedItem': selected == 2}" (click)="itemSelectedChange(2)">
+    <img matListAvatar src="https://booksy.com/media/us/2015/11/23/21f309ce4859db0374e7fdb085bc776d_50x50.png" >
+    <h3 matLine> Maria Segura  </h3>
+    <p matLine>
+        <span class="tagStaff">MIEMBRO ADMINISTRADOR</span>
+    </p>
+  </mat-list-item>
+
+      <mat-list-item [ngClass]="{'selectedItem': selected == 3}" (click)="itemSelectedChange(3)">
+    <img matListAvatar src="https://booksy.com/media/us/2015/11/23/21f309ce4859db0374e7fdb085bc776d_50x50.png" >
+    <h3 matLine> Luisa Corrales </h3>
+    <p matLine>
+      <span class="tagStaff">MIEMBRO ADMINISTRADOR</span>
+    </p>
+  </mat-list-item> -->
+
+
+
+</div>
+
+
+
+
+			
+			</div>
+
+
+		
+
+	<div class="col-xl-8" style="padding-left: 0px !important">
+
+
+
+
+
+
+		<m-portlet>
+	<!-- use ng-container[mPortletHeadTitle] for the title -->
+	<ng-container mPortletHeadTitle>
+		<div class="m-portlet__head-title">
+			<h3 class="m-portlet__head-text">
+				Servicios
+			</h3>
+
+			
+
+		
+		</div>
+
+	</ng-container>
+
+	<!-- use ng-container[mPortletBody] for the body content -->
+	<ng-container mPortletBody>
+
+	<!-- 	 <button  class="btn btn-sm btn-outline-success" style="" color="primary" style="margin-bottom: 20px;float: right;" (click)='completarCita()'   
+			*ngIf='citaSeleccionada?.estado==2'>Completar Reserva</button>
+
+				 <button  class="btn btn-sm btn-outline-success" style="" color="primary" style="margin-bottom: 20px;float: right;" (click)='completarCita()'   
+			*ngIf='citaSeleccionada?.estado==2'>Solicitar Reprogramacion</button>
+ -->
+ <div *ngIf='citaSeleccionada?.estado == 5' >
+
+ 								<span  
+								style="      
+								
+								background: #ffb34c;
+								color: white;
+								padding: 1px 16px;
+								font-size: 13px;
+								border-radius: 4px;
+								font-weight: 600;">REPROGRAMACION SOLICITADA</span>
+
+								<p style="    margin-top: 15px;">
+									<b>Motivo Reprogramacion:</b> <br> {{citaSeleccionada?.comentarioCita}}</p>
+
+ </div>
+
+          <button mat-dialog-close style="  margin-bottom: 20px;  float: right;" class="btn btn-sm btn-outline-success"  color="primary" [hidden]='citaSeleccionada?.cantEmpleados>1 || citaSeleccionada?.estado == 5 || citaSeleccionada?.estado == 4 || citaSeleccionada?.estado == 7 || 
+          citaSeleccionada?.estado == 3 || citaSeleccionada?.estado == 2 ||  citaSeleccionada?.clienteReferencia'
+           [routerLink]="['/reprogramacion']" [queryParams]="{id: citaSeleccionada?.idCita, 
+           detalle:true}" skipLocationChange >
+         Solicitar Reprogramacion
+           </button>
+
+
+
+	<!--	<perfect-scrollbar class="m-scrollable m-scroller" style="height: 40vh;">
+			Begin::Timeline 2 -->
+			<div class="m-timeline-2">
+				<div class="m-timeline-2__items  m--padding-top-15 m--padding-bottom-30">
+
+
+
+
+					<div  *ngFor="let s of serviciosCita; let i = index" class="m-timeline-2__item"  style="width: 100%">
+						<span class="m-timeline-2__item-time" >
+
+
+							<div  class="popOverDate"  [ngClass]="{'citaE3':s.estadoServicio == 3, 'citaE2': s.estadoServicio == 2, 'citaE4':s.estadoServicio == 4,'citaE1':s.estadoServicio == 1, 'citaE0':s.estadoServicio == 0}" style='background: white !important;'>
+							<span *ngIf='i == 0'>{{ s.fechaServicio | date:'MMM' }}</span>
+        					<span  *ngIf='i == 0'>{{ s.fechaServicio | date:'dd' }}</span>
+								<span>{{s.inicioServicio}}</span>
+							</div>
+
+
+						</span>
+	<!-- 					<div class="m-timeline-2__item-cricle">
+							<i class="fa fa-genderless m--font-danger"></i>
+						</div> -->
+						<div class="m-timeline-2__item-text  m--padding-top-5" style="    width: 100%;padding-left: 90px !important;">
+
+							<div style="background: #faf9f7; border: 1px solid #e1e1e1; border-radius: 4px;padding: 20px 20px 20px 30px; position: relative;">
+								
+								<div style="    font-size: 16px;margin-bottom: 10px;">
+									<span style="color:#383734;font-weight: 400">{{s.nombreServicio}}</span>
+
+																	<span *ngIf='s.estadoServicio == 7'  
+								style="            margin-left: 9px;
+								
+								background: lightcoral;
+								color: white;
+								padding: 1px 16px;
+								font-size: 13px;
+								border-radius: 4px;
+								font-weight: 600;">CANCELADO</span>
+
+																<span *ngIf='s.estadoServicio == 4'  
+								style="            margin-left: 9px;
+								
+								background: lightcoral;
+								color: white;
+								padding: 1px 16px;
+								font-size: 13px;
+								border-radius: 4px;
+								font-weight: 600;">DECLINADO</span>
+
+
+
+									
+
+									<span style="color:#383734;float: right;font-weight: 600"
+									[ngStyle]="{'text-decoration': citaSeleccionada.idPaquete ? 'line-through' : 'inherit' }">${{s.precioCobrado}}</span>
+
+									<span style="color: darkgray;
+									float: right;
+									font-weight: 600;
+									    margin-right: 15px;
+									text-decoration: line-through;"
+									 *ngIf='s.precioMomentoCompra && s.precioMomentoCompra !== s.precioCobrado ' >${{s.precioMomentoCompra}}</span>
+
+									 <span *ngIf='citaSeleccionada.idPaquete'  class="ofertaPaq">PAQUETE</span>
+									  <span *ngIf='!citaSeleccionada.idCuponCliente && !citaSeleccionada.idPaquete && 
+									  s.precioMomentoCompra && s.precioMomentoCompra !== s.precioCobrado ' class="ofertaPaq">OFERTA</span>
+
+								</div>
+
+								<div style="    font-size: 16px;">
+									{{s.inicioServicio}} - {{s.finServicio}}
+									<span style="float: right;">
+										{{getHoras(s.duracion)}}h {{s.duracion % 60}}min
+									</span>
+								</div>
+
+								<div style="    margin-top: 23px;">
+								<img style='    display: inline-block; margin: auto; height: 35px;' matListAvatar src="assets/app/media/img/userB.png">
+								<span style="  color:#383734; margin-left: 5px;font-size: 16px;font-weight: 400; display: inline-block;">{{s.nombreEmpleado}}</span>
+								</div> 
+
+								<div style="margin-top: 13px">
+								<button    class="btn btn-sm btn-outline-success" style="" color="primary" (click)='cambiarEstado(s,1)'  
+								*ngIf='s.estadoServicio==0 || s.estadoServicio==2' >Confirmar</button>
+
+								<button  class="btn btn-sm btn-outline-success" style="" color="primary" style="margin-left: 10px;" (click)='cambiarEstado(s,3)'   
+								 *ngIf='s.estadoServicio==1'>Completar</button>
+
+
+								 <button  class="btn btn-sm btn-outline-danger" style="" color="primary" style="margin-left: 10px;" (click)='cambiarEstado(s,7)'   
+								 *ngIf='s.estadoServicio==1 || s.estadoServicio==4 '>Cancelar</button>
+
+								 <button  class="btn btn-sm btn-outline-danger" style="" color="primary" style="margin-left: 10px;" (click)='cambiarEstado(s,4)'   
+								 *ngIf='s.estadoServicio==0'>Declinar</button>
+
+
+
+
+
+
+
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+		
+
+<div style="    float: right;
+    margin-top: 20px; margin-bottom: 20px;">
+
+    			<span *ngIf='citaSeleccionada?.idCuponCliente'  class="ofertaPaq" style="float:left !important">CUPÓN</span>
+
+
+	<span style="font-size: 16px;">Total</span>
+	<span style="    font-size: 30px;
+    color: #383734;
+    margin-left: 10px;">${{citaSeleccionada?.precioEsperado}}</span>
+</div>
+
+
+				<!-- 	<div class="m-timeline-2__item m--margin-top-30">
+						<span class="m-timeline-2__item-time">17:00</span>
+						<div class="m-timeline-2__item-cricle">
+							<i class="fa fa-genderless m--font-info"></i>
+						</div>
+						<div class="m-timeline-2__item-text m--padding-top-5">
+							Placed a new order in
+							<a href="#" class="m-link m-link--brand m--font-bolder">SIGNATURE MOBILE</a> marketplace.
+						</div>
+					</div> -->
+	
+
+				</div>
+			</div>
+			<!--End::Timeline 2 
+		</perfect-scrollbar>-->
+	</ng-container>
+</m-portlet>
+
+
+
+
+
+
+
+
+		</div>
+<!-- 
+		<div style="    padding: 40px 60px;width: 100%">
+
+			
+	</div> -->
+
+
+
+</div>
+
+

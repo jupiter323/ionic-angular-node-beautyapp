@@ -1,0 +1,451 @@
+<div class="row  m-subheader" style="background: rgb(250,249,247) !important;
+    padding: 20px !important;
+text-align: left !important;
+border-bottom: solid 1px lightgray;    display: block;">
+	
+<!-- 
+	<i (click)='goBack()' style="font-size: 25px;
+    color: lightgray;
+    padding-left: 10px;" class="la la-angle-left"></i>
+ -->	<div class="" style="display: inline-block;font-size: 26px;font-weight: 300;padding-left: 15px;">Horario de Atención
+
+    <span style="display: block;
+    font-size: 14px;
+    line-height: 15px;">Indica la disponibilidad de tu negocio! </span>
+</div>
+
+<!-- 
+
+	<button  class="btn btn-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" (click)='guardarHorario()' >Guardar</button>
+
+	<button  class="btn btn-outline-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" (click)='goBack()' >Cancelar</button> -->
+
+
+</div>
+<div class="row">
+<ngx-loading [show]="loadingScreen" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+
+	<div class="col-xl-6" style="    border-right: solid 1px lightgray;" >
+
+		<div style='padding: 30px 45px;'>
+
+
+
+
+
+
+
+
+						<div style="margin-bottom:3px;background: white;padding: 0px 0px;" >
+
+							<div class="contentSupe">
+						<mat-checkbox color='primary' [(ngModel)]='diasSemana.lunes.estado'>
+							<span class='labelBy' style='margin-bottom: 0px !important;'>Lunes</span>
+								</mat-checkbox>
+							</div>
+							<div class="conteinInput" style="margin-top: 20px">
+							
+							<div [hidden]='diasSemana.lunes.estado' style="display: flex">
+								CERRADO
+							</div>
+							<div [hidden]='!diasSemana.lunes.estado' style="display: flex">
+
+							<mat-select  [(ngModel)]='diasSemana.lunes.horaAbrir' class='inputBy w50'>
+
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							<span class="separadorHoras"> - </span>
+							<mat-select  [(ngModel)]='diasSemana.lunes.horaCerrar' class='inputBy w50'>
+							
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							</div>
+
+							</div>	
+					
+						</div>
+
+
+
+
+						<div style="margin-bottom:3px;background: white;padding: 0px 0px;" >
+
+						<div class="contentSupe">
+						<mat-checkbox color='primary' [(ngModel)]='diasSemana.martes.estado'>
+							<span class='labelBy' style='margin-bottom: 0px !important;'>Martes</span>
+								</mat-checkbox>
+
+							</div>
+							<div class="conteinInput" style="margin-top: 20px">
+							
+							<div [hidden]='diasSemana.martes.estado' style="display: flex">
+								CERRADO
+							</div>
+							<div [hidden]='!diasSemana.martes.estado' style="display: flex">
+
+							<mat-select  [(ngModel)]='diasSemana.martes.horaAbrir' class='inputBy w50'>
+
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							<span class="separadorHoras"> - </span>
+							<mat-select  [(ngModel)]='diasSemana.martes.horaCerrar' class='inputBy w50'>
+							
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							</div>
+
+							</div>	
+					
+						</div>
+
+
+
+						<div style="margin-bottom:3px;background: white;padding: 0px 0px;" >
+
+							<div class="contentSupe">
+						<mat-checkbox color='primary' [(ngModel)]='diasSemana.miercoles.estado'>
+							<span class='labelBy' style='margin-bottom: 0px !important;'>Miercoles</span>
+								</mat-checkbox>
+							</div>
+							<div class="conteinInput" style="margin-top: 20px">
+							
+							<div [hidden]='diasSemana.miercoles.estado' style="display: flex">
+								CERRADO
+							</div>
+							<div [hidden]='!diasSemana.miercoles.estado' style="display: flex">
+
+							<mat-select  [(ngModel)]='diasSemana.miercoles.horaAbrir' class='inputBy w50'>
+
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							<span class="separadorHoras"> - </span>
+							<mat-select  [(ngModel)]='diasSemana.miercoles.horaCerrar' class='inputBy w50'>
+							
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							</div>
+
+							</div>	
+					
+						</div>
+
+
+
+
+						<div style="margin-bottom:3px;background: white;padding: 0px 0px;" >
+							<div class="contentSupe">
+						<mat-checkbox color='primary' [(ngModel)]='diasSemana.jueves.estado'>
+							<span class='labelBy' style='margin-bottom: 0px !important;'>Jueves</span>
+								</mat-checkbox>
+							</div>
+							<div class="conteinInput" style="margin-top: 20px">
+							
+							<div [hidden]='diasSemana.jueves.estado' style="display: flex">
+								CERRADO
+							</div>
+							<div [hidden]='!diasSemana.jueves.estado' style="display: flex">
+
+							<mat-select  [(ngModel)]='diasSemana.jueves.horaAbrir' class='inputBy w50'>
+
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							<span class="separadorHoras"> - </span>
+							<mat-select  [(ngModel)]='diasSemana.jueves.horaCerrar' class='inputBy w50'>
+							
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							</div>
+
+							</div>	
+					
+						</div>
+
+
+
+						<div style="margin-bottom:3px;background: white;padding: 0px 0px;" >
+							<div class="contentSupe">
+						<mat-checkbox color='primary' [(ngModel)]='diasSemana.viernes.estado'>
+							<span class='labelBy' style='margin-bottom: 0px !important;'>Viernes</span>
+								</mat-checkbox>
+							</div>
+							<div class="conteinInput" style="margin-top: 20px">
+							
+							<div [hidden]='diasSemana.viernes.estado' style="display: flex">
+								CERRADO
+							</div>
+							<div [hidden]='!diasSemana.viernes.estado' style="display: flex">
+
+							<mat-select  [(ngModel)]='diasSemana.viernes.horaAbrir' class='inputBy w50'>
+
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							<span class="separadorHoras"> - </span>
+							<mat-select  [(ngModel)]='diasSemana.viernes.horaCerrar' class='inputBy w50'>
+							
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							</div>
+
+							</div>	
+					
+						</div>
+
+
+						<div style="margin-bottom:3px;background: white;padding: 0px 0px;" >
+							<div class="contentSupe">
+						<mat-checkbox color='primary' [(ngModel)]='diasSemana.sabado.estado'>
+							<span class='labelBy' style='margin-bottom: 0px !important;'>Sabado</span>
+								</mat-checkbox>
+							</div>
+							<div class="conteinInput" style="margin-top: 20px">
+							
+							<div [hidden]='diasSemana.sabado.estado' style="display: flex">
+								CERRADO
+							</div>
+							<div [hidden]='!diasSemana.sabado.estado' style="display: flex">
+
+							<mat-select  [(ngModel)]='diasSemana.sabado.horaAbrir' class='inputBy w50'>
+
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							<span class="separadorHoras"> - </span>
+							<mat-select [(ngModel)]='diasSemana.sabado.horaCerrar' class='inputBy w50'>
+							
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							</div>
+
+							</div>	
+					
+						</div>
+
+
+						<div style="margin-bottom:3px;background: white;padding: 0px 0px;" >
+							<div class="contentSupe">
+						<mat-checkbox  color='primary' [(ngModel)]='diasSemana.domingo.estado'>
+							<span class='labelBy' style='margin-bottom: 0px !important;'>Domingo</span>
+								</mat-checkbox>
+							</div>
+							<div class="conteinInput" style="margin-top: 20px">
+							
+							<div [hidden]='diasSemana.domingo.estado' style="display: flex">
+								CERRADO
+							</div>
+							<div [hidden]='!diasSemana.domingo.estado' style="display: flex">
+
+							<mat-select  [(ngModel)]='diasSemana.domingo.horaAbrir' class='inputBy w50'>
+
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							<span class="separadorHoras"> - </span>
+							<mat-select  [(ngModel)]='diasSemana.domingo.horaCerrar' class='inputBy w50'>
+							
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							</div>
+
+							</div>	
+					
+						</div>
+
+
+						<button  class="btn btn-success" style="    margin-top: 3px;
+					    float: right;
+					    margin-right: 10px;" (click)='guardarHorario()'>Guardar</button>
+
+					</div>		
+	
+	</div>
+	<div class="col-xl-6" >
+
+		
+
+
+
+
+						<div style="margin-bottom:3px;background: white;padding: 20px 20px;" >
+	<label class='labelBy'>Horario Especial</label>
+	<p>Configure un horario personalizado en días feriados, especiales y otros</p>
+
+							<div class="conteinInput2" style="margin-top: 20px;margin-bottom: 15px !important;">
+
+				
+							<div>
+
+
+
+<!-- 								
+								  <mat-form-field style='    margin: auto;' class='inputBy'>
+								    <input [(ngModel)]='tiempoLibre.inicio' matInput [matDatepicker]="dp3" placeholder="Fecha " disabled>
+									<mat-datepicker-toggle matSuffix [for]="dp3">
+								  </mat-datepicker-toggle>
+								  <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+								    </mat-form-field> -->
+
+							<div  style="">
+
+								
+								  <mat-form-field style='      width: 140px;  margin: auto;' class='inputBy'>
+								    <input [(ngModel)]='tiempoLibre.inicio' matInput [matDatepicker]="dp3" placeholder="Inicio" disabled 
+								    (dateChange)="setDate2()">
+									<mat-datepicker-toggle matSuffix [for]="dp3">
+								  </mat-datepicker-toggle>
+								  <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+								    </mat-form-field>
+								
+
+
+								<mat-form-field  style='   margin-right: 40px;width: 140px;margin-left: 40px;'  class='inputBy'>
+								    <input [(ngModel)]='tiempoLibre.fin' matInput [matDatepicker]="dp4" placeholder="Finaliza" [min]="tiempoLibre.inicio" 
+								    (dateChange)="getDatesBet()" disabled>
+									<mat-datepicker-toggle matSuffix [for]="dp4">
+								  </mat-datepicker-toggle>
+								  <mat-datepicker #dp4 disabled="false"></mat-datepicker>
+								    </mat-form-field>
+
+			<!-- 		<button [disabled]='!tiempoLibre.fin || !tiempoLibre.inicio' class="btn btn-success" style="margin: auto;float: right;margin-right: 20px;" (click)='agregarBloque()'>Agregar</button> -->
+						<mat-checkbox style=" " color='primary' [(ngModel)]='tiempoLibre.centroCerrado'>
+							<span class='labelBy' style='margin-bottom: 0px !important;'>Cerrado</span>
+								</mat-checkbox>
+							
+							</div>
+
+
+
+							<!-- 	   
+
+						<mat-checkbox style='margin-left: 42px;' color='primary' [(ngModel)]='tiempoLibre.centroCerrado'>
+							<span class='labelBy' style='margin-bottom: 0px !important;'>Cerrado</span>
+								</mat-checkbox>
+							-->
+
+
+							<div style="  margin-top: 13px;">
+
+							<mat-select [hidden]='tiempoLibre.centroCerrado' [(ngModel)]='tiempoLibre.horaAbrir'  class='inputBy w50' 
+							style='width: 140px;'>
+						
+					<!-- 	<ngx-mat-select-search [placeholderLabel]="'Buscar hora'" 
+                       [noEntriesFoundLabel]="'no hay horas que coincidan'" > 
+                       	
+                       </ngx-mat-select-search>-->
+
+
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+							<span [hidden]='tiempoLibre.centroCerrado' style="margin: 0px 16px;line-height: 40px;">-</span>
+							<mat-select  [hidden]='tiempoLibre.centroCerrado' [(ngModel)]='tiempoLibre.horaCerrar' class='inputBy w50' 
+							style='width: 140px;margin-right: 40px;'>
+							
+								<mat-option  *ngFor="let h of horarioHoras; let ii = index" value="{{h.valor}}">
+								{{h.text}}
+								</mat-option>
+
+							</mat-select>
+
+										<button  [disabled]='((!tiempoLibre.inicio || !tiempoLibre.horaAbrir || !tiempoLibre.horaCerrar) && !tiempoLibre.centroCerrado) || (tiempoLibre.centroCerrado && !tiempoLibre.inicio)' class="btn btn-success" style="    " (click)='guardarHS()'>Guardar</button>
+
+							</div>
+
+	
+							</div>
+
+
+					<!-- aqui va el butn-->
+ 
+							</div>	
+					    <hr>
+
+
+					    <!-- 	AQUI LOS ITEMNS -->
+
+
+					    <div  *ngFor="let h of horarioEspecial; let i = index"  style="border-bottom: solid 1px lightgray;font-size: 16px;padding: 20px">
+
+					    <div style="display: block;width: 100%">
+					    <span style="font-weight: 400; margin-right: 20px">Fecha:</span>
+						{{h.fecha.split('T')[0]}}</div>
+						<div [hidden]='h.abierto == 0'  style="display: inline-block;">
+					    <div style="display: inline-block;"><span style="font-weight: 400; margin-right: 20px">Abre:</span>{{h.horaAbrir}}</div> 
+					    <span style="margin-left: 20px;margin-right: 20px">- </span>
+					    <div style="display: inline-block;"><span style="font-weight: 400;margin-right: 20px">Cierra:</span>{{h.horaCerrar}}</div>
+						</div>
+						<div [hidden]='h.abierto !== 0' style="display: inline-block;" >
+							CERRADO
+						</div>
+					    	<mat-icon class='iconGG' (click)='borrarBloque(h.idHorarioEspecial)' style='margin-left: 23px;    float: right;background: darkgray; margin: auto;height: 20px;line-height: 20px;color: white;text-align: center;'>
+					    	close
+					    	</mat-icon>
+
+					    </div>
+
+
+
+						</div>
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+</div>
+
+
+
+

@@ -1,0 +1,60 @@
+
+
+.inputBy{    
+color: #383734;
+    background: #fff;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+
+    min-height: 40px;
+    padding: 7px 10px;
+    resize: vertical;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    }
+
+.w100{
+	
+	        display: block;
+    width: 100%;
+
+}
+
+.imgCheckBox{
+	
+	    height: 34px;
+    width: 34px;
+    border-radius: 20px;
+    margin: 5px 11px;
+
+}
+
+.txtF{
+	    color: #383734;
+    font-size: 16px;
+}
+.w50{
+	
+
+    width: 50%;
+
+}
+
+.conteinInput{margin-bottom:30px}
+
+    .labelBy{
+    display: inline-block;
+    margin-bottom: 10px;font-size: 16px;
+    font-weight: 500 !important;
+    line-height: 1.5;
+    color: #383734;}
+
+
+input:focus { 
+ outline: none !important;
+    border:1px solid #34bfa3;
+
+
+
+}
+

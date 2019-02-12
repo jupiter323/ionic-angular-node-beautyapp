@@ -1,0 +1,276 @@
+<div class="row  m-subheader" style="background: rgb(250,249,247) !important;
+    padding: 20px !important;
+text-align: left !important;
+border-bottom: solid 1px lightgray;    display: block;">
+
+	<div class="" style="display: inline-block;font-size: 26px;font-weight: 300;padding-left: 30px;">Servicios
+		<span style="display: block;
+    font-size: 14px;
+    line-height: 2px;">Agrega los servicios de tu negocio</span>
+
+	</div>
+
+	<button  class="btn btn-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" 
+		[routerLink]="['/agregarservicio']"    matTooltip="Crear nuevo servicio">Agregar Servicio</button>
+
+</div>
+
+<div class="row">
+	 <ngx-loading [show]="loadingScreen" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+	<div class="col-xl-4" style="padding-right: 0px;    border-right: solid 1px lightgray;" >
+
+		<div style="width: 100%">
+			
+			<div style="margin-bottom: 30px;    box-shadow: 0 1px 15px 1px rgba(69,65,78,.08); background-color: #fff;">
+				<div style="display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    padding: 16px 20px;
+    height: 69px;
+    position: relative;
+    font-size: 16px;
+    font-weight: 500;
+    border-bottom: solid 1px lightgray;">
+
+					<div style="    display: flex;
+					align-items: center;
+					align-content: flex-start;">Ofertas</div>
+
+	<button  class="btn btn-sm btn-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" color="primary" [routerLink]="['/agregaroferta']" >Agregar Oferta</button>
+
+
+
+				</div>
+
+
+<!-- 									<div class="itemServicios">
+					<div class="boxItem">
+					
+						<div class="txtItemServ">
+							<h3 style=" font-size: 16px !important;   color: #5f5d5b;">Corte y Estilo</h3>
+							<p style="color: #989794;font-size: 12px;">
+								Hasta el 01/01/2018
+							</p>
+						</div>
+						<div class="txtItemServP" style="color:darkgray !important; text-decoration: line-through;">$50</div>
+						<div class="txtItemServP" >$30</div>
+					</div>
+				</div>
+ -->
+	
+<div class="example-container " >
+  <mat-table #table [dataSource]="dataSource">
+    <!-- Position Column -->
+    <ng-container matColumnDef="nombre">
+      <mat-header-cell *matHeaderCellDef> Servicio </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.nombre}} </mat-cell>
+    </ng-container>
+
+        <ng-container matColumnDef="precioOferta">
+      <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
+      <mat-cell *matCellDef="let element"> ${{element.precioOferta}} </mat-cell>
+    </ng-container>
+
+        <ng-container matColumnDef="fechaCaducidad">
+      <mat-header-cell *matHeaderCellDef> Caducidad </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.fechaCaducidad.split('T')[0]}} </mat-cell>
+    </ng-container>
+
+        <ng-container matColumnDef="estado">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+
+      <mat-cell *matCellDef="let element"> 
+
+     
+      <button  *ngIf='element.estado == 1' class="btn btn-sm btn-outline-success" style="" color="primary" (click)='cambiarOferta(0, element.idControlOferta)' >Deshabilitar</button>
+      <button  (click)='cambiarOferta(1,element.idControlOferta)' *ngIf='element.estado == 0'  class="btn btn-sm btn-outline-success" style="" color="primary" >Habilitar</button>
+  		</mat-cell>
+
+    </ng-container>
+
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  
+  <mat-paginator #paginator
+    [pageSize]="5"
+
+    [showFirstLastButtons]="true">
+  </mat-paginator>
+</div>
+
+
+
+
+			</div>
+
+
+
+			<div style="    box-shadow: 0 1px 15px 1px rgba(69,65,78,.08); background-color: #fff;">
+				<div style="display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    padding: 16px 20px;
+    height: 69px;
+    position: relative;
+    font-size: 16px;
+    font-weight: 500;
+    border-bottom: solid 1px lightgray;border-top: solid 1px lightgray;">
+
+					<div style="    display: flex;
+					align-items: center;
+					align-content: flex-start;">Paquetes</div>
+
+	<button  class="btn btn-sm btn-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" color="primary" [routerLink]="['/agregarpaquete']">Agregar Paquete</button>
+
+
+
+				</div>
+
+
+
+
+<div class="example-container " >
+  <mat-table #table5 [dataSource]="dataSource5">
+    <!-- Position Column -->
+    <ng-container matColumnDef="nombre">
+      <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.nombre}} </mat-cell>
+    </ng-container>
+
+        <ng-container matColumnDef="precioTotal">
+      <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
+      <mat-cell *matCellDef="let element"> ${{element.precioTotal}} </mat-cell>
+    </ng-container>
+
+        <ng-container matColumnDef="fechaVencimiento">
+      <mat-header-cell *matHeaderCellDef> Caducidad </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.fechaVencimiento.split('T')[0]}} </mat-cell>
+    </ng-container>
+
+        <ng-container matColumnDef="estado">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+
+      <mat-cell *matCellDef="let element"> 
+
+     
+      <button  *ngIf='element.estado == 1' class="btn btn-sm btn-outline-success" style="" color="primary" (click)='cambiarPaquete(0, element.idPaqueteCentro)' >Deshabilitar</button>
+      <button  (click)='cambiarPaquete(1,element.idPaqueteCentro)' *ngIf='element.estado == 0'  class="btn btn-sm btn-outline-success" style="" color="primary" >Habilitar</button>
+  		</mat-cell>
+
+    </ng-container>
+
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns5"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns5;"></mat-row>
+  </mat-table>
+  
+  <mat-paginator #paginator5
+    [pageSize]="5"
+
+    [showFirstLastButtons]="true">
+  </mat-paginator>
+</div>
+
+
+
+			</div>
+
+
+		</div>
+	</div>
+	<div class="col-xl-8" >
+
+
+		<div style="    padding: 40px 60px;width: 100%">
+
+				<div style="width: 100%; display: table;">
+					<input class='inputBy searchInput' style="padding-left: 10px" placeholder="buscar servicios"  autocomplete="off"  [(ngModel)]="textFilter" type="text" name="nombre">
+				</div>
+
+
+				<div [routerLink]="['/editservicio']" [queryParams]="{id: s.idServicio}" class="itemServicios" *ngFor="let s of serviciosC   | callback: filterUser" 
+				 [ngClass]="{'borderRojo': (!s.nombreCategoria || !s.nombreSubcategoria)}">
+					<div class="boxItem">
+						<i class="la  la-angle-right iconR"></i>
+						<div class="txtItemServ">
+							<h3 style=" font-size: 16px !important;   color: #5f5d5b;">
+							{{s.nombre}}</h3>
+
+							<p *ngIf='s.nombreCategoria && s.nombreSubcategoria' style="color: #989794;font-size: 12px;">
+								{{s.nombreCategoria}} / {{s.nombreSubcategoria}}
+							</p>
+
+							<p *ngIf='!s.nombreCategoria || !s.nombreSubcategoria' style="color: lightcoral;font-size: 12px;">
+								{{s.nombreCategoria}} / {{s.nombreSubcategoria}}
+							</p>
+
+						</div>
+
+						<!-- 	<div class="txtItemServP"> 
+				<span >{{s.duracion}}min</span> 
+						</div>
+ -->
+
+					<div class="txtItemServP">
+				<span>{{getHoras(s.duracion)}}h</span>		 
+				<span style="margin-left: 6px">{{s.duracion % 60}}min</span> 
+						</div>
+
+
+						<div [ngClass]="{'underl': s.oferta}" class="txtItemServP">${{s.precio}}</div>
+							<div *ngIf='s.oferta' class="txtItemServOferta">${{s.oferta}}</div>
+
+
+
+					</div>
+				</div>
+
+<!-- 								<div class="itemServicios">
+					<div class="boxItem">
+						<i class="la  la-angle-right iconR"></i>
+						<div class="txtItemServ">
+							<h3 style=" font-size: 16px !important;   color: #5f5d5b;">Corte y Estilo</h3>
+							<p style="color: #989794;font-size: 12px;">
+								Peluqueria / Cortes de Mujer
+							</p>
+						</div>
+						<div class="txtItemServP">30min</div>
+						<div class="txtItemServP">30min</div>
+					</div>
+				</div>
+
+
+								<div class="itemServicios">
+					<div class="boxItem">
+						<i class="la  la-angle-right iconR"></i>
+						<div class="txtItemServ">
+							<h3 style=" font-size: 16px !important;   color: #5f5d5b;">Corte y Estilo</h3>
+							<p style="color: #989794;font-size: 12px;">
+								Peluqueria / Cortes de Mujer
+							</p>
+						</div>
+						<div class="txtItemServP">30min</div>
+						<div class="txtItemServP">30min</div>
+					</div>
+				</div> -->
+
+		</div>
+	</div>
+
+</div>
+
+
+
+

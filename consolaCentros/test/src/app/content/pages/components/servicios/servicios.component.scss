@@ -1,0 +1,74 @@
+
+.itemServicios{
+	border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    display: block;
+        margin-bottom: 10px;
+}
+
+.borderRojo{
+    border: 1px solid lightcoral !important;
+}
+
+.underl{
+    text-decoration: line-through;
+        color: darkgray !important; 
+}
+
+.txtItemServOferta{
+  
+    text-align: right !important;
+    display: inline-block;
+    min-height: 1px;
+    vertical-align: top;
+    margin: 0;
+    padding-left: 8px;
+    font-size: 16px;
+    font-weight: 400;
+}
+.itemServicios:hover{
+	    opacity: 0.8;
+}
+.boxItem{
+	 position: relative;  
+	 background: rgb(250,249,247) !important;
+	 padding: 10px 50px 2px 40px;
+}
+
+.inputBy:focus { 
+ outline: none !important;
+    border:1px solid #34bfa3;
+
+
+
+}
+.searchInput{
+	float: right;
+    height: 40px;
+    width: 35%;
+    margin-bottom: 40px;
+    
+}
+.iconR{
+	font-size: 16px;
+    position: absolute;
+    right: 5px;
+    top: 29px;
+    color: darkgray
+}
+
+.txtItemServ{
+	width: 60%!important;    
+	display: inline-block;
+	min-height: 1px;
+	vertical-align: top;
+	margin: 0;
+	padding: 0;
+}
+
+
+.txtItemServP{ text-align: right!important;    display: inline-block;
+    min-height: 1px;
+    vertical-align: top;
+    margin: 0;     padding-left: 20px;    font-size: 16px;
+    font-weight: 400;}

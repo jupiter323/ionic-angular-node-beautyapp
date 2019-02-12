@@ -1,0 +1,119 @@
+
+.txtF{
+        color: #383734;
+    font-size: 16px;
+}
+
+.tituloCateg{
+        font-size: 16px;
+    margin-bottom: 10px;
+        margin-top: 15px;
+    font-weight: 400;
+}
+.iconGG:hover{
+    background-color:#34bfa3 !important;
+}
+.w50{
+    
+
+    width: 50%;
+
+}
+input:focus { 
+ outline: none !important;
+    border:1px solid #34bfa3;
+
+
+
+}
+.inputBy{    
+color: #383734;
+    background: #fff;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+
+    min-height: 40px;
+    padding: 7px 10px;
+    resize: vertical;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    }
+
+
+
+
+
+.w100{
+    
+            display: block;
+    width: 100%;
+
+}
+
+.imgCheckBox{
+    
+        height: 34px;
+    width: 34px;
+    border-radius: 20px;
+    margin: 5px 11px;
+
+}
+
+.separadorHoras{
+        margin: 0px 15px;
+    line-height: 36px;
+}
+
+.conteinInput2{
+margin-bottom:30px;}
+
+.conteinInput{
+margin-bottom:30px;
+display: inline-block;
+    width: 240px;
+    }
+
+    .contentSupe{
+        display: inline-block;
+    width: 108px;
+    }
+
+    .labelBy{
+    display: inline-block;
+    margin-bottom: 10px;font-size: 16px;
+    font-weight: 500 !important;
+    line-height: 1.5;
+    color: #383734;}
+
+
+
+
+
+.selectedItem{
+	    background: dimgrey;
+    color: white;
+}
+
+mat-list-item:hover{
+	 background: dimgrey !important;
+    color: white;
+}
+
+mat-list-item{
+	border-bottom: solid 1px lightgray;
+}
+
+.tagStaff{
+	color: #00beb7;
+    background: #e5f8f7;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 12px;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 2px;
+    display: inline-block;
+    padding: 2px 10px;
+    min-width: 100px;
+    vertical-align: middle;
+}

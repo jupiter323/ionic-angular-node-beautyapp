@@ -1,0 +1,104 @@
+<div class="row  m-subheader" style="background: rgb(250,249,247) !important;
+    padding: 20px !important;
+text-align: left !important;
+border-bottom: solid 1px lightgray;    display: block;">
+	
+
+	<i (click)='goBack()' style="font-size: 25px;
+    color: lightgray;
+    padding-left: 10px;" class="la la-angle-left"></i>
+	<div class="" style="display: inline-block;font-size: 26px;font-weight: 300;padding-left: 15px;">Agregar Oferta</div>
+
+
+
+	<button  class="btn btn-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" [disabled]='!valorOferta || !selected2 || itemMarcado.precio<=valorOferta' (click)='openDialog()' >Guardar</button>
+
+	<button  class="btn btn-outline-success" style="    margin-top: 3px;
+    float: right;
+    margin-right: 10px;" (click)='goBack()' >Cancelar</button>
+
+
+</div>
+
+
+<div class="row">
+
+	<div class="col-xl-6" style="    border-right: solid 1px lightgray;" >
+
+		<div style="padding: 40px 60px; ">
+			<div style="    border: solid 2px darkgray;
+    border-radius: 5px;" class="conteinInput">
+
+				<div style="font-size: 16px;
+    font-weight: 500;
+    background-color: #e91e63;
+    color: white;
+    padding: 14px;">Contrato de Oferta</div>
+
+				<p style="  font-size: 15px;  padding: 14px;" class=' w100'>
+					Las ofertas tienen una vigencia de 7 dias y un costo de $8 por cada servicio en oferta. Puedes tener hasta 10 ofertas activas al mismo tiempo. 
+				</p>
+			</div>
+			
+			<label class='labelBy'>Haz que tus servicios sean mas atractivos!</label>
+			<label class='labelBy'>Los negocios con ofertas son distinguidos sobre los demás</label>
+			<img src="assets/app/media/img/demo1.png">
+			<hr>
+
+
+<!-- 			<div class="conteinInput" style="margin-top: 20px">
+				<label class='labelBy'>Fecha de expiracion</label>
+				<div style="display: flex">
+
+				<span class='inputBy w50' > 01/01/2018</span>
+			    </div>
+
+			</div> -->
+		</div>
+	
+	</div>
+	<div class="col-xl-6" >
+		<div style="padding: 40px 60px; ">
+		<div style="color:darkgray;font-size: 16px;font-weight: 500 !important;margin-bottom: 20px;">
+			Elige un servico para marcar en oferta</div>
+					<div style="border: solid 1px lightgray;padding: 20px;">
+
+					
+
+							<div *ngFor="let k of keys;  let m = index">
+							<div class='tituloCateg'>{{k}}</div>
+
+							<div style="margin-bottom:3px;background: rgb(250,249,247);padding: 10px 10px;" *ngFor="let item of serviciosValues[m];  let i = index">
+							<mat-checkbox color='primary' name="{{i}}-name" [disabled]='item.oferta' [checked]="(selected2 == item.idServicio || item.oferta)" (change)="OnChange($event,item.idServicio, item)">
+								<span class="txtF">
+									{{item.nombre}} / 
+									<span  [ngClass]="{'underl': item.oferta}">${{item.precio}}</span>
+									<span style="margin-left: 10px;font-weight: 500;" *ngIf='item.oferta' >${{item.oferta}}</span>
+
+
+								</span></mat-checkbox>
+
+								<div *ngIf='selected2 === item.idServicio' style="margin-top: 20px;font-size: 14px;">
+									<span style="font-weight: 400">
+									Precio en Oferta 
+									               <mat-icon style='    vertical-align: sub;
+    color: darkgray;
+    margin-left: 19px;'   
+          placement="top" ngbTooltip="El precio de oferta debe ser menor que el precio del servicio" ngbTooltipClass="m-tooltip">help_outline</mat-icon>
+      			</span> 
+									<input   class='inputBy w50' placeholder="precio de Oferta"  autocomplete="off"  style='    margin-top: 15px;margin-bottom: 20px;' type="number" name="precio" [(ngModel)]="valorOferta">
+								</div>
+							</div>
+						</div>	
+
+
+
+					</div>
+
+		</div>
+	</div>
+
+</div>
+
